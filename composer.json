@@ -1,0 +1,44 @@
+{
+  "name": "streamcommon/doctrine-container-interop",
+  "description": "Doctrine 2 container interop",
+  "license": "BSD-3-Clause",
+  "type": "library",
+  "keywords": [
+    "streamcommon",
+    "doctrine 2 container interop",
+    "container interop"
+  ],
+  "require": {
+    "php": "^7.2",
+    "psr/container": "^1.0",
+    "doctrine/orm": "^2.6.3",
+    "streamcommon/factory-container-interop": "^1.0.0",
+    "streamcommon/excess-configuration": "^1.0.0"
+  },
+  "require-dev": {
+    "streamcommon/coding-standard": "^1.0.0",
+    "malukenho/docheader": "^0.1.7",
+    "phpstan/phpstan": "^0.11.1",
+    "phpunit/phpunit": "^8.0",
+    "php-coveralls/php-coveralls": "^2.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Streamcommon\\Doctrine\\Container\\Interop\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Streamcommon\\Test\\Doctrine\\Container\\Interop\\": "test/"
+    }
+  },
+  "scripts": {
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "license-check": "docheader check lib/ test/",
+    "phpstan": "phpstan analyze -l max -c phpstan.neon ./lib",
+    "phpunit": "phpunit --colors=always",
+    "phpunit-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+    "coveralls": "php-coveralls -v"
+  }
+}
