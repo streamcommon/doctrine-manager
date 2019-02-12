@@ -141,15 +141,9 @@ class SecondLevelCache extends AbstractOptions
      */
     public function setRegions(array $regions): SecondLevelCache
     {
-        foreach ($regions as $key => $region) {
-            if (is_array($region)) {
-                $regions[$key] = $region = new Region($region);
-            }
-            if (!$region instanceof Region) {
-                unset($regions[$key]);
-            }
-        }
-        $this->regions = $regions;
+        $this->regions = array_map(function ($region) {
+            return ($region instanceof Region) ? $region : new Region($region);
+        }, $regions);
         return $this;
     }
 }

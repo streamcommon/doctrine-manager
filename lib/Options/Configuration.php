@@ -391,7 +391,7 @@ class Configuration extends AbstractOptions
     public function setNamedQueries(array $namedQueries): Configuration
     {
         $this->namedQueries = array_map(function ($item) {
-            return new NamedQuery($item);
+            return ($item instanceof NamedQuery) ? $item : new NamedQuery($item);
         }, $namedQueries);
         return $this;
     }
@@ -415,7 +415,7 @@ class Configuration extends AbstractOptions
     public function setNamedNativeQueries(array $namedNativeQueries): Configuration
     {
         $this->namedNativeQueries = array_map(function ($item) {
-            return new NamedNativeQueries($item);
+            return ($item instanceof NamedNativeQueries) ? $item : new NamedNativeQueries($item);
         }, $namedNativeQueries);
         return $this;
     }
