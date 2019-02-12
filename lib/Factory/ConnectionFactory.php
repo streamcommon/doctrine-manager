@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Container\Interop\Factory;
 
-use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\{Connection, DriverManager};
 use Doctrine\DBAL\Types\Type;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Options\Connection as ConnectionOptions;
@@ -31,7 +31,7 @@ class ConnectionFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param null|array $options
-     * @return object
+     * @return Connection
      * @throws \Doctrine\DBAL\DBALException
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object

@@ -17,18 +17,20 @@ use Doctrine\Common\Cache\{CacheProvider, ArrayCache};
 use Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory;
 
 /**
- * Class FactoryCreationTest
+ * Class CacheFactoryTest
  *
  * @package Streamcommon\Test\Doctrine\Container\Interop
  */
-class FactoryCreationTest extends AbstractFactoryTest
+class CacheFactoryTest extends AbstractFactoryTest
 {
-    public function testCacheFactory()
-    {
-        $container = $this->getContainer();
 
+    /**
+     * Default cache factory creation
+     */
+    public function testCacheFactoryCreation(): void
+    {
         $factory = new CacheFactory();
-        $cache = $factory($container, 'Doctrine\Common\Cache\ArrayCache');
+        $cache = $factory($this->getContainer(), 'doctrine.cache.array');
 
         $this->assertInstanceOf(CacheProvider::class, $cache);
         $this->assertInstanceOf(ArrayCache::class, $cache);

@@ -30,7 +30,7 @@ class EntityManagerFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param null|array $options
-     * @return object
+     * @return EntityManager
      * @throws \Doctrine\ORM\ORMException
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object

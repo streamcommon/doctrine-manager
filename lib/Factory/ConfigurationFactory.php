@@ -34,7 +34,7 @@ class ConfigurationFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param null|array $options
-     * @return object
+     * @return Configuration
      * @throws ORMException
      * @throws RuntimeException
      */
