@@ -17,6 +17,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Prophecy\Prophecy\ObjectProphecy;
 use Streamcommon\Doctrine\Container\Interop\Factory\{
     CacheFactory,
     ConfigurationFactory,
@@ -25,6 +26,7 @@ use Streamcommon\Doctrine\Container\Interop\Factory\{
     EntityManagerFactory,
     EntityResolverFactory,
     EventManagerFactory};
+use Streamcommon\Test\Doctrine\Container\Interop\TestAssets\TestEventSubscriber;
 
 /**
  * Class AbstractFactoryTest
@@ -60,12 +62,16 @@ abstract class AbstractFactoryTest extends TestCase
             ],
             'event_manager' => [
                 'orm_default' => [
-                    'subscribers' => [],
+                    'subscribers' => [
+                        TestEventSubscriber::class
+                    ],
                 ],
             ],
             'entity_resolver' => [
                 'orm_default' => [
-                    'resolvers' => [],
+                    'resolvers' => [
+                        'Original\Entity' => 'New\Entity',
+                    ],
                 ],
             ],
             'driver' => [
@@ -97,6 +103,7 @@ abstract class AbstractFactoryTest extends TestCase
         $container->get('config')->willReturn($this->config);
         $container->has(ArrayCache::class)->willReturn(false);
         $container->has(MappingDriverChain::class)->willReturn(false);
+        $container->get(TestEventSubscriber::class)->willReturn(new TestEventSubscriber());
         $container->get('doctrine.cache.array')->willReturn(call_user_func_array(
             new CacheFactory(),
             [

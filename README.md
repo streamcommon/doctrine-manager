@@ -72,7 +72,7 @@ Configure your project config file:
             ],
             'cache' => [
                 'array' => [
-                    'class_name' => Doctrine\Common\Cache\ArrayCache,
+                    'class_name' => 'Doctrine\Common\Cache\ArrayCache',
                     'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
                 ]
             ],
