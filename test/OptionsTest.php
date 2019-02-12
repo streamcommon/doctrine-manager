@@ -15,12 +15,15 @@ namespace Streamcommon\Test\Doctrine\Container\Interop;
 
 use Doctrine\ORM\Query\ResultSetMapping;
 use PHPUnit\Framework\TestCase;
-use Streamcommon\Doctrine\Container\Interop\Options\{Cache, Configuration};
+use Streamcommon\Doctrine\Container\Interop\Options\{
+    Cache,
+    Configuration,
+    Connection};
 use Streamcommon\Doctrine\Container\Interop\Options\Part\{
+    ConnectionParams,
     NamedNativeQueries,
     NamedQuery,
-    SecondLevelCache
-};
+    SecondLevelCache};
 
 /**
  * Class OptionsTest
@@ -42,7 +45,9 @@ class OptionsTest extends TestCase
         ];
         $options = new Cache($config);
 
-        $this->assertEquals($config, $options->toArray());
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
     }
 
     /**
@@ -99,9 +104,42 @@ class OptionsTest extends TestCase
             'second_level_cache' => new SecondLevelCache(),
             'sql_logger' => 'logger'
         ];
-
         $options = new Configuration($config);
 
-        $this->assertEquals($config, $options->toArray());
+        foreach ($config as $item => $value) {
+            if ($item === 'auto_generate_proxies_classes') {
+                $this->assertEquals($value, $options->isAutoGenerateProxiesClasses());
+            } else {
+                $this->assertEquals($value, $options->{$item});
+            }
+        }
+    }
+
+    /**
+     * Test connection options
+     */
+    public function testConnectionOptions(): void
+    {
+        $config = [
+            'driver_class_name' => 'class_name_a',
+            'wrapper_class_name' => 'class_name_b',
+            'pdo_class_name' => 'pdo',
+            'configuration' => 'orm_default',
+            'event_manager' => 'orm_default',
+            'params' => new ConnectionParams([
+                'platform' => 'test'
+            ]),
+            'type_mapping' => [
+                'test_string' => 'string',
+            ],
+            'commented_types' => [
+                'test_string'
+            ]
+        ];
+        $options = new Connection($config);
+
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
     }
 }
