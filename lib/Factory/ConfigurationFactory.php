@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Container\Interop\Factory;
 
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Cache\{RegionsConfiguration, DefaultCacheFactory, CacheConfiguration};
@@ -114,7 +115,11 @@ class ConfigurationFactory extends AbstractFactory
                 $regionsConfiguration->setLockLifetime($region->getName(), $region->getLockLifetime());
             }
 
-            $cacheFactory = new DefaultCacheFactory($regionsConfiguration, $configuration->getResultCacheImpl());
+            $cache = new ArrayCache();
+            if ($configuration->getResultCacheImpl() !== null) {
+                $cache = $configuration->getResultCacheImpl();
+            }
+            $cacheFactory = new DefaultCacheFactory($regionsConfiguration, $cache);
             if ($secondLevelCacheOptions->getFileLockRegionDirectory() !== null) {
                 $cacheFactory->setFileLockRegionDirectory($secondLevelCacheOptions->getFileLockRegionDirectory());
             }
