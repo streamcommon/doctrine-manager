@@ -59,6 +59,5 @@ class EventManagerFactoryTest extends AbstractFactoryTest
         $this->expectException(RuntimeException::class);
         $factory = new EventManagerFactory();
         $factory($container->reveal(), 'doctrine.event_manager.orm_default');
-
     }
 }
