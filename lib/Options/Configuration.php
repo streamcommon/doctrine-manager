@@ -23,7 +23,6 @@ use Zend\Stdlib\AbstractOptions;
  * @package Streamcommon\Doctrine\Container\Interop\Options
  *
  * @link http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html
- * @link http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/second-level-cache.html
  */
 class Configuration extends AbstractOptions
 {

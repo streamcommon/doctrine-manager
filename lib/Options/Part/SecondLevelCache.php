@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Container\Interop\Options\Part;
 
+use Streamcommon\Doctrine\Container\Interop\Options\Part\Cache\Region;
 use Zend\Stdlib\AbstractOptions;
 
 /**
  * Class SecondLevelCache
  *
  * @package Streamcommon\Doctrine\Container\Interop\Options\Part
+ * @see http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/second-level-cache.html
  */
 class SecondLevelCache extends AbstractOptions
 {
@@ -30,7 +32,7 @@ class SecondLevelCache extends AbstractOptions
     protected $defaultLockLifetime = 60;
     /** @var null|string */
     protected $fileLockRegionDirectory = null;
-    /** @var array */
+    /** @var Region[] */
     protected $regions = [];
 
     /**
@@ -124,7 +126,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Get regions
      *
-     * @return array
+     * @return Region[]
      */
     public function getRegions(): array
     {
@@ -134,11 +136,20 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Set regions
      *
-     * @param array $regions
+     * @param array|Region[] $regions
      * @return SecondLevelCache
      */
     public function setRegions(array $regions): SecondLevelCache
     {
+        foreach ($regions as $key => $region) {
+            if (!is_array($region)) {
+                if (!$region instanceof Region) {
+                    unset($regions[$key]);
+                }
+                continue;
+            }
+            $regions[$key] = new Region($region);
+        }
         $this->regions = $regions;
         return $this;
     }
