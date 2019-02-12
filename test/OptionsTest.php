@@ -18,8 +18,13 @@ use PHPUnit\Framework\TestCase;
 use Streamcommon\Doctrine\Container\Interop\Options\{
     Cache,
     Configuration,
-    Connection};
+    Connection,
+    Driver,
+    EntityManager,
+    EntityResolver,
+    EventManager};
 use Streamcommon\Doctrine\Container\Interop\Options\Part\{
+    Cache\Region,
     ConnectionParams,
     NamedNativeQueries,
     NamedQuery,
@@ -44,10 +49,10 @@ class OptionsTest extends TestCase
             'path' => '/tmp'
         ];
         $options = new Cache($config);
-
         foreach ($config as $item => $value) {
             $this->assertEquals($value, $options->{$item});
         }
+        $this->assertEquals('/tmp', $options->getPath());
     }
 
     /**
@@ -105,7 +110,6 @@ class OptionsTest extends TestCase
             'sql_logger' => 'logger'
         ];
         $options = new Configuration($config);
-
         foreach ($config as $item => $value) {
             if ($item === 'auto_generate_proxies_classes') {
                 $this->assertEquals($value, $options->isAutoGenerateProxiesClasses());
@@ -137,9 +141,171 @@ class OptionsTest extends TestCase
             ]
         ];
         $options = new Connection($config);
-
         foreach ($config as $item => $value) {
             $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test driver options
+     */
+    public function testDriverOptions(): void
+    {
+        $config = [
+            'class_name' => 'test_name',
+            'cache' => 'array',
+            'paths' => [
+                '/tmp'
+            ],
+            'drivers' => [
+                'orm_test' => 'driver_name'
+            ],
+        ];
+        $options = new Driver($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test entityManager options
+     */
+    public function testEntityManagerOptions(): void
+    {
+        $config = [
+            'connection' => 'orm_test_a',
+            'configuration' => 'orm_test_b',
+        ];
+        $options = new EntityManager($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test entityResolver options
+     */
+    public function testEntityResolverOptions(): void
+    {
+        $config = [
+            'resolvers' => [
+                'alias' => 'name'
+            ],
+        ];
+        $options = new EntityResolver($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test eventManager options
+     */
+    public function testEventManagerOptions():void
+    {
+        $config = [
+            'entity_resolver' => 'orm_test',
+            'subscribers' => [
+                'alias' => 'name'
+            ],
+        ];
+        $options = new EventManager($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test cache region options
+     */
+    public function testPartCacheRegionOptions(): void
+    {
+        $config = [
+            'name' => 'test',
+            'life_time' => 13,
+            'lock_life_time' => 42,
+        ];
+        $options = new Region($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test connection params options
+     */
+    public function testPartConnectionParamsOptions(): void
+    {
+        $config = [
+            'platform' => 'pdo',
+            'db_name' => 'test',
+            'user' => 'user',
+            'password' => 'password',
+            'host' => 'localhost',
+            'port' => 3216,
+        ];
+        $options = new ConnectionParams($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test namedNativeQueries options
+     */
+    public function testPartNamedNativeQueries(): void
+    {
+        $config = [
+            'name' => 'query',
+            'sql' => 'select',
+            'rsm' => new ResultSetMapping()
+        ];
+        $options = new NamedNativeQueries($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test namedQuery options
+     */
+    public function testNamedQueryOptions(): void
+    {
+        $config = [
+            'name' => 'query',
+            'sql' => 'select',
+        ];
+        $options = new NamedQuery($config);
+        foreach ($config as $item => $value) {
+            $this->assertEquals($value, $options->{$item});
+        }
+    }
+
+    /**
+     * Test second level cache options
+     */
+    public function testSecondLevelCacheOptions(): void
+    {
+        $config = [
+            'enabled' => true,
+            'default_life_time' => 13,
+            'default_lock_life_time' => 42,
+            'file_lock_region_directory' => '/tmp',
+            'regions' => [
+                new Region([
+                    'name' => 'test',
+                    'life_time' => 13,
+                    'lock_life_time' => 42,
+                ])
+            ]
+        ];
+        $options = new SecondLevelCache($config);
+        foreach ($config as $item => $value) {
+            if ($item === 'enabled') {
+                $this->assertEquals($value, $options->isEnabled());
+            } else {
+                $this->assertEquals($value, $options->{$item});
+            }
         }
     }
 }
