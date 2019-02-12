@@ -29,6 +29,7 @@ use Streamcommon\Doctrine\Container\Interop\Options\Part\{
     NamedNativeQueries,
     NamedQuery,
     SecondLevelCache};
+use Streamcommon\Doctrine\Container\Interop\Exception\InvalidArgumentException;
 
 /**
  * Class OptionsTest
@@ -117,6 +118,17 @@ class OptionsTest extends TestCase
                 $this->assertEquals($value, $options->{$item});
             }
         }
+
+        $options->setSecondLevelCache([
+            'enabled' => true,
+            'default_life_time' => 13,
+            'default_lock_life_time' => 42,
+            'file_lock_region_directory' => '/tmp',
+        ]);
+        $this->assertInstanceOf(SecondLevelCache::class, $options->getSecondLevelCache());
+
+        $this->expectException(InvalidArgumentException::class);
+        $options->setSecondLevelCache(InvalidArgumentException::class);
     }
 
     /**
@@ -144,6 +156,9 @@ class OptionsTest extends TestCase
         foreach ($config as $item => $value) {
             $this->assertEquals($value, $options->{$item});
         }
+
+        $this->expectException(InvalidArgumentException::class);
+        $options->setParams(InvalidArgumentException::class);
     }
 
     /**
@@ -154,6 +169,8 @@ class OptionsTest extends TestCase
         $config = [
             'class_name' => 'test_name',
             'cache' => 'array',
+            'extension' => 'ext',
+            'global_basename' => 'name',
             'paths' => [
                 '/tmp'
             ],
