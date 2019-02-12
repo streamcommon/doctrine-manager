@@ -11,11 +11,11 @@ This package provide [Doctrine 2](https://github.com/doctrine) factories for [PR
 [![Develop][Develop branch image]][Develop branch] [![Build Status][Develop image]][Develop] [![Coverage Status][Develop coverage image]][Develop coverage]
 
 ## Installation
-* Console run:
+Console run:
 ```console
     composer require streamcommon/factory-container-interop
 ```
-* Or add into your `composer.json`:
+Or add into your `composer.json`:
 ```json
     "require": {
         "streamcommon/factory-container-interop": "*"

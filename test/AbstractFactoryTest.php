@@ -24,7 +24,8 @@ use Streamcommon\Doctrine\Container\Interop\Factory\{
     DriverFactory,
     EntityManagerFactory,
     EntityResolverFactory,
-    EventManagerFactory};
+    EventManagerFactory
+};
 
 /**
  * Class AbstractFactoryTest
