@@ -18,9 +18,13 @@ use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Factory\{
-    CacheFactory, ConfigurationFactory, ConnectionFactory, DriverFactory, EntityManagerFactory,
-    EntityResolverFactory, EventManagerFactory
-};
+    CacheFactory,
+    ConfigurationFactory,
+    ConnectionFactory,
+    DriverFactory,
+    EntityManagerFactory,
+    EntityResolverFactory,
+    EventManagerFactory};
 
 /**
  * Class AbstractFactoryTest
