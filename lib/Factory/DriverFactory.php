@@ -23,6 +23,7 @@ use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
  * Class DriverFactory
  *
  * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers
  */
 class DriverFactory extends AbstractFactory
 {
@@ -43,9 +44,6 @@ class DriverFactory extends AbstractFactory
         if ($className === null) {
             throw new RuntimeException('Missing className config key');
         }
-        if ($container->has($className)) {
-            return $container->get($className);
-        }
         if ($className === AnnotationDriver::class || is_subclass_of($className, AnnotationDriver::class)) {
             $cache = $container->get('doctrine.cache.' . $options->getCache());
             $reader = new CachedReader(new IndexedReader(new AnnotationReader()), $cache);
@@ -55,9 +53,14 @@ class DriverFactory extends AbstractFactory
             if ($options->getGlobalBasename() !== null && $driver instanceof FileDriver) {
                 $driver->setGlobalBasename($options->getGlobalBasename());
             }
-        } else {
+        } elseif ($container->has($className)) {
+            $driver = $container->get($className);
+        } elseif (class_exists($className) === true) {
             $driver = new $className($options->getPaths());
+        } else {
+            throw new RuntimeException(sprintf('Cannot create driver with class name \'%s\'', $className));
         }
+
         if ($driver instanceof MappingDriverChain) {
             foreach ($options->getDrivers() as $alias => $className) {
                 $driverFactory = new DriverFactory($alias);
