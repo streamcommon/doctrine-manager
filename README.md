@@ -129,7 +129,6 @@ Configure your project config file:
              //@see https://www.doctrine-project.org/projects/doctrine-annotations/en/1.6/index.html
                 'orm_default' => [
                     'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
-                    'cache' => 'array',
                     'drivers' => [
                        'Annotation\Entity' => 'Annotation\Entity' 
                     ],
@@ -145,7 +144,6 @@ Configure your project config file:
             // Php driver for example
                 'orm_custom' => [
                     'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
-                    'cache' => 'array',
                     'drivers' => [
                         __DIR__ . '/PHPDriver/Entity'
                     ],
