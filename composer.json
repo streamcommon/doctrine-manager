@@ -6,7 +6,9 @@
   "keywords": [
     "streamcommon",
     "doctrine 2 container interop",
-    "container interop"
+    "container interop",
+    "doctrine container",
+    "psr-11"
   ],
   "require": {
     "php": "^7.2",

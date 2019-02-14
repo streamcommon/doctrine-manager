@@ -23,9 +23,14 @@ Or add into your `composer.json`:
 ```
 
 ## Please check doctrine documentation for more info
-* [Doctrine ORM version 2.6](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/index.html)
-* [Doctrine DBAL version 2.9](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/events.html#events)
-* [Doctrine Event Manager version 1.0](https://www.doctrine-project.org/projects/doctrine-event-manager/en/latest/index.html)
+* [ORM version 2.6](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/index.html)
+* [DBAL version 2.9](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/index.html)
+* [Event Manager version 1.0](https://www.doctrine-project.org/projects/doctrine-event-manager/en/latest/index.html)
+* [Metadata driver](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers)
+* [ORM Events](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/events.html)
+* [Doctrine Annotation >1.6](https://www.doctrine-project.org/projects/doctrine-annotations/en/1.6/index.html)
+* [Caching](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html)
+* [Entity Manager](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/working-with-objects.html)
 
 ## Example
 > `Psr\Container\ContainerInterface` container MUST have `config` key
@@ -99,7 +104,6 @@ Configure your project config file:
                     'configuration' => 'orm_custom',
                 ]
             ],
-            //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/events.html
             'event_manager' => [
                 'orm_default' => [
                     'subscribers' => [],
@@ -119,7 +123,6 @@ Configure your project config file:
     ```
 4. Configure orm driver, for example:
     ```php
-    //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers 
             'driver' => [
              // If you use single connection
              // Annotation driver example 
@@ -169,22 +172,22 @@ Configure your project config file:
     ```
 6. Configure your project dependencies:
     ```php
-        'dependencies' => [
-           'factories' => [
-                'doctrine.driver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\DriverFactory',
-                'doctrine.event_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EventManagerFactory',
-                'doctrine.configuration.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConfigurationFactory',
-                'doctrine.connection.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConnectionFactory',
-                'doctrine.entity_resolver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityResolverFactory',
-                'doctrine.entity_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityManagerFactory',
-                'doctrine.cache.array' => 'Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory',
-            ],
-        ]
+    'dependencies' => [
+       'factories' => [
+            'doctrine.driver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\DriverFactory',
+            'doctrine.event_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EventManagerFactory',
+            'doctrine.configuration.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConfigurationFactory',
+            'doctrine.connection.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConnectionFactory',
+            'doctrine.entity_resolver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityResolverFactory',
+            'doctrine.entity_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityManagerFactory',
+            'doctrine.cache.array' => 'Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory',
+        ],
+    ]
     ```
 7. Use in your project:
     ```php
-        $em = $container->get('doctrine.entity_manager.orm_default');
-        $connection = $container->get('doctrine.connection.orm_default');
+    $em = $container->get('doctrine.entity_manager.orm_default');
+    $connection = $container->get('doctrine.connection.orm_default');
     ```
     
 [Master branch]: https://github.com/streamcommon/doctrine-container-interop/tree/master
