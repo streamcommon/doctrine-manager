@@ -82,7 +82,7 @@ Configure your project config file:
                 'orm_custom' => [
                     'configuration' => 'orm_custom',
                     'event_manager' => 'orm_custom',
-                    'driver_class_name' => \Doctrine\DBAL\Driver\PDOPgSql\Driver:class
+                    'driver_class_name' => \Doctrine\DBAL\Driver\PDOPgSql\Driver::class
                     'params' => [
                         'dbname' => 'name',
                         'user' => 'user',
@@ -161,7 +161,7 @@ Configure your project config file:
     //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html
             'cache' => [
                 'array' => [
-                    'class_name' => 'Doctrine\Common\Cache\ArrayCache',
+                    'class_name' => Doctrine\Common\Cache\ArrayCache::class,
                     'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
                 ]
             ],
