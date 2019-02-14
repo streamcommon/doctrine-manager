@@ -21,6 +21,7 @@ use Streamcommon\Doctrine\Container\Interop\Options\EntityManager as EntityManag
  * Class EntityManagerFactory
  *
  * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/working-with-objects.html
  */
 class EntityManagerFactory extends AbstractFactory
 {

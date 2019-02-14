@@ -22,6 +22,7 @@ use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
  * Class CacheFactory
  *
  * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html
  */
 class CacheFactory extends AbstractFactory
 {

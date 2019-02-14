@@ -22,6 +22,9 @@ use Streamcommon\Doctrine\Container\Interop\Options\Connection as ConnectionOpti
  * Class ConnectionFactory
  *
  * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#getting-a-connection
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html#platforms
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/types.html#types
  */
 class ConnectionFactory extends AbstractFactory
 {
@@ -48,7 +51,7 @@ class ConnectionFactory extends AbstractFactory
         if ($options->getPdoClassName() !== null) {
             $connectionParams['pdo'] = $container->get($options->getPdoClassName());
         }
-        if ($options->getParams()->getPlatform() !== null && $container->has($options->getParams()->getPlatform())) {
+        if ($options->getParams()->getPlatform() !== null) {
             $connectionParams['platform'] = $container->get($options->getParams()->getPlatform());
         }
         $connection = DriverManager::getConnection($connectionParams, $configuration, $eventManager);

@@ -25,6 +25,7 @@ use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
  * Class ConfigurationFactory
  *
  * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#configuration
  */
 class ConfigurationFactory extends AbstractFactory
 {
