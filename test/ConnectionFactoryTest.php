@@ -24,8 +24,8 @@ class ConnectionFactoryTest extends AbstractFactoryTest
     public function testConnectionFactoryCreation(): void
     {
         $factory = new ConnectionFactory();
-        $entityResolver = $factory($this->getContainer(), 'doctrine.connection.orm_default');
+        $connection = $factory($this->getContainer(), 'doctrine.connection.orm_default');
 
-        $this->assertInstanceOf(Connection::class, $entityResolver);
+        $this->assertInstanceOf(Connection::class, $connection);
     }
 }

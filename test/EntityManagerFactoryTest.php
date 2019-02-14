@@ -29,8 +29,8 @@ class EntityManagerFactoryTest extends AbstractFactoryTest
     public function testEntityManagerFactoryCreation(): void
     {
         $factory = new EntityManagerFactory();
-        $entityResolver = $factory($this->getContainer(), 'doctrine.entity_manager.orm_default');
+        $entityManager = $factory($this->getContainer(), 'doctrine.entity_manager.orm_default');
 
-        $this->assertInstanceOf(EntityManager::class, $entityResolver);
+        $this->assertInstanceOf(EntityManager::class, $entityManager);
     }
 }

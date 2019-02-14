@@ -29,8 +29,8 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
     public function testConfigurationFactoryCreation(): void
     {
         $factory = new ConfigurationFactory();
-        $entityResolver = $factory($this->getContainer(), 'doctrine.configuration.orm_default');
+        $configuration = $factory($this->getContainer(), 'doctrine.configuration.orm_default');
 
-        $this->assertInstanceOf(Configuration::class, $entityResolver);
+        $this->assertInstanceOf(Configuration::class, $configuration);
     }
 }

@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Container\Interop;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
+use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver};
+use Doctrine\DBAL\Driver\PDOSqlite\Driver;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Prophecy\Prophecy\ObjectProphecy;
 use Streamcommon\Doctrine\Container\Interop\Factory\{
     CacheFactory,
     ConfigurationFactory,
@@ -51,7 +53,21 @@ abstract class AbstractFactoryTest extends TestCase
                 'orm_default' => [
                     'configuration' => 'orm_default',
                     'event_manager' => 'orm_default',
-                    'params' => [],
+                    'driver_class_name' => Driver::class,
+                    'pdo_class_name' => \PDO::class,
+                    'params' => [
+                        'dbname' => 'test',
+                        'user' => 'test',
+                        'password' => 'test',
+                        'host' => 'localhost',
+                        'platform' => SqlitePlatform::class
+                    ],
+                    'type_mapping' => [
+                        'integer' => 'integer',
+                    ],
+                    'commented_types' => [
+                        'integer'
+                    ],
                 ],
             ],
             'entity_manager' => [
@@ -78,8 +94,22 @@ abstract class AbstractFactoryTest extends TestCase
                 'orm_default' => [
                     'class_name' => MappingDriverChain::class,
                     'cache' => 'array',
-                    'paths' => [],
-                    'drivers' => [],
+                    'drivers' => [
+                        'TestAssets\AnnotationEntity' => 'TestAssets\AnnotationEntity',
+                        'TestAssets\FileEntity' => 'TestAssets\FileEntity'
+                    ]
+                ],
+                'TestAssets\AnnotationEntity' => [
+                    'class_name' => AnnotationDriver::class,
+                    'paths' => [
+                        __DIR__ . '/TestAssets/AnnotationEntity'
+                    ]
+                ],
+                'TestAssets\FileEntity' => [
+                    'class_name' => PHPDriver::class,
+                    'paths' => [
+                        __DIR__ . '/TestAssets/FileEntity'
+                    ]
                 ],
             ],
             'cache' => [
@@ -104,6 +134,9 @@ abstract class AbstractFactoryTest extends TestCase
         $container->has(ArrayCache::class)->willReturn(false);
         $container->has(MappingDriverChain::class)->willReturn(false);
         $container->get(TestEventSubscriber::class)->willReturn(new TestEventSubscriber());
+        $container->get(\PDO::class)->willReturn(new \PDO('sqlite::memory:'));
+        $container->get(SqlitePlatform::class)->willReturn(new SqlitePlatform());
+        $container->has(AnnotationDriver::class)->willReturn(false);
         $container->get('doctrine.cache.array')->willReturn(call_user_func_array(
             new CacheFactory(),
             [

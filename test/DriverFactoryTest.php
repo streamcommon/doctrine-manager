@@ -29,8 +29,8 @@ class DriverFactoryTest extends AbstractFactoryTest
     public function testEntityResolverFactoryCreation(): void
     {
         $factory = new DriverFactory();
-        $entityResolver = $factory($this->getContainer(), 'doctrine.driver.orm_default');
+        $driver = $factory($this->getContainer(), 'doctrine.driver.orm_default');
 
-        $this->assertInstanceOf(MappingDriver::class, $entityResolver);
+        $this->assertInstanceOf(MappingDriver::class, $driver);
     }
 }
