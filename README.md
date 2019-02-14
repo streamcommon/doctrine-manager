@@ -22,15 +22,22 @@ Or add into your `composer.json`:
     }
 ```
 
+## Please check doctrine documentation for more info
+* [Doctrine ORM version 2.6](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/index.html)
+* [Doctrine DBAL version 2.9](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/events.html#events)
+* [Doctrine Event Manager version 1.0](https://www.doctrine-project.org/projects/doctrine-event-manager/en/latest/index.html)
+
 ## Example
 > `Psr\Container\ContainerInterface` container MUST have `config` key
 
 Configure your project config file: 
 
-```php
+1. Configure doctrine configuration like: 
+    ```php
     'config' => [
         'doctrine' => [
             'configuration' => [
+            // If you use single connection
                 'orm_default' => [
                     'result_cache' => 'array',
                     'metadata_cache' => 'array',
@@ -38,38 +45,119 @@ Configure your project config file:
                     'hydration_cache' => 'array',
                     'driver' => 'orm_default',
                 ],
+             
+            // If you want to add a second connection
+                'orm_custom' => [
+                    'result_cache' => 'memcached',
+                    'metadata_cache' => 'memcached',
+                    'query_cache' => 'memcached',
+                    'hydration_cache' => 'memcached',
+                    'driver' => 'orm_custom',
+                ],
             ],
+    ```
+2. Configure connection options like: 
+    ```php
             'connection' => [
+            // If you use single connection
+            // Default using MySql connection
                 'orm_default' => [
                     'configuration' => 'orm_default',
                     'event_manager' => 'orm_default',
-                    'params' => [],
+                    'params' => [
+                        'dbname' => 'name',
+                        'user' => 'user',
+                        'password' => 'password',
+                        'host' => 'localhost',
+                    ],
                 ],
+             
+            // If you want to add a second connection
+            // Alternative Postgress connection
+                'orm_custom' => [
+                    'configuration' => 'orm_custom',
+                    'event_manager' => 'orm_custom',
+                    'driver_class_name' => \Doctrine\DBAL\Driver\PDOPgSql\Driver:class
+                    'params' => [
+                        'dbname' => 'name',
+                        'user' => 'user',
+                        'password' => 'password',
+                        'host' => 'localhost_custom',
+                    ],
+                ]
             ],
+    ```
+3. Configure entity|event manager:
+    ```php
             'entity_manager' => [
                 'orm_default' => [
                     'connection' => 'orm_default',
                     'configuration' => 'orm_default',
                 ],
+                'orm_custom' => [
+                    'connection' => 'orm_custom',
+                    'configuration' => 'orm_custom',
+                ]
             ],
+            //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/events.html
             'event_manager' => [
                 'orm_default' => [
                     'subscribers' => [],
                 ],
+                'orm_custom' => [
+                    'subscribers' => [],
+                ]
             ],
             'entity_resolver' => [
                 'orm_default' => [
                     'resolvers' => [],
                 ],
-            ],
-            'driver' => [
-                'orm_default' => [
-                    'class_name' => 'Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain',
-                    'cache' => 'array',
-                    'paths' => [],
-                    'drivers' => [],
+                'orm_custom' => [
+                    'resolvers' => [],
                 ],
             ],
+    ```
+4. Configure orm driver, for example:
+    ```php
+            'driver' => [
+             // If you use single connection
+             // Annotation driver example 
+             //@see https://www.doctrine-project.org/projects/doctrine-annotations/en/1.6/index.html
+                'orm_default' => [
+                    'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
+                    'cache' => 'array',
+                    'drivers' => [
+                       'Annotation\Entity' => 'Annotation\Entity' 
+                    ],
+                ],
+                'Annotation\Entity' => [
+                    'class_name' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                    'paths' => [
+                        __DIR__ . '/Annotation/Entity'
+                    ]
+                ],      
+          
+            // If you want to add a second connection
+            // Php driver for example
+            //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers 
+                'orm_custom' => [
+           Annotation         'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
+                    'cache' => 'array',
+                    'drivers' => [
+                        __DIR__ . '/PHPDriver/Entity'
+                    ],
+                ],
+                'PHPDriver\Entity' => [
+                    'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\PHPDriver::class,
+                    'paths' => [
+                        __DIR__ . '/PHPDriver/Entity'
+                    ]
+                ], 
+            ],
+    ```
+5. Configure doctrine cache
+    ```php
+    //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html
             'cache' => [
                 'array' => [
                     'class_name' => 'Doctrine\Common\Cache\ArrayCache',
@@ -78,30 +166,27 @@ Configure your project config file:
             ],
         ]
     ],
-```
-
-Configure your project dependencies:
-
-```php
-    'dependencies' => [
-       'factories' => [
-            'doctrine.driver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\DriverFactory',
-            'doctrine.event_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EventManagerFactory',
-            'doctrine.configuration.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConfigurationFactory',
-            'doctrine.connection.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConnectionFactory',
-            'doctrine.entity_resolver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityResolverFactory',
-            'doctrine.entity_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityManagerFactory',
-            'doctrine.cache.array' => 'Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory',
-        ],
-    ]
-```
-Use in project:
-
-```php
-    $em = $container->get('doctrine.entity_manager.orm_default');
-    $connection = $container->get('doctrine.connection.orm_default');
-```
-
+    ```
+6. Configure your project dependencies:
+    ```php
+        'dependencies' => [
+           'factories' => [
+                'doctrine.driver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\DriverFactory',
+                'doctrine.event_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EventManagerFactory',
+                'doctrine.configuration.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConfigurationFactory',
+                'doctrine.connection.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConnectionFactory',
+                'doctrine.entity_resolver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityResolverFactory',
+                'doctrine.entity_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityManagerFactory',
+                'doctrine.cache.array' => 'Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory',
+            ],
+        ]
+    ```
+7. Use in your project:
+    ```php
+        $em = $container->get('doctrine.entity_manager.orm_default');
+        $connection = $container->get('doctrine.connection.orm_default');
+    ```
+    
 [Master branch]: https://github.com/streamcommon/doctrine-container-interop/tree/master
 [Master branch image]: https://img.shields.io/badge/branch-master-blue.svg
 [Develop branch]: https://github.com/streamcommon/doctrine-container-interop/tree/develop
