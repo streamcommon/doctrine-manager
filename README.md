@@ -119,6 +119,7 @@ Configure your project config file:
     ```
 4. Configure orm driver, for example:
     ```php
+    //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers 
             'driver' => [
              // If you use single connection
              // Annotation driver example 
@@ -139,9 +140,8 @@ Configure your project config file:
           
             // If you want to add a second connection
             // Php driver for example
-            //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers 
                 'orm_custom' => [
-           Annotation         'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
+                    'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
                     'cache' => 'array',
                     'drivers' => [
                         __DIR__ . '/PHPDriver/Entity'
