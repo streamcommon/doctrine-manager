@@ -42,7 +42,7 @@
     "license-check": "docheader check lib/ test/",
     "phpstan": "phpstan analyze -l max -c phpstan.neon ./lib",
     "phpunit": "phpunit --colors=always",
-    "phpunit-coverage": "phpunit --colors=always --coverage-clover clover.xml --coverage-html html/",
+    "phpunit-coverage": "phpunit --colors=always --coverage-clover clover.xml",
     "coveralls": "php-coveralls -v"
   }
 }
