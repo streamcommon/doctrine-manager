@@ -232,6 +232,7 @@ abstract class AbstractFactoryTest extends TestCase
         $container->has('TestAssets\ResultSetMapping')->willReturn(false);
         $container->has('TestAssets\ArrayCache')->willReturn(true);
         $container->get('TestAssets\ArrayCache')->willReturn(new ArrayCache());
+        $container->has('TestAssets\NotExistClass')->willReturn(false);
         $container->get('doctrine.cache.array')->willReturn(call_user_func_array(
             new CacheFactory('array'),
             [
