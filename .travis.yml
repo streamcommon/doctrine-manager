@@ -8,9 +8,6 @@ cache:
 php:
   - 7.2
 
-before_install:
-  - pecl install redis
-
 install:
   - composer install --no-interaction
 
