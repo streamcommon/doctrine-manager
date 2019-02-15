@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Container\Interop;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver};
+use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver, StaticPHPDriver};
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
@@ -96,7 +96,8 @@ abstract class AbstractFactoryTest extends TestCase
                     'cache' => 'array',
                     'drivers' => [
                         'TestAssets\AnnotationEntity' => 'TestAssets\AnnotationEntity',
-                        'TestAssets\FileEntity' => 'TestAssets\FileEntity'
+                        'TestAssets\FileEntity' => 'TestAssets\FileEntity',
+                        'TestAssets\Static' => 'TestAssets\Static',
                     ]
                 ],
                 'TestAssets\AnnotationEntity' => [
@@ -110,6 +111,9 @@ abstract class AbstractFactoryTest extends TestCase
                     'paths' => [
                         __DIR__ . '/TestAssets/FileEntity'
                     ]
+                ],
+                'TestAssets\Static' => [
+                    'class_name' => StaticPHPDriver::class
                 ],
             ],
             'cache' => [
@@ -137,6 +141,10 @@ abstract class AbstractFactoryTest extends TestCase
         $container->get(\PDO::class)->willReturn(new \PDO('sqlite::memory:'));
         $container->get(SqlitePlatform::class)->willReturn(new SqlitePlatform());
         $container->has(AnnotationDriver::class)->willReturn(false);
+        $container->has(PHPDriver::class)->willReturn(false);
+        $container->has(StaticPHPDriver::class)->willReturn(true);
+        $container->get(StaticPHPDriver::class)->willReturn(new StaticPHPDriver([]));
+        $container->has('NotFoundA')->willReturn(false);
         $container->get('doctrine.cache.array')->willReturn(call_user_func_array(
             new CacheFactory(),
             [
