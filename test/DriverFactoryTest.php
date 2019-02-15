@@ -61,4 +61,18 @@ class DriverFactoryTest extends AbstractFactoryTest
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.driver.orm_default');
     }
+
+    /**
+     * Test NULL Exception
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     */
+    public function testDriverNULLException(): void
+    {
+        $this->config['doctrine']['driver']['orm_default']['drivers']['NotFoundA'] = 'NotFoundA';
+        $this->config['doctrine']['driver']['NotFoundA'] = ['class_name' => null];
+
+        $factory = new DriverFactory();
+        $this->expectException(RuntimeException::class);
+        $factory($this->getContainer(), 'doctrine.driver.orm_default');
+    }
 }
