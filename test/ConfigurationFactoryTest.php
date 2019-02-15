@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Container\Interop;
 
 use Doctrine\ORM\Configuration;
+use Streamcommon\Doctrine\Container\Interop\Exception\RuntimeException;
 use Streamcommon\Doctrine\Container\Interop\Factory\ConfigurationFactory;
 
 /**
@@ -32,5 +33,23 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
         $configuration = $factory($this->getContainer(), 'doctrine.configuration.orm_default');
 
         $this->assertInstanceOf(Configuration::class, $configuration);
+    }
+
+    /**
+     * Test Named query exception
+     *
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function testRsmException(): void
+    {
+        $this->config['doctrine']['configuration']['orm_default']['named_native_queries'][] = [
+            'name' => 'test',
+            'rsm' => 'TestAssets\ResultSetMapping',
+            'sql' => 'SHOW DATABASES;'
+        ];
+
+        $factory = new ConfigurationFactory();
+        $this->expectException(RuntimeException::class);
+        $factory($this->getContainer(), 'doctrine.configuration.orm_default');
     }
 }

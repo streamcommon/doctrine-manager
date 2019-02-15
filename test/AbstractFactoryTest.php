@@ -13,14 +13,22 @@ declare(strict_types=1);
 
 namespace Streamcommon\Test\Doctrine\Container\Interop;
 
-use Redis;
-use Memcached;
+use Doctrine\DBAL\Logging\EchoSQLLogger;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\{
+    ClassMetadataFactory,
+    DefaultEntityListenerResolver,
+    DefaultNamingStrategy,
+    Driver\AnnotationDriver};
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Common\Cache\{ArrayCache, FilesystemCache, RedisCache, PredisCache, MemcachedCache};
 use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver, StaticPHPDriver};
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Repository\DefaultRepositoryFactory;
 use Predis\{ClientInterface, Client};
+use Redis;
+use Memcached;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Factory\{
@@ -52,6 +60,40 @@ abstract class AbstractFactoryTest extends TestCase
                     'query_cache' => 'predis',
                     'hydration_cache' => 'redis',
                     'driver' => 'orm_default',
+                    'class_metadata_factory_name' => ClassMetadataFactory::class,
+                    'default_repository_class_name' => EntityRepository::class,
+                    'naming_strategy' => DefaultNamingStrategy::class,
+                    'repository_factory' => DefaultRepositoryFactory::class,
+                    'entity_listener_resolver' => DefaultEntityListenerResolver::class,
+                    'named_queries' => [
+                        [
+                          'name' => 'test',
+                          'sql' => 'SHOW DATABASES;'
+                        ],
+                    ],
+                    'named_native_queries' => [
+                        [
+                            'name' => 'test',
+                            'rsm' => ResultSetMapping::class,
+                            'sql' => 'SHOW DATABASES;'
+                        ],
+                    ],
+                    'filters' => [
+                        'test' => 'TestAssets\Filter'
+                    ],
+                    'sql_logger' => EchoSQLLogger::class,
+                    'second_level_cache' => [
+                        'enabled' => true,
+                        'regions' => [
+                            [
+                                'name' => 'test'
+                            ],
+                            [
+                                'name' => null
+                            ]
+                        ],
+                        'file_lock_region_directory' => __DIR__ . '/cache',
+                    ]
                 ],
             ],
             'connection' => [
@@ -181,6 +223,15 @@ abstract class AbstractFactoryTest extends TestCase
         $redis->connect('127.0.0.1');
         $container->get(Redis::class)->willReturn($redis);
         $container->get(Memcached::class)->willReturn(new Memcached());
+        $container->has(ResultSetMapping::class)->willReturn(true);
+        $container->get(ResultSetMapping::class)->willReturn(new ResultSetMapping());
+        $container->get(EchoSQLLogger::class)->willReturn(new EchoSQLLogger());
+        $container->get(DefaultNamingStrategy::class)->willReturn(new DefaultNamingStrategy());
+        $container->get(DefaultRepositoryFactory::class)->willReturn(new DefaultRepositoryFactory());
+        $container->get(DefaultEntityListenerResolver::class)->willReturn(new DefaultEntityListenerResolver());
+        $container->has('TestAssets\ResultSetMapping')->willReturn(false);
+        $container->has('TestAssets\ArrayCache')->willReturn(true);
+        $container->get('TestAssets\ArrayCache')->willReturn(new ArrayCache());
         $container->get('doctrine.cache.array')->willReturn(call_user_func_array(
             new CacheFactory('array'),
             [
