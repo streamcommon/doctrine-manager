@@ -41,6 +41,10 @@ class DriverFactory extends AbstractFactory
         $options = new DriverOptions($this->getOptions($container, 'driver'));
 
         $className = $options->getClassName();
+        if ($className === null) {
+            throw new RuntimeException('Missing className config key');
+        }
+
         if ($container->has($className)) {
             $driver = $container->get($className);
         } elseif ($className === AnnotationDriver::class || is_subclass_of($className, AnnotationDriver::class)) {
