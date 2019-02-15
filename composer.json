@@ -22,11 +22,14 @@
   "require-dev": {
     "ext-pdo":  "*",
     "ext-pdo_sqlite": "*",
+    "ext-redis": "*",
+    "ext-memcached": "*",
     "streamcommon/coding-standard": "^1.0.0",
     "malukenho/docheader": "^0.1.7",
     "phpstan/phpstan": "^0.11.1",
     "phpunit/phpunit": "^8.0",
-    "php-coveralls/php-coveralls": "^2.1.0"
+    "php-coveralls/php-coveralls": "^2.1.0",
+    "predis/predis":   "^1.1.0"
   },
   "autoload": {
     "psr-4": {
