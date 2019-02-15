@@ -187,7 +187,7 @@ Configure your project config file:
             'doctrine.configuration.orm_default'   => ConfigurationFactory::class,
             'doctrine.connection.orm_default'      => ConnectionFactory::class,
             'doctrine.entity_resolver.orm_default' => EntityResolverFactory::class,
-            'doctrine.entity_manager.orm_default'  => _EntityManagerFactory::class,
+            'doctrine.entity_manager.orm_default'  => EntityManagerFactory::class,
             'doctrine.cache.array'                 => CacheFactory::class,
         
        // If you want to add a second connection
