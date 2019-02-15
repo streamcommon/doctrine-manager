@@ -18,6 +18,11 @@ use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Options\EventManager as EventManagerOptions;
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
+use function is_object;
+use function get_class;
+use function gettype;
+use function sprintf;
+
 /**
  * Class EventManagerFactory
  *

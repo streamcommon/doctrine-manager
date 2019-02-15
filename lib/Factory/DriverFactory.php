@@ -19,6 +19,10 @@ use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Options\Driver as DriverOptions;
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
+use function sprintf;
+use function is_subclass_of;
+use function class_exists;
+
 /**
  * Class DriverFactory
  *

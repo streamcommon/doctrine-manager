@@ -17,6 +17,13 @@ use Streamcommon\Doctrine\Container\Interop\Options\Part\{NamedQuery, NamedNativ
 use Streamcommon\Doctrine\Container\Interop\Exception\{InvalidArgumentException};
 use Zend\Stdlib\AbstractOptions;
 
+use function array_map;
+use function is_array;
+use function sprintf;
+use function is_object;
+use function get_class;
+use function gettype;
+
 /**
  * Class Configuration
  *

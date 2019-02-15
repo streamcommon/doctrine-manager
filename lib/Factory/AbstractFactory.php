@@ -17,6 +17,8 @@ use Psr\Container\ContainerInterface;
 use Streamcommon\Factory\Container\Interop\FactoryInterface;
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
+use function sprintf;
+
 /**
  * Class AbstractFactory
  *

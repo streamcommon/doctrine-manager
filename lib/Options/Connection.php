@@ -18,6 +18,12 @@ use Streamcommon\Doctrine\Container\Interop\Exception\{InvalidArgumentException}
 use Streamcommon\Doctrine\Container\Interop\Options\Part\{ConnectionParams};
 use Zend\Stdlib\AbstractOptions;
 
+use function is_array;
+use function sprintf;
+use function is_object;
+use function get_class;
+use function gettype;
+
 /**
  * Class Connection
  *

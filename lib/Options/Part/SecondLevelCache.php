@@ -16,6 +16,8 @@ namespace Streamcommon\Doctrine\Container\Interop\Options\Part;
 use Streamcommon\Doctrine\Container\Interop\Options\Part\Cache\Region;
 use Zend\Stdlib\AbstractOptions;
 
+use function array_map;
+
 /**
  * Class SecondLevelCache
  *
