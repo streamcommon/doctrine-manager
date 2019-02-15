@@ -12,6 +12,9 @@ services:
   - memcached
   - redis-server
 
+before_install:
+  - phpenv config-add ./test/travis/php.ini
+
 install:
   - composer install --no-interaction
 
