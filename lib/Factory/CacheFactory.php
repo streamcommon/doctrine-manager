@@ -57,7 +57,7 @@ class CacheFactory extends AbstractFactory
         }
 
         $instance = $options->getInstance();
-        if ($instance !== null && $container->has($instance)) {
+        if ($instance !== null) {
             $instance = $container->get($instance);
         }
 
