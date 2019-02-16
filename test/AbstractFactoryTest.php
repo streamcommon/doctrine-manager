@@ -13,11 +13,22 @@ declare(strict_types=1);
 
 namespace Streamcommon\Test\Doctrine\Container\Interop;
 
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver};
+use Doctrine\DBAL\Logging\EchoSQLLogger;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\{
+    ClassMetadataFactory,
+    DefaultEntityListenerResolver,
+    DefaultNamingStrategy,
+    Driver\AnnotationDriver};
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\Common\Cache\{ArrayCache, FilesystemCache, RedisCache, PredisCache, MemcachedCache};
+use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver, StaticPHPDriver};
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Repository\DefaultRepositoryFactory;
+use Predis\{ClientInterface, Client};
+use Redis;
+use Memcached;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Factory\{
@@ -29,6 +40,8 @@ use Streamcommon\Doctrine\Container\Interop\Factory\{
     EntityResolverFactory,
     EventManagerFactory};
 use Streamcommon\Test\Doctrine\Container\Interop\TestAssets\TestEventSubscriber;
+
+use function call_user_func_array;
 
 /**
  * Class AbstractFactoryTest
@@ -42,11 +55,45 @@ abstract class AbstractFactoryTest extends TestCase
         'doctrine' => [
             'configuration' => [
                 'orm_default' => [
-                    'result_cache' => 'array',
-                    'metadata_cache' => 'array',
-                    'query_cache' => 'array',
-                    'hydration_cache' => 'array',
+                    'result_cache' => 'memcached',
+                    'metadata_cache' => 'filesystem',
+                    'query_cache' => 'predis',
+                    'hydration_cache' => 'redis',
                     'driver' => 'orm_default',
+                    'class_metadata_factory_name' => ClassMetadataFactory::class,
+                    'default_repository_class_name' => EntityRepository::class,
+                    'naming_strategy' => DefaultNamingStrategy::class,
+                    'repository_factory' => DefaultRepositoryFactory::class,
+                    'entity_listener_resolver' => DefaultEntityListenerResolver::class,
+                    'named_queries' => [
+                        [
+                          'name' => 'test',
+                          'sql' => 'SHOW DATABASES;'
+                        ],
+                    ],
+                    'named_native_queries' => [
+                        [
+                            'name' => 'test',
+                            'rsm' => ResultSetMapping::class,
+                            'sql' => 'SHOW DATABASES;'
+                        ],
+                    ],
+                    'filters' => [
+                        'test' => 'TestAssets\Filter'
+                    ],
+                    'sql_logger' => EchoSQLLogger::class,
+                    'second_level_cache' => [
+                        'enabled' => true,
+                        'regions' => [
+                            [
+                                'name' => 'test'
+                            ],
+                            [
+                                'name' => null
+                            ]
+                        ],
+                        'file_lock_region_directory' => __DIR__ . '/cache',
+                    ]
                 ],
             ],
             'connection' => [
@@ -96,7 +143,8 @@ abstract class AbstractFactoryTest extends TestCase
                     'cache' => 'array',
                     'drivers' => [
                         'TestAssets\AnnotationEntity' => 'TestAssets\AnnotationEntity',
-                        'TestAssets\FileEntity' => 'TestAssets\FileEntity'
+                        'TestAssets\FileEntity' => 'TestAssets\FileEntity',
+                        'TestAssets\Static' => 'TestAssets\Static',
                     ]
                 ],
                 'TestAssets\AnnotationEntity' => [
@@ -111,12 +159,35 @@ abstract class AbstractFactoryTest extends TestCase
                         __DIR__ . '/TestAssets/FileEntity'
                     ]
                 ],
+                'TestAssets\Static' => [
+                    'class_name' => StaticPHPDriver::class
+                ],
             ],
             'cache' => [
                 'array' => [
                     'class_name' => ArrayCache::class,
                     'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
-                ]
+                ],
+                'filesystem' => [
+                    'class_name' => FilesystemCache::class,
+                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                    'path' => __DIR__
+                ],
+                'redis' => [
+                    'class_name' => RedisCache::class,
+                    'instance' => Redis::class,
+                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                ],
+                'predis' => [
+                    'class_name' => PredisCache::class,
+                    'instance' => ClientInterface::class,
+                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                ],
+                'memcached' => [
+                    'class_name' => MemcachedCache::class,
+                    'instance' => Memcached::class,
+                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                ],
             ],
         ]
     ];
@@ -132,16 +203,69 @@ abstract class AbstractFactoryTest extends TestCase
         $container->has('config')->willReturn(true);
         $container->get('config')->willReturn($this->config);
         $container->has(ArrayCache::class)->willReturn(false);
+        $container->has(FilesystemCache::class)->willReturn(false);
+        $container->has(RedisCache::class)->willReturn(false);
+        $container->has(PredisCache::class)->willReturn(false);
+        $container->has(MemcachedCache::class)->willReturn(false);
         $container->has(MappingDriverChain::class)->willReturn(false);
         $container->get(TestEventSubscriber::class)->willReturn(new TestEventSubscriber());
         $container->get(\PDO::class)->willReturn(new \PDO('sqlite::memory:'));
         $container->get(SqlitePlatform::class)->willReturn(new SqlitePlatform());
         $container->has(AnnotationDriver::class)->willReturn(false);
+        $container->has(PHPDriver::class)->willReturn(false);
+        $container->has(StaticPHPDriver::class)->willReturn(true);
+        $container->get(StaticPHPDriver::class)->willReturn(new StaticPHPDriver([]));
+        $container->has('NotFoundA')->willReturn(false);
+        $container->has(ClientInterface::class)->willReturn(true);
+        $container->get(ClientInterface::class)->willReturn(new Client());
+        $container->has(Redis::class)->willReturn(true);
+        $redis = new Redis();
+        $redis->connect('127.0.0.1');
+        $container->get(Redis::class)->willReturn($redis);
+        $container->get(Memcached::class)->willReturn(new Memcached());
+        $container->has(ResultSetMapping::class)->willReturn(true);
+        $container->get(ResultSetMapping::class)->willReturn(new ResultSetMapping());
+        $container->get(EchoSQLLogger::class)->willReturn(new EchoSQLLogger());
+        $container->get(DefaultNamingStrategy::class)->willReturn(new DefaultNamingStrategy());
+        $container->get(DefaultRepositoryFactory::class)->willReturn(new DefaultRepositoryFactory());
+        $container->get(DefaultEntityListenerResolver::class)->willReturn(new DefaultEntityListenerResolver());
+        $container->has('TestAssets\ResultSetMapping')->willReturn(false);
+        $container->has('TestAssets\ArrayCache')->willReturn(true);
+        $container->get('TestAssets\ArrayCache')->willReturn(new ArrayCache());
+        $container->has('TestAssets\NotExistClass')->willReturn(false);
         $container->get('doctrine.cache.array')->willReturn(call_user_func_array(
-            new CacheFactory(),
+            new CacheFactory('array'),
             [
                 $container->reveal(),
                 'doctrine.cache.array'
+            ]
+        ));
+        $container->get('doctrine.cache.filesystem')->willReturn(call_user_func_array(
+            new CacheFactory('filesystem'),
+            [
+                $container->reveal(),
+                'doctrine.cache.filesystem'
+            ]
+        ));
+        $container->get('doctrine.cache.predis')->willReturn(call_user_func_array(
+            new CacheFactory('predis'),
+            [
+                $container->reveal(),
+                'doctrine.cache.predis'
+            ]
+        ));
+        $container->get('doctrine.cache.redis')->willReturn(call_user_func_array(
+            new CacheFactory('redis'),
+            [
+                $container->reveal(),
+                'doctrine.cache.redis'
+            ]
+        ));
+        $container->get('doctrine.cache.memcached')->willReturn(call_user_func_array(
+            new CacheFactory('memcached'),
+            [
+                $container->reveal(),
+                'doctrine.cache.memcached'
             ]
         ));
         $container->get('doctrine.driver.orm_default')->willReturn(call_user_func_array(

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Container\Interop;
 
 use Doctrine\Common\Cache\{CacheProvider, ArrayCache};
+use Streamcommon\Doctrine\Container\Interop\Exception\RuntimeException;
 use Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory;
 
 /**
@@ -34,5 +35,43 @@ class CacheFactoryTest extends AbstractFactoryTest
 
         $this->assertInstanceOf(CacheProvider::class, $cache);
         $this->assertInstanceOf(ArrayCache::class, $cache);
+    }
+
+    /**
+     * Test null class name exception
+     */
+    public function testCacheNullClassNameException(): void
+    {
+        $this->config['doctrine']['cache']['array']['class_name'] = null;
+
+        $factory = new CacheFactory();
+        $this->expectException(RuntimeException::class);
+        $factory($this->getContainer(), 'doctrine.cache.array');
+    }
+
+    /**
+     * Test cache container exists
+     */
+    public function testCacheContainer(): void
+    {
+        $this->config['doctrine']['cache']['array']['class_name'] = 'TestAssets\ArrayCache';
+
+        $factory = new CacheFactory();
+        $cache = $factory($this->getContainer(), 'doctrine.cache.array');
+
+        $this->assertInstanceOf(CacheProvider::class, $cache);
+        $this->assertInstanceOf(ArrayCache::class, $cache);
+    }
+
+    /**
+     * Test not exists cache class
+     */
+    public function testCacheClassNotExist(): void
+    {
+        $this->config['doctrine']['cache']['array']['class_name'] = 'TestAssets\NotExistClass';
+
+        $factory = new CacheFactory();
+        $this->expectException(RuntimeException::class);
+        $factory($this->getContainer(), 'doctrine.cache.array');
     }
 }

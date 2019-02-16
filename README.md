@@ -145,7 +145,7 @@ Configure your project config file:
                 'orm_custom' => [
                     'class_name' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
                     'drivers' => [
-                        __DIR__ . '/PHPDriver/Entity'
+                        'PHPDriver\Entity' => 'PHPDriver\Entity'
                     ],
                 ],
                 'PHPDriver\Entity' => [
@@ -156,7 +156,7 @@ Configure your project config file:
                 ], 
             ],
     ```
-5. Configure doctrine cache
+5. Configure doctrine cache:
     ```php
     //@see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html
             'cache' => [
@@ -170,15 +170,33 @@ Configure your project config file:
     ```
 6. Configure your project dependencies:
     ```php
+    use Streamcommon\Doctrine\Container\Interop\Factory\{
+       DriverFactory,
+       EventManagerFactory,
+       ConfigurationFactory,
+       ConnectionFactory,
+       EntityResolverFactory,
+       EntityManagerFactory,
+       CacheFactory};
+    
     'dependencies' => [
        'factories' => [
-            'doctrine.driver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\DriverFactory',
-            'doctrine.event_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EventManagerFactory',
-            'doctrine.configuration.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConfigurationFactory',
-            'doctrine.connection.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\ConnectionFactory',
-            'doctrine.entity_resolver.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityResolverFactory',
-            'doctrine.entity_manager.orm_default' => 'Streamcommon\Doctrine\Container\Interop\Factory\EntityManagerFactory',
-            'doctrine.cache.array' => 'Streamcommon\Doctrine\Container\Interop\Factory\CacheFactory',
+       // If you use single connection
+            'doctrine.driver.orm_default'          => DriverFactory::class,
+            'doctrine.event_manager.orm_default'   => EventManagerFactory::class,
+            'doctrine.configuration.orm_default'   => ConfigurationFactory::class,
+            'doctrine.connection.orm_default'      => ConnectionFactory::class,
+            'doctrine.entity_resolver.orm_default' => EntityResolverFactory::class,
+            'doctrine.entity_manager.orm_default'  => EntityManagerFactory::class,
+            'doctrine.cache.array'                 => CacheFactory::class,
+        
+       // If you want to add a second connection
+            'doctrine.driver.orm_custom'          => [DriverFactory::class, 'orm_custom'],
+            'doctrine.event_manager.orm_custom'   => [EventManagerFactory::class, 'orm_custom'],
+            'doctrine.configuration.orm_custom'   => [ConfigurationFactory::class, 'orm_custom'],
+            'doctrine.connection.orm_custom'      => [ConnectionFactory::class, 'orm_custom'],
+            'doctrine.entity_resolver.orm_custom' => [EntityResolverFactory::class, 'orm_custom'],
+            'doctrine.entity_manager.orm_custom'  => [EntityManagerFactory::class, 'orm_custom'],
         ],
     ]
     ```

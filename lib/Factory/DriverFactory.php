@@ -19,6 +19,10 @@ use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Options\Driver as DriverOptions;
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
+use function sprintf;
+use function is_subclass_of;
+use function class_exists;
+
 /**
  * Class DriverFactory
  *
@@ -44,7 +48,10 @@ class DriverFactory extends AbstractFactory
         if ($className === null) {
             throw new RuntimeException('Missing className config key');
         }
-        if ($className === AnnotationDriver::class || is_subclass_of($className, AnnotationDriver::class)) {
+
+        if ($container->has($className)) {
+            $driver = $container->get($className);
+        } elseif ($className === AnnotationDriver::class || is_subclass_of($className, AnnotationDriver::class)) {
             $cache = $container->get('doctrine.cache.' . $options->getCache());
             $reader = new CachedReader(new IndexedReader(new AnnotationReader()), $cache);
             $driver = new $className($reader, $options->getPaths());
@@ -53,8 +60,6 @@ class DriverFactory extends AbstractFactory
             if ($options->getGlobalBasename() !== null && $driver instanceof FileDriver) {
                 $driver->setGlobalBasename($options->getGlobalBasename());
             }
-        } elseif ($container->has($className)) {
-            $driver = $container->get($className);
         } elseif (class_exists($className) === true) {
             $driver = new $className($options->getPaths());
         } else {

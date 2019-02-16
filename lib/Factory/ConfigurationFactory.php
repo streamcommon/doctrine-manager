@@ -21,6 +21,12 @@ use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Options\Configuration as ConfigurationOptions;
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
+use function is_object;
+use function get_class;
+use function gettype;
+use function sprintf;
+use function is_string;
+
 /**
  * Class ConfigurationFactory
  *
@@ -61,8 +67,6 @@ class ConfigurationFactory extends AbstractFactory
             if (is_string($rsm)) {
                 if ($container->has($rsm)) {
                     $rsm = $container->get($rsm);
-                } elseif (class_exists($rsm)) {
-                    $rsm = new $rsm;
                 } else {
                     throw new RuntimeException(sprintf(
                         '%s variable must be instance of Doctrine\ORM\Query\ResultSetMapping',

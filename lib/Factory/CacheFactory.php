@@ -18,6 +18,9 @@ use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Container\Interop\Options\Cache as CacheOptions;
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
+use function sprintf;
+use function class_exists;
+
 /**
  * Class CacheFactory
  *
@@ -57,7 +60,7 @@ class CacheFactory extends AbstractFactory
         }
 
         $instance = $options->getInstance();
-        if ($instance !== null && $container->has($instance)) {
+        if ($instance !== null) {
             $instance = $container->get($instance);
         }
 
