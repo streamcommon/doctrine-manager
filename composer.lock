@@ -963,16 +963,16 @@
         },
         {
             "name": "streamcommon/factory-container-interop",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/streamcommon/factory-container-interop.git",
-                "reference": "3468458dc8e607666b71df7a962a696e2543ddce"
+                "reference": "a6d4518ac39e3a15129a11fe1d45acdfd11c7bfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/streamcommon/factory-container-interop/zipball/3468458dc8e607666b71df7a962a696e2543ddce",
-                "reference": "3468458dc8e607666b71df7a962a696e2543ddce",
+                "url": "https://api.github.com/repos/streamcommon/factory-container-interop/zipball/a6d4518ac39e3a15129a11fe1d45acdfd11c7bfe",
+                "reference": "a6d4518ac39e3a15129a11fe1d45acdfd11c7bfe",
                 "shasum": ""
             },
             "require": {
@@ -981,6 +981,7 @@
             },
             "require-dev": {
                 "malukenho/docheader": "^0.1.7",
+                "php-coveralls/php-coveralls": "^2.1.0",
                 "phpstan/phpstan": "^0.11.1",
                 "phpunit/phpunit": "^8.0",
                 "streamcommon/coding-standard": "^1.0.0"
@@ -1001,7 +1002,7 @@
                 "factory container psr-11",
                 "streamcommon"
             ],
-            "time": "2019-02-10T15:45:51+00:00"
+            "time": "2019-02-16T19:55:30+00:00"
         },
         {
             "name": "symfony/console",
@@ -2725,16 +2726,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "7.0.1",
+            "version": "7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "4832739a02c418397e404da6c3e4fe680b7a4de7"
+                "reference": "cfca9c5f7f2694ca0c7749ffb142927d9f05250f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/4832739a02c418397e404da6c3e4fe680b7a4de7",
-                "reference": "4832739a02c418397e404da6c3e4fe680b7a4de7",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cfca9c5f7f2694ca0c7749ffb142927d9f05250f",
+                "reference": "cfca9c5f7f2694ca0c7749ffb142927d9f05250f",
                 "shasum": ""
             },
             "require": {
@@ -2784,7 +2785,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-02-01T07:29:14+00:00"
+            "time": "2019-02-15T13:40:27+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2977,16 +2978,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.0.2",
+            "version": "8.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d64e502503bcfab5d46c0b74ffd41f4986831dc7"
+                "reference": "651e95a71ff705faae24d18ef5e4c7c8c5050f9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d64e502503bcfab5d46c0b74ffd41f4986831dc7",
-                "reference": "d64e502503bcfab5d46c0b74ffd41f4986831dc7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/651e95a71ff705faae24d18ef5e4c7c8c5050f9a",
+                "reference": "651e95a71ff705faae24d18ef5e4c7c8c5050f9a",
                 "shasum": ""
             },
             "require": {
@@ -3055,7 +3056,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-02-07T14:17:09+00:00"
+            "time": "2019-02-15T14:06:48+00:00"
         },
         {
             "name": "psr/http-message",

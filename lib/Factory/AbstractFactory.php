@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Doctrine\Container\Interop\Factory;
 
 use Psr\Container\ContainerInterface;
-use Streamcommon\Factory\Container\Interop\FactoryInterface;
+use Streamcommon\Factory\Container\Interop\{FactoryInterface, CallableFactoryTrait};
 use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
 
 /**
@@ -24,17 +24,16 @@ use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
  */
 abstract class AbstractFactory implements FactoryInterface
 {
-    /** @var string */
-    protected $ormName;
+    use CallableFactoryTrait;
 
     /**
      * AbstractFactory constructor.
      *
-     * @param string $ormName
+     * @param string $name
      */
-    public function __construct(string $ormName = 'orm_default')
+    public function __construct(string $name = 'orm_default')
     {
-        $this->ormName = $ormName;
+        $this->name = $name;
     }
 
     /**
@@ -49,7 +48,7 @@ abstract class AbstractFactory implements FactoryInterface
     public function getOptions(ContainerInterface $container, string $key, string $ormName = null): array
     {
         if ($ormName === null) {
-            $ormName = $this->ormName;
+            $ormName = $this->name;
         }
         $config = $container->has('config') ? $container->get('config') : [];
         $doctrineConfig = !empty($config['doctrine']) ? $config['doctrine'] : [];
