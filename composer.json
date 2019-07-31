@@ -5,8 +5,13 @@
   "type": "library",
   "keywords": [
     "streamcommon",
+    "doctrine manager",
     "doctrine container",
-    "doctrine-manager",
+    "doctrine cli",
+    "doctrine zend servicemanager",
+    "doctrine auradi",
+    "doctrine pimple",
+    "doctrine symfony container",
     "psr-11"
   ],
   "require": {
@@ -33,6 +38,12 @@
     "zendframework/zend-auradi-config": "^1.0.1",
     "zendframework/zend-pimple-config": "^1.1.0",
     "jsoumelidis/zend-sf-di-config": "^0.4.0"
+  },
+  "extra": {
+    "zf" : {
+      "component": "Streamcommon\\Doctrine\\Manager",
+      "config-provider" : "Streamcommon\\Doctrine\\Manager\\ConfigProvider"
+    }
   },
   "autoload": {
     "psr-4": {
