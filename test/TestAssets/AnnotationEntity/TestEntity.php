@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Test\Doctrine\Container\Interop\TestAssets\AnnotationEntity;
+namespace Streamcommon\Test\Doctrine\Manager\TestAssets\AnnotationEntity;
 
 /**
  * Class TestEntity
  *
- * @package Streamcommon\Test\Doctrine\Container\Interop\TestAssets\AnnotationEntity
+ * @package Streamcommon\Test\Doctrine\Manager\TestAssets\AnnotationEntity
  *
  * @Doctrine\ORM\Mapping\Entity
  * @Doctrine\ORM\Mapping\@Table(name="test")

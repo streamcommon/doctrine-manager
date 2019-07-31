@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Container\Interop\Options;
+namespace Streamcommon\Doctrine\Manager\Options;
 
-use Streamcommon\Doctrine\Container\Interop\Options\Part\{NamedQuery, NamedNativeQueries, SecondLevelCache};
-use Streamcommon\Doctrine\Container\Interop\Exception\{InvalidArgumentException};
+use Streamcommon\Doctrine\Manager\Options\Part\{NamedQuery, NamedNativeQueries, SecondLevelCache};
+use Streamcommon\Doctrine\Manager\Exception\{InvalidArgumentException};
 use Zend\Stdlib\AbstractOptions;
 
 use function array_map;
@@ -27,7 +27,7 @@ use function gettype;
 /**
  * Class Configuration
  *
- * @package Streamcommon\Doctrine\Container\Interop\Options
+ * @package Streamcommon\Doctrine\Manager\Options
  *
  * @link http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html
  */
@@ -48,7 +48,7 @@ class Configuration extends AbstractOptions
     /** @var string */
     protected $proxyDir = 'data/doctrine/orm/proxy';
     /** @var string */
-    protected $proxyNamespace = 'Streamcommon\Doctrine\Container\Interop\Proxy';
+    protected $proxyNamespace = 'Streamcommon\Doctrine\Manager\Proxy';
     /** @var array */
     protected $entityNamespaces = [];
     /** @var array */

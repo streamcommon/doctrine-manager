@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Container\Interop\Factory;
+namespace Streamcommon\Doctrine\Manager\Factory;
 
 use Doctrine\Common\Cache\{FilesystemCache, PredisCache, MemcachedCache, RedisCache, CacheProvider};
 use Psr\Container\ContainerInterface;
-use Streamcommon\Doctrine\Container\Interop\Options\Cache as CacheOptions;
-use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
+use Streamcommon\Doctrine\Manager\Options\Cache as CacheOptions;
+use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
 use function sprintf;
 use function class_exists;
@@ -24,7 +24,7 @@ use function class_exists;
 /**
  * Class CacheFactory
  *
- * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @package Streamcommon\Doctrine\Manager\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html
  */
 class CacheFactory extends AbstractFactory

@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,20 +11,20 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Test\Doctrine\Container\Interop;
+namespace Streamcommon\Test\Doctrine\Manager;
 
 use ArrayObject;
 use Doctrine\Common\EventManager;
 use Psr\Container\ContainerInterface;
-use Streamcommon\Doctrine\Container\Interop\Exception\RuntimeException;
-use Streamcommon\Doctrine\Container\Interop\Factory\EntityResolverFactory;
-use Streamcommon\Doctrine\Container\Interop\Factory\EventManagerFactory;
-use Streamcommon\Test\Doctrine\Container\Interop\TestAssets\TestEventSubscriber;
+use Streamcommon\Doctrine\Manager\Exception\RuntimeException;
+use Streamcommon\Doctrine\Manager\Factory\EntityResolverFactory;
+use Streamcommon\Doctrine\Manager\Factory\EventManagerFactory;
+use Streamcommon\Test\Doctrine\Manager\TestAssets\TestEventSubscriber;
 
 /**
  * Class EventManagerFactoryTest
  *
- * @package Streamcommon\Test\Doctrine\Container\Interop
+ * @package Streamcommon\Test\Doctrine\Manager
  */
 class EventManagerFactoryTest extends AbstractFactoryTest
 {

@@ -1,7 +1,7 @@
-# doctrine-container-interop
-[![Latest Stable Version](https://poser.pugx.org/streamcommon/doctrine-container-interop/v/stable)](https://packagist.org/packages/streamcommon/doctrine-container-interop)
-[![Total Downloads](https://poser.pugx.org/streamcommon/doctrine-container-interop/downloads)](https://packagist.org/packages/streamcommon/doctrine-container-interop)
-[![License](https://poser.pugx.org/streamcommon/doctrine-container-interop/license)](./LICENSE)
+# doctrine-manager
+[![Latest Stable Version](https://poser.pugx.org/streamcommon/doctrine-manager/v/stable)](https://packagist.org/packages/streamcommon/doctrine-manager)
+[![Total Downloads](https://poser.pugx.org/streamcommon/doctrine-manager/downloads)](https://packagist.org/packages/streamcommon/doctrine-manager)
+[![License](https://poser.pugx.org/streamcommon/doctrine-manager/license)](./LICENSE)
 
 This package provide [Doctrine 2](https://github.com/doctrine) factories for [PRS-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) container standard.
 
@@ -170,7 +170,7 @@ Configure your project config file:
     ```
 6. Configure your project dependencies:
     ```php
-    use Streamcommon\Doctrine\Container\Interop\Factory\{
+    use Streamcommon\Doctrine\Manager\Factory\{
        DriverFactory,
        EventManagerFactory,
        ConfigurationFactory,
@@ -206,15 +206,15 @@ Configure your project config file:
     $connection = $container->get('doctrine.connection.orm_default');
     ```
     
-[Master branch]: https://github.com/streamcommon/doctrine-container-interop/tree/master
+[Master branch]: https://github.com/streamcommon/doctrine-container-manager/tree/master
 [Master branch image]: https://img.shields.io/badge/branch-master-blue.svg
-[Develop branch]: https://github.com/streamcommon/doctrine-container-interop/tree/develop
+[Develop branch]: https://github.com/streamcommon/doctrine-container-manager/tree/develop
 [Develop branch image]: https://img.shields.io/badge/branch-develop-blue.svg
-[Master image]: https://travis-ci.org/streamcommon/doctrine-container-interop.svg?branch=master
-[Master]: https://travis-ci.org/streamcommon/doctrine-container-interop
-[Master coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-container-interop/badge.svg?branch=master
-[Master coverage]: https://coveralls.io/github/streamcommon/doctrine-container-interop?branch=master
-[Develop image]: https://travis-ci.org/streamcommon/doctrine-container-interop.svg?branch=develop
-[Develop]: https://travis-ci.org/streamcommon/doctrine-container-interop
-[Develop coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-container-interop/badge.svg?branch=develop
-[Develop coverage]: https://coveralls.io/github/streamcommon/doctrine-container-interop?branch=develop
+[Master image]: https://travis-ci.org/streamcommon/doctrine-container-manager.svg?branch=master
+[Master]: https://travis-ci.org/streamcommon/doctrine-container-manager
+[Master coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-container-manager/badge.svg?branch=master
+[Master coverage]: https://coveralls.io/github/streamcommon/doctrine-container-manager?branch=master
+[Develop image]: https://travis-ci.org/streamcommon/doctrine-container-manager.svg?branch=develop
+[Develop]: https://travis-ci.org/streamcommon/doctrine-container-manager
+[Develop coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-container-manager/badge.svg?branch=develop
+[Develop coverage]: https://coveralls.io/github/streamcommon/doctrine-container-manager?branch=develop

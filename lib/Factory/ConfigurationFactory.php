@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Container\Interop\Factory;
+namespace Streamcommon\Doctrine\Manager\Factory;
 
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Cache\{RegionsConfiguration, DefaultCacheFactory, CacheConfiguration};
 use Psr\Container\ContainerInterface;
-use Streamcommon\Doctrine\Container\Interop\Options\Configuration as ConfigurationOptions;
-use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
+use Streamcommon\Doctrine\Manager\Options\Configuration as ConfigurationOptions;
+use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
 use function is_object;
 use function get_class;
@@ -30,7 +30,7 @@ use function is_string;
 /**
  * Class ConfigurationFactory
  *
- * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @package Streamcommon\Doctrine\Manager\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#configuration
  */
 class ConfigurationFactory extends AbstractFactory

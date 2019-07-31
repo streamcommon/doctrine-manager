@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,18 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Container\Interop\Factory;
+namespace Streamcommon\Doctrine\Manager\Factory;
 
 use Psr\Container\ContainerInterface;
 use Streamcommon\Factory\Container\Interop\{FactoryInterface, CallableFactoryTrait};
-use Streamcommon\Doctrine\Container\Interop\Exception\{RuntimeException};
+use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
 use function sprintf;
 
 /**
  * Class AbstractFactory
  *
- * @package Streamcommon\Doctrine\Container\Interop\Factory
+ * @package Streamcommon\Doctrine\Manager\Factory
  */
 abstract class AbstractFactory implements FactoryInterface
 {

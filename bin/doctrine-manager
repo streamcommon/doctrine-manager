@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
@@ -9,15 +10,4 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
-
-namespace Streamcommon\Doctrine\Manager\Exception;
-
-/**
- * Class InvalidArgumentException
- *
- * @package Streamcommon\Doctrine\Manager\Exception
- */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
-{
-}
+include('doctrine-manager.php');

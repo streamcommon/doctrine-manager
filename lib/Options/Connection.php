@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Container\Interop\Options;
+namespace Streamcommon\Doctrine\Manager\Options;
 
 use Doctrine\DBAL\Driver\PDOMySql\Driver;
-use Streamcommon\Doctrine\Container\Interop\Exception\{InvalidArgumentException};
-use Streamcommon\Doctrine\Container\Interop\Options\Part\{ConnectionParams};
+use Streamcommon\Doctrine\Manager\Exception\{InvalidArgumentException};
+use Streamcommon\Doctrine\Manager\Options\Part\{ConnectionParams};
 use Zend\Stdlib\AbstractOptions;
 
 use function is_array;
@@ -27,7 +27,7 @@ use function gettype;
 /**
  * Class Connection
  *
- * @package Streamcommon\Doctrine\Container\Interop\Options
+ * @package Streamcommon\Doctrine\Manager\Options
  */
 class Connection extends AbstractOptions
 {

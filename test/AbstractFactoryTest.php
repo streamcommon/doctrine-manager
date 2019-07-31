@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,8 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Test\Doctrine\Container\Interop;
+namespace Streamcommon\Test\Doctrine\Manager;
 
+use Aura\Di\Container as AuraContainer;
 use Doctrine\DBAL\Logging\EchoSQLLogger;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\{
@@ -26,12 +27,14 @@ use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver, S
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Repository\DefaultRepositoryFactory;
+use JSoumelidis\SymfonyDI\Config\{Config as SymfonyConfig, ContainerFactory as SymfonyContainerFactory};
 use Predis\{ClientInterface, Client};
 use Redis;
 use Memcached;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Streamcommon\Doctrine\Container\Interop\Factory\{
+use Pimple\Psr11\Container as PimpleContainer;
+use Streamcommon\Doctrine\Manager\Factory\{
     CacheFactory,
     ConfigurationFactory,
     ConnectionFactory,
@@ -39,14 +42,19 @@ use Streamcommon\Doctrine\Container\Interop\Factory\{
     EntityManagerFactory,
     EntityResolverFactory,
     EventManagerFactory};
-use Streamcommon\Test\Doctrine\Container\Interop\TestAssets\TestEventSubscriber;
+use Streamcommon\Doctrine\Manager\ConfigProvider;
+use Streamcommon\Test\Doctrine\Manager\TestAssets\TestEventSubscriber;
+use Symfony\Component\DependencyInjection\ContainerBuilder as SymfonyContainer;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Pimple\Config\{Config as PimpleConfig, ContainerFactory as PimpleContainerFactory};
+use Zend\AuraDi\Config\{Config as AuraConfig, ContainerFactory as AuraContainerFactory};
 
 use function call_user_func_array;
 
 /**
  * Class AbstractFactoryTest
  *
- * @package Streamcommon\Test\Doctrine\Container\Interop
+ * @package Streamcommon\Test\Doctrine\Manager
  */
 abstract class AbstractFactoryTest extends TestCase
 {
@@ -67,8 +75,8 @@ abstract class AbstractFactoryTest extends TestCase
                     'entity_listener_resolver' => DefaultEntityListenerResolver::class,
                     'named_queries' => [
                         [
-                          'name' => 'test',
-                          'sql' => 'SHOW DATABASES;'
+                            'name' => 'test',
+                            'sql' => 'SHOW DATABASES;'
                         ],
                     ],
                     'named_native_queries' => [
@@ -311,5 +319,100 @@ abstract class AbstractFactoryTest extends TestCase
             ]
         ));
         return $container->reveal();
+    }
+
+    /**
+     * Return Zend ServiceManager
+     *
+     * @return ServiceManager
+     */
+    protected function getZendServiceManager(): ServiceManager
+    {
+        $config = new ConfigProvider();
+        $config = $config();
+        $dependencies = $config['dependencies'];
+        $dependencies['services']['config'] = $config;
+        $dependencies['invokables'] = [
+            'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
+            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+        ];
+        $dependencies['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
+            $redis = new Redis();
+            $redis->connect('127.0.0.1');
+            return $redis;
+        };
+        return new ServiceManager($dependencies);
+    }
+
+    /**
+     * Return aura di
+     *
+     * @return AuraContainer
+     */
+    protected function getAuraContainer(): AuraContainer
+    {
+        $config = new ConfigProvider();
+        $dependencies = $config();
+        $dependencies['services']['config'] = $config;
+        $dependencies['dependencies']['invokables'] = [
+            'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
+            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+        ];
+        $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
+            $redis = new Redis();
+            $redis->connect('127.0.0.1');
+            return $redis;
+        };
+
+        $container = new AuraContainerFactory();
+        return $container(new AuraConfig($dependencies));
+    }
+
+    /**
+     * Return pimple di
+     *
+     * @return PimpleContainer
+     */
+    protected function getPimpleContainer(): PimpleContainer
+    {
+        $config = new ConfigProvider();
+        $dependencies = $config();
+        $dependencies['services']['config'] = $config;
+        $dependencies['dependencies']['invokables'] = [
+            'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
+            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+        ];
+        $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
+            $redis = new Redis();
+            $redis->connect('127.0.0.1');
+            return $redis;
+        };
+
+        $container = new PimpleContainerFactory();
+        return $container(new PimpleConfig($dependencies));
+    }
+
+    /**
+     * Return symfony di
+     *
+     * @return SymfonyContainer
+     */
+    protected function getSymfonyContainer(): SymfonyContainer
+    {
+        $config = new ConfigProvider();
+        $dependencies = $config();
+        $dependencies['services']['config'] = $config;
+        $dependencies['dependencies']['invokables'] = [
+            'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
+            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+        ];
+        $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
+            $redis = new Redis();
+            $redis->connect('127.0.0.1');
+            return $redis;
+        };
+
+        $container = new SymfonyContainerFactory();
+        return $container(new SymfonyConfig($dependencies));
     }
 }

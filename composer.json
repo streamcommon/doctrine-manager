@@ -1,13 +1,12 @@
 {
-  "name": "streamcommon/doctrine-container-interop",
+  "name": "streamcommon/doctrine-container-manager",
   "description": "Doctrine 2 container interop",
   "license": "BSD-3-Clause",
   "type": "library",
   "keywords": [
     "streamcommon",
-    "doctrine 2 container interop",
-    "container interop",
     "doctrine container",
+    "doctrine-manager",
     "psr-11"
   ],
   "require": {
@@ -29,23 +28,27 @@
     "phpstan/phpstan": "^0.11.1",
     "phpunit/phpunit": "^8.0",
     "php-coveralls/php-coveralls": "^2.1.0",
-    "predis/predis":   "^1.1.0"
+    "predis/predis":   "^1.1.0",
+    "zendframework/zend-servicemanager": "^3.4.0",
+    "zendframework/zend-auradi-config": "^1.0.1",
+    "zendframework/zend-pimple-config": "^1.1.0",
+    "jsoumelidis/zend-sf-di-config": "^0.4.0"
   },
   "autoload": {
     "psr-4": {
-      "Streamcommon\\Doctrine\\Container\\Interop\\": "lib/"
+      "Streamcommon\\Doctrine\\Manager\\": "lib/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Streamcommon\\Test\\Doctrine\\Container\\Interop\\": "test/"
+      "Streamcommon\\Test\\Doctrine\\Manager\\": "test/"
     }
   },
   "scripts": {
     "cs-check": "phpcs",
     "cs-fix": "phpcbf",
-    "license-check": "docheader check lib/ test/",
-    "phpstan": "phpstan analyze -l max -c phpstan.neon ./lib",
+    "license-check": "docheader check lib/ test/ config/ bin/",
+    "phpstan": "phpstan analyze -l max ./lib ./bin ./config",
     "phpunit": "phpunit --colors=always",
     "phpunit-coverage": "phpunit --colors=always --coverage-clover clover.xml",
     "coveralls": "php-coveralls -v"

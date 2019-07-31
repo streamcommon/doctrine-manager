@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Test\Doctrine\Container\Interop;
+namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\ORM\Query\ResultSetMapping;
 use PHPUnit\Framework\TestCase;
-use Streamcommon\Doctrine\Container\Interop\Options\{
+use Streamcommon\Doctrine\Manager\Options\{
     Cache,
     Configuration,
     Connection,
@@ -23,18 +23,18 @@ use Streamcommon\Doctrine\Container\Interop\Options\{
     EntityManager,
     EntityResolver,
     EventManager};
-use Streamcommon\Doctrine\Container\Interop\Options\Part\{
+use Streamcommon\Doctrine\Manager\Options\Part\{
     Cache\Region,
     ConnectionParams,
     NamedNativeQueries,
     NamedQuery,
     SecondLevelCache};
-use Streamcommon\Doctrine\Container\Interop\Exception\InvalidArgumentException;
+use Streamcommon\Doctrine\Manager\Exception\InvalidArgumentException;
 
 /**
  * Class OptionsTest
  *
- * @package Streamcommon\Test\Doctrine\Container\Interop
+ * @package Streamcommon\Test\Doctrine\Manager
  */
 class OptionsTest extends TestCase
 {

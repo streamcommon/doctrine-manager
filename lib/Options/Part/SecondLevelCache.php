@@ -1,9 +1,9 @@
 <?php
 /**
- * This file is part of the Common package, a StreamCommon open software project.
+ * This file is part of the doctrine-container-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2019 StreamCommon Team.
- * @see https://github.com/streamcommon/doctrine-container-interop
+ * @copyright (c) 2019 StreamCommon Team
+ * @see https://github.com/streamcommon/doctrine-container-manager
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Container\Interop\Options\Part;
+namespace Streamcommon\Doctrine\Manager\Options\Part;
 
-use Streamcommon\Doctrine\Container\Interop\Options\Part\Cache\Region;
+use Streamcommon\Doctrine\Manager\Options\Part\Cache\Region;
 use Zend\Stdlib\AbstractOptions;
 
 use function array_map;
@@ -21,7 +21,7 @@ use function array_map;
 /**
  * Class SecondLevelCache
  *
- * @package Streamcommon\Doctrine\Container\Interop\Options\Part
+ * @package Streamcommon\Doctrine\Manager\Options\Part
  * @see http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/second-level-cache.html
  */
 class SecondLevelCache extends AbstractOptions
