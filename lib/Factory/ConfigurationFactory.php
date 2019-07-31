@@ -67,15 +67,12 @@ class ConfigurationFactory extends AbstractFactory
             $rsm = $query->getRsm();
             if (is_string($rsm) && $container->has($rsm)) {
                 $rsm = $container->get($rsm);
-                if ($container->has($rsm)) {
-                    $rsm = $container->get($rsm);
-                }
-                if (!($rsm instanceof ResultSetMapping)) {
-                    throw new RuntimeException(sprintf(
-                        '%s variable must be instance of Doctrine\ORM\Query\ResultSetMapping',
-                        is_object($rsm) ? get_class($rsm) : gettype($rsm)
-                    ));
-                }
+            }
+            if (!($rsm instanceof ResultSetMapping)) {
+                throw new RuntimeException(sprintf(
+                    '%s variable must be instance of Doctrine\ORM\Query\ResultSetMapping',
+                    is_object($rsm) ? get_class($rsm) : gettype($rsm)
+                ));
             }
             $configuration->addNamedNativeQuery($query->getName(), $query->getSql(), $rsm);
         }
