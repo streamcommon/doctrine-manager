@@ -1,5 +1,5 @@
 {
-  "name": "streamcommon/doctrine-container-manager",
+  "name": "streamcommon/doctrine-manager",
   "description": "Doctrine 2 container interop",
   "license": "BSD-3-Clause",
   "type": "library",

@@ -13,12 +13,12 @@ This package provide [Doctrine 2](https://github.com/doctrine) factories for [PR
 ## Installation
 Console run:
 ```console
-    composer require streamcommon/factory-container-interop
+    composer require streamcommon/doctrine-manager
 ```
 Or add into your `composer.json`:
 ```json
     "require": {
-        "streamcommon/factory-container-interop": "*"
+        "streamcommon/doctrine-manager": "*"
     }
 ```
 
@@ -31,8 +31,13 @@ Or add into your `composer.json`:
 * [Doctrine Annotation >1.6](https://www.doctrine-project.org/projects/doctrine-annotations/en/1.6/index.html)
 * [Caching](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html)
 * [Entity Manager](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/working-with-objects.html)
+* [ZendFramework/zend-servicemanager](https://github.com/zendframework/zend-servicemanager)
+* [ZendFramework/zend-auradi-config](https://github.com/zendframework/zend-auradi-config)
+* [ZendFramework/zend-pimple-config](https://github.com/zendframework/zend-pimple-config)
+* [Jsoumelidis/zend-sf-di-config](https://github.com/jsoumelidis/zend-sf-di-config)
 
-## Example
+
+## Example configure project file
 > `Psr\Container\ContainerInterface` container MUST have `config` key
 
 Configure your project config file: 
@@ -205,16 +210,51 @@ Configure your project config file:
     $em = $container->get('doctrine.entity_manager.orm_default');
     $connection = $container->get('doctrine.connection.orm_default');
     ```
-    
-[Master branch]: https://github.com/streamcommon/doctrine-container-manager/tree/master
+
+## Example configure container
+
+>Zend ServiceManager
+```php
+use Streamcommon\Doctrine\Manager\ConfigProvider;
+use Zend\ServiceManager\ServiceManager;
+
+$config = new ConfigProvider();
+$config = $config();
+$dependencies = $config['dependencies'];
+$dependencies['services']['config'] = $config;
+return new ServiceManager($dependencies);
+```
+>Symfony Container
+```php
+use JSoumelidis\SymfonyDI\Config\{Config as SymfonyConfig, ContainerFactory as SymfonyContainerFactory};
+use Streamcommon\Doctrine\Manager\ConfigProvider;
+
+$config = new ConfigProvider();
+$config = $config();
+$dependencies = $config['dependencies'];
+$dependencies['services']['config'] = $config;
+$container = new SymfonyContainerFactory();
+return $container(new SymfonyConfig($dependencies))
+```
+>Etc...
+
+## CLI usage
+1) See [doctrine console tools](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/tools.html)
+2) For many connections was added a new `--object-manager` argument to `orm` namespace:
+```console
+Arguments:
+  --object-manager      Doctrine object manager name [default: "orm_default"]
+```
+
+[Master branch]: https://github.com/streamcommon/doctrine-manager/tree/master
 [Master branch image]: https://img.shields.io/badge/branch-master-blue.svg
-[Develop branch]: https://github.com/streamcommon/doctrine-container-manager/tree/develop
+[Develop branch]: https://github.com/streamcommon/doctrine-manager/tree/develop
 [Develop branch image]: https://img.shields.io/badge/branch-develop-blue.svg
-[Master image]: https://travis-ci.org/streamcommon/doctrine-container-manager.svg?branch=master
-[Master]: https://travis-ci.org/streamcommon/doctrine-container-manager
-[Master coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-container-manager/badge.svg?branch=master
-[Master coverage]: https://coveralls.io/github/streamcommon/doctrine-container-manager?branch=master
-[Develop image]: https://travis-ci.org/streamcommon/doctrine-container-manager.svg?branch=develop
-[Develop]: https://travis-ci.org/streamcommon/doctrine-container-manager
-[Develop coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-container-manager/badge.svg?branch=develop
-[Develop coverage]: https://coveralls.io/github/streamcommon/doctrine-container-manager?branch=develop
+[Master image]: https://travis-ci.org/streamcommon/doctrine-manager.svg?branch=master
+[Master]: https://travis-ci.org/streamcommon/doctrine-manager
+[Master coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-manager/badge.svg?branch=master
+[Master coverage]: https://coveralls.io/github/streamcommon/doctrine-manager?branch=master
+[Develop image]: https://travis-ci.org/streamcommon/doctrine-manager.svg?branch=develop
+[Develop]: https://travis-ci.org/streamcommon/doctrine-manager
+[Develop coverage image]: https://coveralls.io/repos/github/streamcommon/doctrine-manager/badge.svg?branch=develop
+[Develop coverage]: https://coveralls.io/github/streamcommon/doctrine-manager?branch=develop
