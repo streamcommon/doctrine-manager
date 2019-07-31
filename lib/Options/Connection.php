@@ -138,7 +138,7 @@ class Connection extends AbstractOptions
     /**
      * Set params
      *
-     * @param ConnectionParams|array $params
+     * @param ConnectionParams|array|mixed $params
      * @return Connection
      */
     public function setParams($params): Connection

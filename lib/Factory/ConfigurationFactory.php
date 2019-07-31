@@ -17,6 +17,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Cache\{RegionsConfiguration, DefaultCacheFactory, CacheConfiguration};
+use Doctrine\ORM\Query\ResultSetMapping;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Manager\Options\Configuration as ConfigurationOptions;
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
@@ -64,15 +65,17 @@ class ConfigurationFactory extends AbstractFactory
         }
         foreach ($options->getNamedNativeQueries() as $query) {
             $rsm = $query->getRsm();
-            if (is_string($rsm)) {
+            if (is_string($rsm) && $container->has($rsm)) {
+                $rsm = $container->get($rsm);
                 if ($container->has($rsm)) {
                     $rsm = $container->get($rsm);
-                } else {
-                    throw new RuntimeException(sprintf(
-                        '%s variable must be instance of Doctrine\ORM\Query\ResultSetMapping',
-                        is_object($rsm) ? get_class($rsm) : gettype($rsm)
-                    ));
                 }
+            }
+            if (!($rsm instanceof ResultSetMapping)) {
+                throw new RuntimeException(sprintf(
+                    '%s variable must be instance of Doctrine\ORM\Query\ResultSetMapping',
+                    is_object($rsm) ? get_class($rsm) : gettype($rsm)
+                ));
             }
             $configuration->addNamedNativeQuery($query->getName(), $query->getSql(), $rsm);
         }

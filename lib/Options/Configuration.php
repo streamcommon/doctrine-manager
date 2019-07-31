@@ -594,7 +594,7 @@ class Configuration extends AbstractOptions
     /**
      * Set secondLevelCache
      *
-     * @param SecondLevelCache|array $secondLevelCache
+     * @param SecondLevelCache|array|mixed $secondLevelCache
      * @return Configuration
      */
     public function setSecondLevelCache($secondLevelCache): Configuration
