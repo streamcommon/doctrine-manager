@@ -46,7 +46,11 @@ class ConnectionFactory extends AbstractFactory
         $connectionParams = [
             'driverClass' => $options->getDriverClassName(),
             'wrapperClass' => $options->getWrapperClassName(),
-            'pdo' => null
+            'pdo' => null,
+            'dbname' => $options->getParams()->getDbName(),
+            'user' => $options->getParams()->getUser(),
+            'password' => $options->getParams()->getPlatform(),
+            'host' => $options->getParams()->getHost()
         ];
         if ($options->getPdoClassName() !== null) {
             $connectionParams['pdo'] = $container->get($options->getPdoClassName());
