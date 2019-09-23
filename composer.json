@@ -56,6 +56,9 @@
       "Streamcommon\\Test\\Doctrine\\Manager\\": "test/"
     }
   },
+  "bin": [
+    "bin/doctrine-manager"
+  ],
   "scripts": {
     "cs-check": "phpcs",
     "cs-fix": "phpcbf",
