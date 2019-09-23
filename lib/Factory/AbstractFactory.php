@@ -47,7 +47,11 @@ abstract class AbstractFactory
      * @param null|array $options
      * @return object
      */
-    abstract public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object;
+    abstract public function __invoke(
+        ContainerInterface $container,
+        string $requestedName,
+        ?array $options = null
+    ): object;
 
     /**
      * Call create an object
