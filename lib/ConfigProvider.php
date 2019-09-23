@@ -28,8 +28,7 @@ use Doctrine\Common\Cache\{
     MemcachedCache,
     RedisCache,
     PredisCache,
-    ZendDataCache,
-    WinCacheCache};
+    ZendDataCache};
 
 /**
  * Class ConfigProvider
@@ -74,7 +73,6 @@ class ConfigProvider
                 'doctrine.cache.redis' => [CacheFactory::class, 'redis'],
                 'doctrine.cache.predis' => [CacheFactory::class, 'predis'],
                 'doctrine.cache.zend_data' => [CacheFactory::class, 'zend_data'],
-                'doctrine.cache.win_cache' => [CacheFactory::class, 'win_cache'],
             ],
         ];
     }
@@ -141,10 +139,6 @@ class ConfigProvider
                 ],
                 'zend_data' => [
                     'class_name' => ZendDataCache::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
-                ],
-                'win_cache' => [
-                    'class_name' => WinCacheCache::class,
                     'namespace' => 'Streamcommon\Doctrine\Manager',
                 ],
             ],

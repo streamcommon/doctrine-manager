@@ -24,8 +24,7 @@ use Doctrine\Common\Cache\{
     MemcachedCache,
     RedisCache,
     PredisCache,
-    ZendDataCache,
-    WinCacheCache};
+    ZendDataCache};
 
 /**
  * Class DITest
@@ -56,7 +55,6 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(RedisCache::class, $serviceManger->get('doctrine.cache.redis'));
         $this->assertInstanceOf(PredisCache::class, $serviceManger->get('doctrine.cache.predis'));
         $this->assertInstanceOf(ZendDataCache::class, $serviceManger->get('doctrine.cache.zend_data'));
-        $this->assertInstanceOf(WinCacheCache::class, $serviceManger->get('doctrine.cache.win_cache'));
     }
 
     /**
@@ -83,7 +81,6 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(RedisCache::class, $container->get('doctrine.cache.redis'));
         $this->assertInstanceOf(PredisCache::class, $container->get('doctrine.cache.predis'));
         $this->assertInstanceOf(ZendDataCache::class, $container->get('doctrine.cache.zend_data'));
-        $this->assertInstanceOf(WinCacheCache::class, $container->get('doctrine.cache.win_cache'));
     }
 
     /**
@@ -108,7 +105,6 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(RedisCache::class, $container->get('doctrine.cache.redis'));
         $this->assertInstanceOf(PredisCache::class, $container->get('doctrine.cache.predis'));
         $this->assertInstanceOf(ZendDataCache::class, $container->get('doctrine.cache.zend_data'));
-        $this->assertInstanceOf(WinCacheCache::class, $container->get('doctrine.cache.win_cache'));
     }
 
     /**
@@ -135,6 +131,5 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(RedisCache::class, $container->get('doctrine.cache.redis'));
         $this->assertInstanceOf(PredisCache::class, $container->get('doctrine.cache.predis'));
         $this->assertInstanceOf(ZendDataCache::class, $container->get('doctrine.cache.zend_data'));
-        $this->assertInstanceOf(WinCacheCache::class, $container->get('doctrine.cache.win_cache'));
     }
 }
