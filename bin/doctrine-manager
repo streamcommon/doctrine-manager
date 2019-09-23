@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use Doctrine\Migrations\Tools\Console\ConsoleRunner as MigrationConsole;
+use Doctrine\Migrations\Tools\Console\ConsoleRunner as MigrationsConsole;
 use Symfony\Component\Console\Input\{ArgvInput, InputArgument};
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -78,7 +78,7 @@ $helper = ConsoleRunner::createHelperSet($entityManager);
 
 // Create CLI
 $cli = ConsoleRunner::createApplication($helper);
-$cli->addCommands(MigrationConsole::createApplication($helper)->all());
+$cli->addCommands(MigrationsConsole::createApplication($helper)->all());
 $commands = $cli->all('orm');
 $commandHash = [];
 array_walk($commands, function (Command $command) use (&$commandHash) {
