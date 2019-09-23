@@ -2,7 +2,6 @@
 <ruleset name="StreamCommon Team Coding Standard">
     <rule ref="./vendor/streamcommon/coding-standard/ruleset.xml"/>
     <file>bin</file>
-    <file>config</file>
     <file>lib</file>
     <file>test</file>
 </ruleset>

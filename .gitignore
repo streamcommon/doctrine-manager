@@ -1,5 +1,6 @@
 .idea
 .phpunit.result.cache
+cli-container.php
 clover.xml
 coveralls-upload.json
 phpunit.xml

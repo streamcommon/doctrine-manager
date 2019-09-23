@@ -10,4 +10,93 @@
  * file that was distributed with this source code.
  */
 
-include('doctrine-manager.php');
+declare(strict_types=1);
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\Migrations\Tools\Console\ConsoleRunner as MigrationConsole;
+use Symfony\Component\Console\Input\{ArgvInput, InputArgument};
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Console\Command\Command;
+
+if (PHP_SAPI !== 'cli' || PHP_OS !== 'Linux') {
+    return false;
+}
+
+$autoloadFiles = [
+    realpath(__DIR__) . '/../vendor/autoload.php',
+    realpath(__DIR__) . '/../../../autoload.php'
+];
+
+foreach ($autoloadFiles as $autoloadFile) {
+    if (file_exists($autoloadFile)) {
+        require $autoloadFile;
+        break;
+    }
+}
+$directories = [
+    getcwd() . '/',
+    realpath(__DIR__) . '/../../../../config/'
+];
+
+$container = null;
+foreach ($directories as $directory) {
+    /** @var ContainerInterface $container */
+    $container = $directory . 'cli-container.php';
+    if (file_exists($container)) {
+        $container = require $container;
+        break;
+    }
+}
+
+if (($container instanceof ContainerInterface) === false) {
+    echo <<<'HELP'
+You are missing a "cli-container.php" or "config/cli-container.php" file in your
+project, which is required to get the Doctrine Console working. You can use the
+following sample as a template:
+
+<?php
+
+// replace with file to your own project bootstrap
+require_once 'bootstrap.php';
+
+return new Psr\Container\ContainerInterface();
+
+HELP;
+    exit(1);
+}
+
+AnnotationRegistry::registerLoader('class_exists');
+
+$ormName = 'orm_default';
+$arguments = new ArgvInput();
+if ($arguments->hasParameterOption('--object-manager')) {
+    $ormName = $arguments->getParameterOption('--object-manager');
+}
+$entityManager = $container->get('doctrine.entity_manager.' . $ormName);
+$helper = ConsoleRunner::createHelperSet($entityManager);
+
+// Create CLI
+$cli = ConsoleRunner::createApplication($helper);
+$cli->addCommands(MigrationConsole::createApplication($helper)->all());
+$commands = $cli->all('orm');
+$commandHash = [];
+array_walk($commands, function (Command $command) use (&$commandHash) {
+    $hash = spl_object_hash($command);
+    if (!in_array($hash, $commandHash)) {
+        $command->addArgument(
+            '--object-manager',
+            InputArgument::OPTIONAL,
+            'Doctrine object manager name',
+            'orm_default'
+        );
+        $commandHash[] = $hash;
+    }
+});
+// Run console
+try {
+    $cli->run();
+} catch (\Exception $e) {
+    echo $e;
+    exit(1);
+}

@@ -15,12 +15,12 @@
     "psr-11"
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.3",
     "psr/container": "^1.0",
     "doctrine/orm": "^2.6.3",
     "doctrine/dbal": "^2.9.2",
+    "doctrine/migrations": "^2.1.0",
     "doctrine/event-manager": "^1.0.0",
-    "streamcommon/factory-container-interop": "^1.0.0",
     "streamcommon/excess-configuration": "^1.0.0"
   },
   "require-dev": {
@@ -29,6 +29,7 @@
     "ext-redis": "*",
     "ext-memcached": "*",
     "streamcommon/coding-standard": "^1.0.0",
+    "roave/security-advisories": "dev-master",
     "malukenho/docheader": "^0.1.7",
     "phpstan/phpstan": "^0.11.1",
     "phpunit/phpunit": "^8.0",
@@ -59,7 +60,7 @@
     "cs-check": "phpcs",
     "cs-fix": "phpcbf",
     "license-check": "docheader check lib/ test/ config/ bin/",
-    "phpstan": "phpstan analyze -l max ./lib ./bin ./config",
+    "phpstan": "phpstan analyze -l max ./lib ./bin",
     "phpunit": "phpunit --colors=always",
     "phpunit-coverage": "phpunit --colors=always --coverage-clover clover.xml",
     "coveralls": "php-coveralls -v"

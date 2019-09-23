@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Streamcommon\Doctrine\Manager\Factory;
 
 use Psr\Container\ContainerInterface;
-use Streamcommon\Factory\Container\Interop\{FactoryInterface, CallableFactoryTrait};
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
 use function sprintf;
@@ -24,11 +23,13 @@ use function sprintf;
  *
  * @package Streamcommon\Doctrine\Manager\Factory
  */
-abstract class AbstractFactory implements FactoryInterface
+abstract class AbstractFactory
 {
-    use CallableFactoryTrait;
+    /** @var string */
+    protected $name;
 
     /**
+     *
      * AbstractFactory constructor.
      *
      * @param string $name
@@ -36,6 +37,28 @@ abstract class AbstractFactory implements FactoryInterface
     public function __construct(string $name = 'orm_default')
     {
         $this->name = $name;
+    }
+
+    /**
+     * Create an object
+     *
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param null|array $options
+     * @return object
+     */
+    abstract function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object;
+
+    /**
+     * Call create an object
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return object
+     */
+    public static function __callStatic(string $name, array $arguments): object
+    {
+        return call_user_func_array(new static($name), $arguments);
     }
 
     /**

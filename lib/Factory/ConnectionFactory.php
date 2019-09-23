@@ -49,7 +49,7 @@ class ConnectionFactory extends AbstractFactory
             'pdo' => null,
             'dbname' => $options->getParams()->getDbName(),
             'user' => $options->getParams()->getUser(),
-            'password' => $options->getParams()->getPlatform(),
+            'password' => $options->getParams()->getPassword(),
             'host' => $options->getParams()->getHost()
         ];
         if ($options->getPdoClassName() !== null) {
