@@ -87,7 +87,7 @@ Configure your project config file:
                 'orm_custom' => [
                     'configuration' => 'orm_custom',
                     'event_manager' => 'orm_custom',
-                    'driver_class_name' => \Doctrine\DBAL\Driver\PDOPgSql\Driver::class
+                    'driver_class_name' => \Doctrine\DBAL\Driver\PDOPgSql\Driver::class,
                     'params' => [
                         'dbname' => 'name',
                         'user' => 'user',
@@ -175,14 +175,17 @@ Configure your project config file:
     ```
 6. Configure your project dependencies:
     ```php
-    use Streamcommon\Doctrine\Manager\Factory\{
-       DriverFactory,
-       EventManagerFactory,
-       ConfigurationFactory,
-       ConnectionFactory,
-       EntityResolverFactory,
-       EntityManagerFactory,
-       CacheFactory};
+    use Streamcommon\Doctrine\Manager\Common\Factory\{
+        Cache as CacheFactory,
+        Driver as DriverFactory,
+        EventManager as EventManagerFactory
+    };
+    use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
+    use Streamcommon\Doctrine\Manager\ORM\Factory\{
+        Configuration as ConfigurationFactory,
+        EntityManager as EntityManagerFactory,
+        EntityResolver as EntityResolverFactory,
+    };
     
     'dependencies' => [
        'factories' => [
@@ -239,7 +242,9 @@ return $container(new SymfonyConfig($dependencies))
 >Etc...
 
 ## CLI usage
-1) See [doctrine console tools](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/tools.html)
+1) See 
+    - [doctrine orm console tools](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/tools.html)
+    - [doctrine migrations console tools](https://www.doctrine-project.org/projects/doctrine-migrations/en/2.1/reference/introduction.html#introduction)
 2) For many connections was added a new `--object-manager` argument to `orm` namespace:
 ```console
 Arguments:
