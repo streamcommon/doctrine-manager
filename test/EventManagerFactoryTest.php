@@ -30,6 +30,8 @@ class EventManagerFactoryTest extends AbstractFactoryTest
 {
     /**
      * Default event manager factory creation
+     *
+     * @return void
      */
     public function testEventManagerFactoryCreation(): void
     {
@@ -41,6 +43,8 @@ class EventManagerFactoryTest extends AbstractFactoryTest
 
     /**
      * EventSubscriber Exception
+     *
+     * @return void
      */
     public function testEventManagerFactoryException(): void
     {

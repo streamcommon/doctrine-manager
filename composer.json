@@ -28,7 +28,7 @@
     "ext-pdo_sqlite": "*",
     "ext-redis": "*",
     "ext-memcached": "*",
-    "streamcommon/coding-standard": "^1.0.0",
+    "streamcommon/coding-standard": "dev-master",
     "roave/security-advisories": "dev-master",
     "malukenho/docheader": "^0.1.7",
     "phpstan/phpstan": "^0.11.1",

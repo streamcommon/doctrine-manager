@@ -22,7 +22,12 @@ use Doctrine\Common\EventSubscriber;
  */
 class TestEventSubscriber implements EventSubscriber
 {
-    public function getSubscribedEvents()
+    /**
+     * Return event
+     *
+     * @return array|string[]
+     */
+    public function getSubscribedEvents():array
     {
         return ['test'];
     }

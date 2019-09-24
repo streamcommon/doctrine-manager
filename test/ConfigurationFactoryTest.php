@@ -26,6 +26,9 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
 {
     /**
      * Default configuration factory creation
+     *
+     * @return void
+     * @throws \Doctrine\ORM\ORMException
      */
     public function testConfigurationFactoryCreation(): void
     {
@@ -38,14 +41,15 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
     /**
      * Test Named query exception
      *
+     * @return void
      * @throws \Doctrine\ORM\ORMException
      */
     public function testRsmException(): void
     {
         $this->config['doctrine']['configuration']['orm_default']['named_native_queries'][] = [
             'name' => 'test',
-            'rsm' => 'TestAssets\ResultSetMapping',
-            'sql' => 'SHOW DATABASES;'
+            'rsm'  => 'TestAssets\ResultSetMapping',
+            'sql'  => 'SHOW DATABASES;'
         ];
 
         $factory = new ConfigurationFactory();

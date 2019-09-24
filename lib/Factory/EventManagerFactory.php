@@ -35,8 +35,8 @@ class EventManagerFactory extends AbstractFactory
      * Create an object
      *
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param null|array $options
+     * @param string             $requestedName
+     * @param null|array         $options
      * @return EventManager
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object

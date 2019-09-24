@@ -26,6 +26,8 @@ class DriverFactoryTest extends AbstractFactoryTest
 {
     /**
      * Default entity resolver factory creation
+     *
+     * @return void
      */
     public function testEntityResolverFactoryCreation(): void
     {
@@ -37,6 +39,8 @@ class DriverFactoryTest extends AbstractFactoryTest
 
     /**
      * Test Exception
+     *
+     * @return void
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function testRuntimeException(): void
@@ -50,6 +54,8 @@ class DriverFactoryTest extends AbstractFactoryTest
 
     /**
      * Test Exception
+     *
+     * @return void
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function testDriverException(): void
@@ -64,9 +70,11 @@ class DriverFactoryTest extends AbstractFactoryTest
 
     /**
      * Test NULL Exception
+     *
+     * @return void
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function testDriverNULLException(): void
+    public function testDriverNullException(): void
     {
         $this->config['doctrine']['driver']['orm_default']['drivers']['NotFoundA'] = 'NotFoundA';
         $this->config['doctrine']['driver']['NotFoundA'] = ['class_name' => null];

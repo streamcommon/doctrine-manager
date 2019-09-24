@@ -40,7 +40,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Get enabled
      *
-     * @return bool
+     * @return boolean
      */
     public function isEnabled(): bool
     {
@@ -50,7 +50,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Set enabled
      *
-     * @param bool $enabled
+     * @param boolean $enabled
      * @return SecondLevelCache
      */
     public function setEnabled(bool $enabled): SecondLevelCache
@@ -62,7 +62,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Get defaultLifetime
      *
-     * @return int
+     * @return integer
      */
     public function getDefaultLifetime(): int
     {
@@ -72,7 +72,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Set defaultLifetime
      *
-     * @param int $defaultLifetime
+     * @param integer $defaultLifetime
      * @return SecondLevelCache
      */
     public function setDefaultLifetime(int $defaultLifetime): SecondLevelCache
@@ -84,7 +84,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Get defaultLockLifetime
      *
-     * @return int
+     * @return integer
      */
     public function getDefaultLockLifetime(): int
     {
@@ -94,7 +94,7 @@ class SecondLevelCache extends AbstractOptions
     /**
      * Set defaultLockLifetime
      *
-     * @param int $defaultLockLifetime
+     * @param integer $defaultLockLifetime
      * @return SecondLevelCache
      */
     public function setDefaultLockLifetime(int $defaultLockLifetime): SecondLevelCache

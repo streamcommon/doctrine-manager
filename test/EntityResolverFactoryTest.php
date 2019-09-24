@@ -25,6 +25,8 @@ class EntityResolverFactoryTest extends AbstractFactoryTest
 {
     /**
      * Default entity resolver factory creation
+     *
+     * @return void
      */
     public function testEntityResolverFactoryCreation(): void
     {

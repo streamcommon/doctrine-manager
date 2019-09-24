@@ -35,8 +35,8 @@ class DriverFactory extends AbstractFactory
      * Create an object
      *
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param null|array $options
+     * @param string             $requestedName
+     * @param null|array         $options
      * @return MappingDriver
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */

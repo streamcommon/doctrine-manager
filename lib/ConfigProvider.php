@@ -46,7 +46,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'doctrine' => $this->getDoctrine(),
+            'doctrine'     => $this->getDoctrine(),
         ];
     }
 
@@ -60,44 +60,47 @@ class ConfigProvider
         return [
             'factories' => [
                 // default orm
-                'doctrine.driver.orm_default' => DriverFactory::class,
-                'doctrine.event_manager.orm_default' => EventManagerFactory::class,
-                'doctrine.configuration.orm_default' => ConfigurationFactory::class,
-                'doctrine.connection.orm_default' => ConnectionFactory::class,
+                'doctrine.driver.orm_default'          => DriverFactory::class,
+                'doctrine.event_manager.orm_default'   => EventManagerFactory::class,
+                'doctrine.configuration.orm_default'   => ConfigurationFactory::class,
+                'doctrine.connection.orm_default'      => ConnectionFactory::class,
                 'doctrine.entity_resolver.orm_default' => EntityResolverFactory::class,
-                'doctrine.entity_manager.orm_default' => EntityManagerFactory::class,
+                'doctrine.entity_manager.orm_default'  => EntityManagerFactory::class,
                 // orm cached
-                'doctrine.cache.array' => [CacheFactory::class, 'array'],
-                'doctrine.cache.filesystem' => [CacheFactory::class, 'filesystem'],
-                'doctrine.cache.memcached' => [CacheFactory::class, 'memcached'],
-                'doctrine.cache.redis' => [CacheFactory::class, 'redis'],
-                'doctrine.cache.predis' => [CacheFactory::class, 'predis'],
-                'doctrine.cache.zend_data' => [CacheFactory::class, 'zend_data'],
+                'doctrine.cache.array'                 => [CacheFactory::class, 'array'],
+                'doctrine.cache.filesystem'            => [CacheFactory::class, 'filesystem'],
+                'doctrine.cache.memcached'             => [CacheFactory::class, 'memcached'],
+                'doctrine.cache.redis'                 => [CacheFactory::class, 'redis'],
+                'doctrine.cache.predis'                => [CacheFactory::class, 'predis'],
+                'doctrine.cache.zend_data'             => [CacheFactory::class, 'zend_data'],
             ],
         ];
     }
 
+    /**
+     * Return doctrine configuration
+     *
+     * @return array
+     */
     public function getDoctrine(): array
     {
         return [
-            'configuration' => [
-                'orm_default' => [
-                    'driver' => 'orm_default',
-                ],
+            'configuration'   => [
+                'orm_default' => ['driver' => 'orm_default'],
             ],
-            'connection' => [
+            'connection'      => [
                 'orm_default' => [
                     'configuration' => 'orm_default',
                     'event_manager' => 'orm_default',
                 ],
             ],
-            'entity_manager' => [
+            'entity_manager'  => [
                 'orm_default' => [
-                    'connection' => 'orm_default',
+                    'connection'    => 'orm_default',
                     'configuration' => 'orm_default',
                 ],
             ],
-            'event_manager' => [
+            'event_manager'   => [
                 'orm_default' => [
                     'subscribers' => [],
                 ],
@@ -107,39 +110,39 @@ class ConfigProvider
                     'resolvers' => [],
                 ],
             ],
-            'driver' => [
+            'driver'          => [
                 'orm_default' => [
                     'class_name' => MappingDriverChain::class,
                 ],
             ],
-            'cache' => [
-                'array' => [
+            'cache'           => [
+                'array'      => [
                     'class_name' => ArrayCache::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager',
                 ],
                 'filesystem' => [
                     'class_name' => FilesystemCache::class,
-                    'path' => 'data/doctrine/cache',
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
+                    'path'       => 'data/doctrine/cache',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager',
                 ],
-                'memcached' => [
+                'memcached'  => [
                     'class_name' => MemcachedCache::class,
-                    'instance' => 'Streamcommon\Container\Alias\Cache\Memcached',
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
+                    'instance'   => 'Streamcommon\Container\Alias\Cache\Memcached',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager',
                 ],
-                'redis' => [
+                'redis'      => [
                     'class_name' => RedisCache::class,
-                    'instance' => 'Streamcommon\Container\Alias\Cache\Redis',
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
+                    'instance'   => 'Streamcommon\Container\Alias\Cache\Redis',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager',
                 ],
-                'predis' => [
+                'predis'     => [
                     'class_name' => PredisCache::class,
-                    'instance' => 'Streamcommon\Container\Alias\Cache\Predis',
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
+                    'instance'   => 'Streamcommon\Container\Alias\Cache\Predis',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager',
                 ],
-                'zend_data' => [
+                'zend_data'  => [
                     'class_name' => ZendDataCache::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager',
                 ],
             ],
         ];

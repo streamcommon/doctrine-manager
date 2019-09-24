@@ -61,38 +61,38 @@ abstract class AbstractFactoryTest extends TestCase
     /** @var array */
     protected $config = [
         'doctrine' => [
-            'configuration' => [
+            'configuration'   => [
                 'orm_default' => [
-                    'result_cache' => 'memcached',
-                    'metadata_cache' => 'filesystem',
-                    'query_cache' => 'predis',
-                    'hydration_cache' => 'redis',
-                    'driver' => 'orm_default',
-                    'class_metadata_factory_name' => ClassMetadataFactory::class,
+                    'result_cache'                  => 'memcached',
+                    'metadata_cache'                => 'filesystem',
+                    'query_cache'                   => 'predis',
+                    'hydration_cache'               => 'redis',
+                    'driver'                        => 'orm_default',
+                    'class_metadata_factory_name'   => ClassMetadataFactory::class,
                     'default_repository_class_name' => EntityRepository::class,
-                    'naming_strategy' => DefaultNamingStrategy::class,
-                    'repository_factory' => DefaultRepositoryFactory::class,
-                    'entity_listener_resolver' => DefaultEntityListenerResolver::class,
-                    'named_queries' => [
+                    'naming_strategy'               => DefaultNamingStrategy::class,
+                    'repository_factory'            => DefaultRepositoryFactory::class,
+                    'entity_listener_resolver'      => DefaultEntityListenerResolver::class,
+                    'named_queries'                 => [
                         [
                             'name' => 'test',
-                            'sql' => 'SHOW DATABASES;'
+                            'sql'  => 'SHOW DATABASES;'
                         ],
                     ],
-                    'named_native_queries' => [
+                    'named_native_queries'          => [
                         [
                             'name' => 'test',
-                            'rsm' => ResultSetMapping::class,
-                            'sql' => 'SHOW DATABASES;'
+                            'rsm'  => ResultSetMapping::class,
+                            'sql'  => 'SHOW DATABASES;'
                         ],
                     ],
-                    'filters' => [
+                    'filters'                       => [
                         'test' => 'TestAssets\Filter'
                     ],
-                    'sql_logger' => EchoSQLLogger::class,
-                    'second_level_cache' => [
-                        'enabled' => true,
-                        'regions' => [
+                    'sql_logger'                    => EchoSQLLogger::class,
+                    'second_level_cache'            => [
+                        'enabled'                    => true,
+                        'regions'                    => [
                             [
                                 'name' => 'test'
                             ],
@@ -104,97 +104,85 @@ abstract class AbstractFactoryTest extends TestCase
                     ]
                 ],
             ],
-            'connection' => [
+            'connection'      => [
                 'orm_default' => [
-                    'configuration' => 'orm_default',
-                    'event_manager' => 'orm_default',
+                    'configuration'     => 'orm_default',
+                    'event_manager'     => 'orm_default',
                     'driver_class_name' => Driver::class,
-                    'pdo_class_name' => \PDO::class,
-                    'params' => [
-                        'dbname' => 'test',
-                        'user' => 'test',
+                    'pdo_class_name'    => \PDO::class,
+                    'params'            => [
+                        'dbname'   => 'test',
+                        'user'     => 'test',
                         'password' => 'test',
-                        'host' => 'localhost',
+                        'host'     => 'localhost',
                         'platform' => SqlitePlatform::class
                     ],
-                    'type_mapping' => [
-                        'integer' => 'integer',
-                    ],
-                    'commented_types' => [
-                        'integer'
-                    ],
+                    'type_mapping'      => ['integer' => 'integer'],
+                    'commented_types'   => ['integer'],
                 ],
             ],
-            'entity_manager' => [
+            'entity_manager'  => [
                 'orm_default' => [
-                    'connection' => 'orm_default',
+                    'connection'    => 'orm_default',
                     'configuration' => 'orm_default',
                 ],
             ],
-            'event_manager' => [
+            'event_manager'   => [
                 'orm_default' => [
-                    'subscribers' => [
-                        TestEventSubscriber::class
-                    ],
+                    'subscribers' => [TestEventSubscriber::class],
                 ],
             ],
             'entity_resolver' => [
                 'orm_default' => [
-                    'resolvers' => [
-                        'Original\Entity' => 'New\Entity',
-                    ],
+                    'resolvers' => ['Original\Entity' => 'New\Entity'],
                 ],
             ],
-            'driver' => [
-                'orm_default' => [
+            'driver'          => [
+                'orm_default'                 => [
                     'class_name' => MappingDriverChain::class,
-                    'cache' => 'array',
-                    'drivers' => [
+                    'cache'      => 'array',
+                    'drivers'    => [
                         'TestAssets\AnnotationEntity' => 'TestAssets\AnnotationEntity',
-                        'TestAssets\FileEntity' => 'TestAssets\FileEntity',
-                        'TestAssets\Static' => 'TestAssets\Static',
+                        'TestAssets\FileEntity'       => 'TestAssets\FileEntity',
+                        'TestAssets\Static'           => 'TestAssets\Static',
                     ]
                 ],
                 'TestAssets\AnnotationEntity' => [
                     'class_name' => AnnotationDriver::class,
-                    'paths' => [
-                        __DIR__ . '/TestAssets/AnnotationEntity'
-                    ]
+                    'paths'      => [__DIR__ . '/TestAssets/AnnotationEntity']
                 ],
-                'TestAssets\FileEntity' => [
+                'TestAssets\FileEntity'       => [
                     'class_name' => PHPDriver::class,
-                    'paths' => [
-                        __DIR__ . '/TestAssets/FileEntity'
-                    ]
+                    'paths'      => [__DIR__ . '/TestAssets/FileEntity']
                 ],
-                'TestAssets\Static' => [
+                'TestAssets\Static'           => [
                     'class_name' => StaticPHPDriver::class
                 ],
             ],
-            'cache' => [
-                'array' => [
+            'cache'           => [
+                'array'      => [
                     'class_name' => ArrayCache::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                    'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
                 ],
                 'filesystem' => [
                     'class_name' => FilesystemCache::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
-                    'path' => __DIR__
+                    'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
+                    'path'       => __DIR__
                 ],
-                'redis' => [
+                'redis'      => [
                     'class_name' => RedisCache::class,
-                    'instance' => Redis::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                    'instance'   => Redis::class,
+                    'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
                 ],
-                'predis' => [
+                'predis'     => [
                     'class_name' => PredisCache::class,
-                    'instance' => ClientInterface::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                    'instance'   => ClientInterface::class,
+                    'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
                 ],
-                'memcached' => [
+                'memcached'  => [
                     'class_name' => MemcachedCache::class,
-                    'instance' => Memcached::class,
-                    'namespace' => 'Streamcommon\Doctrine\Manager\Interop',
+                    'instance'   => Memcached::class,
+                    'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
                 ],
             ],
         ]
@@ -334,7 +322,7 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['services']['config'] = $config;
         $dependencies['invokables'] = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
-            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+            'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
         $dependencies['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();
@@ -356,7 +344,7 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['services']['config'] = $config;
         $dependencies['dependencies']['invokables'] = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
-            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+            'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
         $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();
@@ -380,7 +368,7 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['services']['config'] = $config;
         $dependencies['dependencies']['invokables'] = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
-            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+            'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
         $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();
@@ -404,7 +392,7 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['services']['config'] = $config;
         $dependencies['dependencies']['invokables'] = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
-            'Streamcommon\Container\Alias\Cache\Predis' => Client::class,
+            'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
         $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();

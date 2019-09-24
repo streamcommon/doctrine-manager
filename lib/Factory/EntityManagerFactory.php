@@ -29,8 +29,8 @@ class EntityManagerFactory extends AbstractFactory
      * Create an object
      *
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param null|array $options
+     * @param string             $requestedName
+     * @param null|array         $options
      * @return EntityManager
      * @throws \Doctrine\ORM\ORMException
      */

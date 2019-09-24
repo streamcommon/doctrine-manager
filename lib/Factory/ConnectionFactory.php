@@ -32,8 +32,8 @@ class ConnectionFactory extends AbstractFactory
      * Create an object
      *
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param null|array $options
+     * @param string             $requestedName
+     * @param null|array         $options
      * @return Connection
      * @throws \Doctrine\DBAL\DBALException
      */
@@ -44,13 +44,13 @@ class ConnectionFactory extends AbstractFactory
         $configuration = $container->get('doctrine.configuration.' . $options->getConfiguration());
         $eventManager = $container->get('doctrine.event_manager.' . $options->getEventManager());
         $connectionParams = [
-            'driverClass' => $options->getDriverClassName(),
+            'driverClass'  => $options->getDriverClassName(),
             'wrapperClass' => $options->getWrapperClassName(),
-            'pdo' => null,
-            'dbname' => $options->getParams()->getDbName(),
-            'user' => $options->getParams()->getUser(),
-            'password' => $options->getParams()->getPassword(),
-            'host' => $options->getParams()->getHost()
+            'pdo'          => null,
+            'dbname'       => $options->getParams()->getDbName(),
+            'user'         => $options->getParams()->getUser(),
+            'password'     => $options->getParams()->getPassword(),
+            'host'         => $options->getParams()->getHost()
         ];
         if ($options->getPdoClassName() !== null) {
             $connectionParams['pdo'] = $container->get($options->getPdoClassName());

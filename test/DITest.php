@@ -35,6 +35,8 @@ class DITest extends AbstractFactoryTest
 {
     /**
      * Test zend factories
+     *
+     * @return void
      */
     public function testZendServiceManagerFactories(): void
     {
@@ -60,6 +62,7 @@ class DITest extends AbstractFactoryTest
     /**
      * Test aura factories
      *
+     * @return void
      * @throws \Aura\Di\Exception\ServiceNotFound
      */
     public function testAuraFactories(): void
@@ -85,6 +88,8 @@ class DITest extends AbstractFactoryTest
 
     /**
      * Test aura factories
+     *
+     * @return void
      */
     public function testPimpleFactories(): void
     {
@@ -110,6 +115,7 @@ class DITest extends AbstractFactoryTest
     /**
      * Test symfony factories
      *
+     * @return void
      * @throws \Exception
      */
     public function testSymphonyFactories(): void

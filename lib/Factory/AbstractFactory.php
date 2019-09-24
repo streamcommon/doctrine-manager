@@ -43,8 +43,8 @@ abstract class AbstractFactory
      * Create an object
      *
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param null|array $options
+     * @param string             $requestedName
+     * @param null|array         $options
      * @return object
      */
     abstract public function __invoke(
@@ -57,7 +57,7 @@ abstract class AbstractFactory
      * Call create an object
      *
      * @param string $name
-     * @param array $arguments
+     * @param array  $arguments
      * @return object
      */
     public static function __callStatic(string $name, array $arguments): object
@@ -69,8 +69,8 @@ abstract class AbstractFactory
      * Gets options from configuration based on name.
      *
      * @param ContainerInterface $container
-     * @param string $key
-     * @param string|null $ormName
+     * @param string             $key
+     * @param string|null        $ormName
      * @return array
      * @throws RuntimeException
      */

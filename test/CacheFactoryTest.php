@@ -27,6 +27,8 @@ class CacheFactoryTest extends AbstractFactoryTest
 
     /**
      * Default cache factory creation
+     *
+     * @return void
      */
     public function testCacheFactoryCreation(): void
     {
@@ -39,6 +41,8 @@ class CacheFactoryTest extends AbstractFactoryTest
 
     /**
      * Test null class name exception
+     *
+     * @return void
      */
     public function testCacheNullClassNameException(): void
     {
@@ -51,6 +55,8 @@ class CacheFactoryTest extends AbstractFactoryTest
 
     /**
      * Test cache container exists
+     *
+     * @return void
      */
     public function testCacheContainer(): void
     {
@@ -65,6 +71,8 @@ class CacheFactoryTest extends AbstractFactoryTest
 
     /**
      * Test not exists cache class
+     *
+     * @return void
      */
     public function testCacheClassNotExist(): void
     {

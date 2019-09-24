@@ -25,6 +25,8 @@ class ConnectionFactoryTest extends AbstractFactoryTest
 {
     /**
      * Default connection factory creation
+     *
+     * @return void
      */
     public function testConnectionFactoryCreation(): void
     {

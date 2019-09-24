@@ -206,7 +206,7 @@ class Configuration extends AbstractOptions
     /**
      * Get autoGenerateProxiesClasses
      *
-     * @return bool
+     * @return boolean
      */
     public function isAutoGenerateProxiesClasses(): bool
     {
@@ -216,7 +216,7 @@ class Configuration extends AbstractOptions
     /**
      * Set autoGenerateProxiesClasses
      *
-     * @param bool $autoGenerateProxiesClasses
+     * @param boolean $autoGenerateProxiesClasses
      * @return Configuration
      */
     public function setAutoGenerateProxiesClasses(bool $autoGenerateProxiesClasses): Configuration

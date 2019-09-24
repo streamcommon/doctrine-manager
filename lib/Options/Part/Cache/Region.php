@@ -54,7 +54,7 @@ class Region extends AbstractOptions
     /**
      * Get lifetime
      *
-     * @return int
+     * @return integer
      */
     public function getLifetime(): int
     {
@@ -64,7 +64,7 @@ class Region extends AbstractOptions
     /**
      * Set lifetime
      *
-     * @param int $lifetime
+     * @param integer $lifetime
      * @return Region
      */
     public function setLifetime(int $lifetime): Region
@@ -76,7 +76,7 @@ class Region extends AbstractOptions
     /**
      * Get lockLifetime
      *
-     * @return int
+     * @return integer
      */
     public function getLockLifetime(): int
     {
@@ -86,7 +86,7 @@ class Region extends AbstractOptions
     /**
      * Set lockLifetime
      *
-     * @param int $lockLifetime
+     * @param integer $lockLifetime
      * @return Region
      */
     public function setLockLifetime(int $lockLifetime): Region

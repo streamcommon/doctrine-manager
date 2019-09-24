@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d711f0391993b096b4e504b0d0b857c9",
+    "content-hash": "23ceb26c9fcc2048764acde9ea9f2f82",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4695,7 +4695,7 @@
         },
         {
             "name": "streamcommon/coding-standard",
-            "version": "1.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/streamcommon/coding-standard.git",
@@ -5340,6 +5340,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "streamcommon/coding-standard": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
