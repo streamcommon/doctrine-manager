@@ -16,6 +16,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\Migrations\Tools\Console\ConsoleRunner as MigrationsConsole;
 use Symfony\Component\Console\Input\{ArgvInput, InputArgument};
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 
@@ -75,6 +76,7 @@ if ($arguments->hasParameterOption('--object-manager')) {
 }
 $entityManager = $container->get('doctrine.entity_manager.' . $ormName);
 $helper = ConsoleRunner::createHelperSet($entityManager);
+$helper->set(new QuestionHelper(), 'question');
 
 // Create CLI
 $cli = ConsoleRunner::createApplication($helper);
