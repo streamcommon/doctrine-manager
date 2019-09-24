@@ -35,7 +35,7 @@ class EventManagerFactoryTest extends AbstractFactoryTest
      */
     public function testEventManagerFactoryCreation(): void
     {
-        $factory = new EventManagerFactory();
+        $factory     = new EventManagerFactory();
         $eventManger = $factory($this->getContainer(), 'doctrine.event_manager.orm_default');
 
         $this->assertInstanceOf(EventManager::class, $eventManger);

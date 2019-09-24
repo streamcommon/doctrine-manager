@@ -79,9 +79,9 @@ abstract class AbstractFactory
         if ($ormName === null) {
             $ormName = $this->name;
         }
-        $config = $container->has('config') ? $container->get('config') : [];
+        $config         = $container->has('config') ? $container->get('config') : [];
         $doctrineConfig = !empty($config['doctrine']) ? $config['doctrine'] : [];
-        $ormConfig = !empty($doctrineConfig[$key]) ? $doctrineConfig[$key] : [];
+        $ormConfig      = !empty($doctrineConfig[$key]) ? $doctrineConfig[$key] : [];
 
         if (empty($ormConfig[$ormName])) {
             throw new RuntimeException(sprintf(

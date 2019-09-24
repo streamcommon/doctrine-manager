@@ -316,11 +316,11 @@ abstract class AbstractFactoryTest extends TestCase
      */
     protected function getZendServiceManager(): ServiceManager
     {
-        $config = new ConfigProvider();
-        $config = $config();
-        $dependencies = $config['dependencies'];
-        $dependencies['services']['config'] = $config;
-        $dependencies['invokables'] = [
+        $config                                                                = new ConfigProvider();
+        $config                                                                = $config();
+        $dependencies                                                          = $config['dependencies'];
+        $dependencies['services']['config']                                    = $config;
+        $dependencies['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
@@ -339,10 +339,10 @@ abstract class AbstractFactoryTest extends TestCase
      */
     protected function getAuraContainer(): AuraContainer
     {
-        $config = new ConfigProvider();
-        $dependencies = $config();
-        $dependencies['services']['config'] = $config;
-        $dependencies['dependencies']['invokables'] = [
+        $config                                                                                = new ConfigProvider();
+        $dependencies                                                                          = $config();
+        $dependencies['services']['config']                                                    = $config;
+        $dependencies['dependencies']['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
@@ -363,10 +363,10 @@ abstract class AbstractFactoryTest extends TestCase
      */
     protected function getPimpleContainer(): PimpleContainer
     {
-        $config = new ConfigProvider();
-        $dependencies = $config();
-        $dependencies['services']['config'] = $config;
-        $dependencies['dependencies']['invokables'] = [
+        $config                                                                                = new ConfigProvider();
+        $dependencies                                                                          = $config();
+        $dependencies['services']['config']                                                    = $config;
+        $dependencies['dependencies']['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
@@ -387,10 +387,10 @@ abstract class AbstractFactoryTest extends TestCase
      */
     protected function getSymfonyContainer(): SymfonyContainer
     {
-        $config = new ConfigProvider();
-        $dependencies = $config();
-        $dependencies['services']['config'] = $config;
-        $dependencies['dependencies']['invokables'] = [
+        $config                                                                                = new ConfigProvider();
+        $dependencies                                                                          = $config();
+        $dependencies['services']['config']                                                    = $config;
+        $dependencies['dependencies']['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];

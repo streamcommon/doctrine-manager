@@ -30,7 +30,7 @@ class EntityResolverFactoryTest extends AbstractFactoryTest
      */
     public function testEntityResolverFactoryCreation(): void
     {
-        $factory = new EntityResolverFactory();
+        $factory        = new EntityResolverFactory();
         $entityResolver = $factory($this->getContainer(), 'doctrine.entity_resolver.orm_default');
 
         $this->assertInstanceOf(ResolveTargetEntityListener::class, $entityResolver);

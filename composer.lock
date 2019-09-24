@@ -4699,12 +4699,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/streamcommon/coding-standard.git",
-                "reference": "98cb9562bd56a6b064c5071a50c62d13bd69d645"
+                "reference": "76371ccf4f8764f4ea349534ea7d09aabe9017df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/streamcommon/coding-standard/zipball/98cb9562bd56a6b064c5071a50c62d13bd69d645",
-                "reference": "98cb9562bd56a6b064c5071a50c62d13bd69d645",
+                "url": "https://api.github.com/repos/streamcommon/coding-standard/zipball/76371ccf4f8764f4ea349534ea7d09aabe9017df",
+                "reference": "76371ccf4f8764f4ea349534ea7d09aabe9017df",
                 "shasum": ""
             },
             "require": {
@@ -4720,7 +4720,7 @@
                 "Coding Standard",
                 "streamcommon"
             ],
-            "time": "2019-02-16T22:27:16+00:00"
+            "time": "2019-09-24T18:26:48+00:00"
         },
         {
             "name": "symfony/config",

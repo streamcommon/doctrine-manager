@@ -52,7 +52,7 @@ class DriverFactory extends AbstractFactory
         if ($container->has($className)) {
             $driver = $container->get($className);
         } elseif ($className === AnnotationDriver::class || is_subclass_of($className, AnnotationDriver::class)) {
-            $cache = $container->get('doctrine.cache.' . $options->getCache());
+            $cache  = $container->get('doctrine.cache.' . $options->getCache());
             $reader = new CachedReader(new IndexedReader(new AnnotationReader()), $cache);
             $driver = new $className($reader, $options->getPaths());
         } elseif ($className === FileDriver::class || is_subclass_of($className, FileDriver::class)) {

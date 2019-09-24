@@ -41,8 +41,8 @@ class ConnectionFactory extends AbstractFactory
     {
         $options = new ConnectionOptions($this->getOptions($container, 'connection'));
 
-        $configuration = $container->get('doctrine.configuration.' . $options->getConfiguration());
-        $eventManager = $container->get('doctrine.event_manager.' . $options->getEventManager());
+        $configuration    = $container->get('doctrine.configuration.' . $options->getConfiguration());
+        $eventManager     = $container->get('doctrine.event_manager.' . $options->getEventManager());
         $connectionParams = [
             'driverClass'  => $options->getDriverClassName(),
             'wrapperClass' => $options->getWrapperClassName(),

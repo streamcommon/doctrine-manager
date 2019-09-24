@@ -32,7 +32,7 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
      */
     public function testConfigurationFactoryCreation(): void
     {
-        $factory = new ConfigurationFactory();
+        $factory       = new ConfigurationFactory();
         $configuration = $factory($this->getContainer(), 'doctrine.configuration.orm_default');
 
         $this->assertInstanceOf(Configuration::class, $configuration);

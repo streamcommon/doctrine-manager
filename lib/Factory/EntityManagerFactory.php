@@ -38,7 +38,7 @@ class EntityManagerFactory extends AbstractFactory
     {
         $options = new EntityManagerOptions($this->getOptions($container, 'entity_manager'));
 
-        $connection = $container->get('doctrine.connection.' . $options->getConnection());
+        $connection    = $container->get('doctrine.connection.' . $options->getConnection());
         $configuration = $container->get('doctrine.configuration.' . $options->getConfiguration());
 
         return EntityManager::create($connection, $configuration);

@@ -33,7 +33,7 @@ class CacheFactoryTest extends AbstractFactoryTest
     public function testCacheFactoryCreation(): void
     {
         $factory = new CacheFactory();
-        $cache = $factory($this->getContainer(), 'doctrine.cache.array');
+        $cache   = $factory($this->getContainer(), 'doctrine.cache.array');
 
         $this->assertInstanceOf(CacheProvider::class, $cache);
         $this->assertInstanceOf(ArrayCache::class, $cache);
@@ -63,7 +63,7 @@ class CacheFactoryTest extends AbstractFactoryTest
         $this->config['doctrine']['cache']['array']['class_name'] = 'TestAssets\ArrayCache';
 
         $factory = new CacheFactory();
-        $cache = $factory($this->getContainer(), 'doctrine.cache.array');
+        $cache   = $factory($this->getContainer(), 'doctrine.cache.array');
 
         $this->assertInstanceOf(CacheProvider::class, $cache);
         $this->assertInstanceOf(ArrayCache::class, $cache);

@@ -45,7 +45,7 @@ class OptionsTest extends TestCase
      */
     public function testCacheOptions(): void
     {
-        $config = [
+        $config  = [
             'class_name' => 'class_name_a',
             'namespace'  => 'class_name_b',
             'instance'   => 'class_name_c',
@@ -65,7 +65,7 @@ class OptionsTest extends TestCase
      */
     public function testConfigurationOptions(): void
     {
-        $config = [
+        $config  = [
             'result_cache'                  => 'result_test_array',
             'metadata_cache'                => 'metadata_test_array',
             'query_cache'                   => 'query_test_array',
@@ -142,7 +142,7 @@ class OptionsTest extends TestCase
      */
     public function testConnectionOptions(): void
     {
-        $config = [
+        $config  = [
             'driver_class_name'  => 'class_name_a',
             'wrapper_class_name' => 'class_name_b',
             'pdo_class_name'     => 'pdo',
@@ -174,7 +174,7 @@ class OptionsTest extends TestCase
      */
     public function testDriverOptions(): void
     {
-        $config = [
+        $config  = [
             'class_name'      => 'test_name',
             'cache'           => 'array',
             'extension'       => 'ext',
@@ -199,7 +199,7 @@ class OptionsTest extends TestCase
      */
     public function testEntityManagerOptions(): void
     {
-        $config = [
+        $config  = [
             'connection'    => 'orm_test_a',
             'configuration' => 'orm_test_b',
         ];
@@ -216,7 +216,7 @@ class OptionsTest extends TestCase
      */
     public function testEntityResolverOptions(): void
     {
-        $config = [
+        $config  = [
             'resolvers' => [
                 'alias' => 'name'
             ],
@@ -234,7 +234,7 @@ class OptionsTest extends TestCase
      */
     public function testEventManagerOptions():void
     {
-        $config = [
+        $config  = [
             'entity_resolver' => 'orm_test',
             'subscribers'     => [
                 'alias' => 'name'
@@ -253,7 +253,7 @@ class OptionsTest extends TestCase
      */
     public function testPartCacheRegionOptions(): void
     {
-        $config = [
+        $config  = [
             'name'           => 'test',
             'life_time'      => 13,
             'lock_life_time' => 42,
@@ -271,7 +271,7 @@ class OptionsTest extends TestCase
      */
     public function testPartConnectionParamsOptions(): void
     {
-        $config = [
+        $config  = [
             'platform' => 'pdo',
             'db_name'  => 'test',
             'user'     => 'user',
@@ -292,7 +292,7 @@ class OptionsTest extends TestCase
      */
     public function testPartNamedNativeQueries(): void
     {
-        $config = [
+        $config  = [
             'name' => 'query',
             'sql'  => 'select',
             'rsm'  => new ResultSetMapping()
@@ -310,7 +310,7 @@ class OptionsTest extends TestCase
      */
     public function testNamedQueryOptions(): void
     {
-        $config = [
+        $config  = [
             'name' => 'query',
             'sql'  => 'select',
         ];
@@ -327,7 +327,7 @@ class OptionsTest extends TestCase
      */
     public function testSecondLevelCacheOptions(): void
     {
-        $config = [
+        $config  = [
             'enabled'                    => true,
             'default_life_time'          => 13,
             'default_lock_life_time'     => 42,
