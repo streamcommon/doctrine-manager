@@ -25,6 +25,7 @@ Or add into your `composer.json`:
 ## Please check doctrine documentation for more info
 * [ORM version 2.6](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/index.html)
 * [DBAL version 2.9](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/index.html)
+* [Migrations version 2.1](https://www.doctrine-project.org/projects/doctrine-migrations/en/2.1/index.html) 
 * [Event Manager version 1.0](https://www.doctrine-project.org/projects/doctrine-event-manager/en/latest/index.html)
 * [Metadata driver](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers)
 * [ORM Events](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/events.html)
