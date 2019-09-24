@@ -11,10 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\Common\Factory;
 
-use Doctrine\Common\{EventManager, EventSubscriber};
+use Doctrine\Common\EventSubscriber;
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\EventManager as EventManagerOptions;
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
@@ -24,12 +25,12 @@ use function gettype;
 use function sprintf;
 
 /**
- * Class EventManagerFactory
+ * Class EventManager
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\Common\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/events.html
  */
-class EventManagerFactory extends AbstractFactory
+class EventManager extends AbstractFactory
 {
     /**
      * Create an object
@@ -37,13 +38,13 @@ class EventManagerFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string             $requestedName
      * @param null|array         $options
-     * @return EventManager
+     * @return \Doctrine\Common\EventManager
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object
     {
         $options = new EventManagerOptions($this->getOptions($container, 'event_manager'));
 
-        $eventManager = new EventManager();
+        $eventManager = new \Doctrine\Common\EventManager();
         foreach ($options->getSubscribers() as $subscriber) {
             $subscriber = $container->get($subscriber);
             if (!($subscriber instanceof EventSubscriber)) {

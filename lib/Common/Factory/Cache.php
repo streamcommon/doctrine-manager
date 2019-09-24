@@ -11,10 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\Common\Factory;
 
 use Doctrine\Common\Cache\{FilesystemCache, PredisCache, MemcachedCache, RedisCache, CacheProvider};
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\Cache as CacheOptions;
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
@@ -22,12 +23,12 @@ use function sprintf;
 use function class_exists;
 
 /**
- * Class CacheFactory
+ * Class Cache
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\Common\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html
  */
-class CacheFactory extends AbstractFactory
+class Cache extends AbstractFactory
 {
     /**
      * CacheFactory constructor.

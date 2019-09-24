@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager;
 
-use Streamcommon\Doctrine\Manager\Factory\{
-    CacheFactory,
-    ConfigurationFactory,
-    ConnectionFactory,
-    DriverFactory,
-    EntityManagerFactory,
-    EventManagerFactory,
-    EntityResolverFactory};
+use Streamcommon\Doctrine\Manager\Common\Factory\{
+    Cache as CacheFactory,
+    Driver as DriverFactory,
+    EventManager as EventManagerFactory
+};
+use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\{
+    Configuration as ConfigurationFactory,
+    EntityManager as EntityManagerFactory,
+    EntityResolver as EntityResolverFactory,
+};
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\Common\Cache\{
     ArrayCache,

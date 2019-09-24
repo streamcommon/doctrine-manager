@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\ORM\Factory;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\ORM\Configuration;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Cache\{RegionsConfiguration, DefaultCacheFactory, CacheConfiguration};
 use Doctrine\ORM\Query\ResultSetMapping;
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\Configuration as ConfigurationOptions;
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
@@ -29,12 +29,12 @@ use function sprintf;
 use function is_string;
 
 /**
- * Class ConfigurationFactory
+ * Class Configuration
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\ORM\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#configuration
  */
-class ConfigurationFactory extends AbstractFactory
+class Configuration extends AbstractFactory
 {
     /**
      * Create an object
@@ -42,7 +42,7 @@ class ConfigurationFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string             $requestedName
      * @param null|array         $options
-     * @return Configuration
+     * @return \Doctrine\ORM\Configuration
      * @throws ORMException
      * @throws RuntimeException
      */
@@ -50,7 +50,7 @@ class ConfigurationFactory extends AbstractFactory
     {
         $options = new ConfigurationOptions($this->getOptions($container, 'configuration'));
 
-        $configuration = new Configuration();
+        $configuration = new \Doctrine\ORM\Configuration();
         $configuration->setProxyDir($options->getProxyDir());
         $configuration->setProxyNamespace($options->getProxyNamespace());
         $configuration->setAutoGenerateProxyClasses($options->isAutoGenerateProxiesClasses());

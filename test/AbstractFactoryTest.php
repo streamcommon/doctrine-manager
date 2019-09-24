@@ -34,14 +34,17 @@ use Memcached;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Pimple\Psr11\Container as PimpleContainer;
-use Streamcommon\Doctrine\Manager\Factory\{
-    CacheFactory,
-    ConfigurationFactory,
-    ConnectionFactory,
-    DriverFactory,
-    EntityManagerFactory,
-    EntityResolverFactory,
-    EventManagerFactory};
+use Streamcommon\Doctrine\Manager\Common\Factory\{
+    Cache as CacheFactory,
+    Driver as DriverFactory,
+    EventManager as EventManagerFactory
+};
+use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\{
+    Configuration as ConfigurationFactory,
+    EntityManager as EntityManagerFactory,
+    EntityResolver as EntityResolverFactory,
+};
 use Streamcommon\Doctrine\Manager\ConfigProvider;
 use Streamcommon\Test\Doctrine\Manager\TestAssets\TestEventSubscriber;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SymfonyContainer;

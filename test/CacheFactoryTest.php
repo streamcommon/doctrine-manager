@@ -15,7 +15,7 @@ namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\Common\Cache\{CacheProvider, ArrayCache};
 use Streamcommon\Doctrine\Manager\Exception\RuntimeException;
-use Streamcommon\Doctrine\Manager\Factory\CacheFactory;
+use Streamcommon\Doctrine\Manager\Common\Factory\Cache as CacheFactory;
 
 /**
  * Class CacheFactoryTest

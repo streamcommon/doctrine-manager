@@ -17,8 +17,8 @@ use ArrayObject;
 use Doctrine\Common\EventManager;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Manager\Exception\RuntimeException;
-use Streamcommon\Doctrine\Manager\Factory\EntityResolverFactory;
-use Streamcommon\Doctrine\Manager\Factory\EventManagerFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\EntityResolver as EntityResolverFactory;
+use Streamcommon\Doctrine\Manager\Common\Factory\EventManager as EventManagerFactory;
 use Streamcommon\Test\Doctrine\Manager\TestAssets\TestEventSubscriber;
 
 /**

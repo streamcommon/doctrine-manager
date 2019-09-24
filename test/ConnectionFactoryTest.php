@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\DBAL\Connection;
-use Streamcommon\Doctrine\Manager\Factory\ConnectionFactory;
+use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
 
 /**
  * Class ConnectionFactoryTest

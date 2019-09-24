@@ -15,7 +15,7 @@ namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\ORM\Configuration;
 use Streamcommon\Doctrine\Manager\Exception\RuntimeException;
-use Streamcommon\Doctrine\Manager\Factory\ConfigurationFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\Configuration as ConfigurationFactory;
 
 /**
  * Class ConfigurationFactoryTest

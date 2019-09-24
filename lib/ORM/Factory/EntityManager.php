@@ -11,19 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\ORM\Factory;
 
-use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\EntityManager as EntityManagerOptions;
 
 /**
- * Class EntityManagerFactory
+ * Class EntityManager
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\ORM\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/working-with-objects.html
  */
-class EntityManagerFactory extends AbstractFactory
+class EntityManager extends AbstractFactory
 {
     /**
      * Create an object
@@ -31,7 +31,7 @@ class EntityManagerFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string             $requestedName
      * @param null|array         $options
-     * @return EntityManager
+     * @return \Doctrine\ORM\EntityManager
      * @throws \Doctrine\ORM\ORMException
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object
@@ -41,6 +41,6 @@ class EntityManagerFactory extends AbstractFactory
         $connection    = $container->get('doctrine.connection.' . $options->getConnection());
         $configuration = $container->get('doctrine.configuration.' . $options->getConfiguration());
 
-        return EntityManager::create($connection, $configuration);
+        return \Doctrine\ORM\EntityManager::create($connection, $configuration);
     }
 }

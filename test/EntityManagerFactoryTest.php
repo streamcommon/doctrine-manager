@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\ORM\EntityManager;
-use Streamcommon\Doctrine\Manager\Factory\EntityManagerFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\EntityManager as EntityManagerFactory;
 
 /**
  * Class EntityManagerFactoryTest
@@ -27,6 +27,7 @@ class EntityManagerFactoryTest extends AbstractFactoryTest
      * Default entity resolver factory creation
      *
      * @return void
+     * @throws \Doctrine\ORM\ORMException
      */
     public function testEntityManagerFactoryCreation(): void
     {

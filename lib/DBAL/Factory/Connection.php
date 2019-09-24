@@ -11,22 +11,23 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\DBAL\Factory;
 
-use Doctrine\DBAL\{Connection, DriverManager};
+use Doctrine\DBAL\{Connection as DBALConnection, DriverManager};
 use Doctrine\DBAL\Types\Type;
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\Connection as ConnectionOptions;
 
 /**
- * Class ConnectionFactory
+ * Class Connection
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\DBAL\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#getting-a-connection
  * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html#platforms
  * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/types.html#types
  */
-class ConnectionFactory extends AbstractFactory
+class Connection extends AbstractFactory
 {
     /**
      * Create an object
@@ -34,7 +35,7 @@ class ConnectionFactory extends AbstractFactory
      * @param ContainerInterface $container
      * @param string             $requestedName
      * @param null|array         $options
-     * @return Connection
+     * @return DBALConnection
      * @throws \Doctrine\DBAL\DBALException
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object

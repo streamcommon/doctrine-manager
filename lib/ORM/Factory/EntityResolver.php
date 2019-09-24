@@ -11,18 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\ORM\Factory;
 
 use Doctrine\ORM\Tools\ResolveTargetEntityListener;
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\EntityResolver as EntityResolverOptions;
 
 /**
- * Class EntityResolverFactory
+ * Class EntityResolver
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\ORM\Factory
  */
-class EntityResolverFactory extends AbstractFactory
+class EntityResolver extends AbstractFactory
 {
     /**
      * Create an object

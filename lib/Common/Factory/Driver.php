@@ -11,11 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager\Common\Factory;
 
 use Doctrine\Common\Annotations\{AnnotationReader, CachedReader, IndexedReader};
 use Doctrine\Common\Persistence\Mapping\Driver\{AnnotationDriver, FileDriver, MappingDriverChain, MappingDriver};
 use Psr\Container\ContainerInterface;
+use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\Driver as DriverOptions;
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
 
@@ -24,12 +25,12 @@ use function is_subclass_of;
 use function class_exists;
 
 /**
- * Class DriverFactory
+ * Class Driver
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager\Common\Factory
  * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/metadata-drivers.html#metadata-drivers
  */
-class DriverFactory extends AbstractFactory
+class Driver extends AbstractFactory
 {
     /**
      * Create an object
@@ -68,7 +69,7 @@ class DriverFactory extends AbstractFactory
 
         if ($driver instanceof MappingDriverChain) {
             foreach ($options->getDrivers() as $alias => $className) {
-                $driverFactory = new DriverFactory($alias);
+                $driverFactory = new Driver($alias);
                 $driver->addDriver($driverFactory($container, $alias), $alias);
             }
         }

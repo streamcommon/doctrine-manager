@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
-use Streamcommon\Doctrine\Manager\Factory\DriverFactory;
+use Streamcommon\Doctrine\Manager\Common\Factory\Driver as DriverFactory;
 use Streamcommon\Doctrine\Manager\Exception\RuntimeException;
 
 /**

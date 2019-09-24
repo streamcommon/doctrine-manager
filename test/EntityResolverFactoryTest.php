@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\ORM\Tools\ResolveTargetEntityListener;
-use Streamcommon\Doctrine\Manager\Factory\EntityResolverFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\EntityResolver as EntityResolverFactory;
 
 /**
  * Class EntityResolverFactoryTest

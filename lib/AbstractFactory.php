@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Streamcommon\Doctrine\Manager\Factory;
+namespace Streamcommon\Doctrine\Manager;
 
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Manager\Exception\{RuntimeException};
@@ -21,7 +21,7 @@ use function sprintf;
 /**
  * Class AbstractFactory
  *
- * @package Streamcommon\Doctrine\Manager\Factory
+ * @package Streamcommon\Doctrine\Manager
  */
 abstract class AbstractFactory
 {
