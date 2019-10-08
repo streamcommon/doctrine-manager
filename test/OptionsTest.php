@@ -278,6 +278,7 @@ class OptionsTest extends TestCase
             'password' => 'password',
             'host'     => 'localhost',
             'port'     => 3216,
+            'charset'  => 'utf8',
         ];
         $options = new ConnectionParams($config);
         foreach ($config as $item => $value) {

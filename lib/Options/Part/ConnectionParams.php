@@ -24,6 +24,8 @@ class ConnectionParams extends DbConnection
 {
     /** @var string|null */
     protected $platform;
+    /** @var string|null */
+    protected $charset;
 
     /**
      * Get platform
@@ -44,6 +46,28 @@ class ConnectionParams extends DbConnection
     public function setPlatform(?string $platform): ConnectionParams
     {
         $this->platform = $platform;
+        return $this;
+    }
+
+    /**
+     * Get charset
+     *
+     * @return string|null
+     */
+    public function getCharset(): ?string
+    {
+        return $this->charset;
+    }
+
+    /**
+     * Set charset
+     *
+     * @param string|null $charset
+     * @return ConnectionParams
+     */
+    public function setCharset(?string $charset): ConnectionParams
+    {
+        $this->charset = $charset;
         return $this;
     }
 }

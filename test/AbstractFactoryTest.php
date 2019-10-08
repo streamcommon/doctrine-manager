@@ -118,7 +118,8 @@ abstract class AbstractFactoryTest extends TestCase
                         'user'     => 'test',
                         'password' => 'test',
                         'host'     => 'localhost',
-                        'platform' => SqlitePlatform::class
+                        'platform' => SqlitePlatform::class,
+                        'charset'  => 'utf8',
                     ],
                     'type_mapping'      => ['integer' => 'integer'],
                     'commented_types'   => ['integer'],

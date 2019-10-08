@@ -51,13 +51,16 @@ class Connection extends AbstractFactory
             'dbname'       => $options->getParams()->getDbName(),
             'user'         => $options->getParams()->getUser(),
             'password'     => $options->getParams()->getPassword(),
-            'host'         => $options->getParams()->getHost()
+            'host'         => $options->getParams()->getHost(),
         ];
         if ($options->getPdoClassName() !== null) {
             $connectionParams['pdo'] = $container->get($options->getPdoClassName());
         }
         if ($options->getParams()->getPlatform() !== null) {
             $connectionParams['platform'] = $container->get($options->getParams()->getPlatform());
+        }
+        if ($options->getParams()->getCharset() !== null) {
+            $connectionParams['charset'] = $options->getParams()->getCharset();
         }
         $connection = DriverManager::getConnection($connectionParams, $configuration, $eventManager);
         foreach ($options->getTypeMapping() as $dbType => $doctrineType) {
