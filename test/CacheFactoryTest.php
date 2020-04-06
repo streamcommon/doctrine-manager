@@ -32,7 +32,7 @@ class CacheFactoryTest extends AbstractFactoryTest
      */
     public function testCacheFactoryCreation(): void
     {
-        $factory = new CacheFactory();
+        $factory = new CacheFactory('array');
         $cache   = $factory($this->getContainer(), 'doctrine.cache.array');
 
         $this->assertInstanceOf(CacheProvider::class, $cache);
@@ -48,7 +48,7 @@ class CacheFactoryTest extends AbstractFactoryTest
     {
         $this->config['doctrine']['cache']['array']['class_name'] = null;
 
-        $factory = new CacheFactory();
+        $factory = new CacheFactory('array');
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.cache.array');
     }
@@ -62,7 +62,7 @@ class CacheFactoryTest extends AbstractFactoryTest
     {
         $this->config['doctrine']['cache']['array']['class_name'] = 'TestAssets\ArrayCache';
 
-        $factory = new CacheFactory();
+        $factory = new CacheFactory('array');
         $cache   = $factory($this->getContainer(), 'doctrine.cache.array');
 
         $this->assertInstanceOf(CacheProvider::class, $cache);
@@ -78,7 +78,7 @@ class CacheFactoryTest extends AbstractFactoryTest
     {
         $this->config['doctrine']['cache']['array']['class_name'] = 'TestAssets\NotExistClass';
 
-        $factory = new CacheFactory();
+        $factory = new CacheFactory('array');
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.cache.array');
     }

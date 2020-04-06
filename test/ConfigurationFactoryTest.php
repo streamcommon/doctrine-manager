@@ -32,7 +32,7 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
      */
     public function testConfigurationFactoryCreation(): void
     {
-        $factory       = new ConfigurationFactory();
+        $factory       = new ConfigurationFactory('orm_default');
         $configuration = $factory($this->getContainer(), 'doctrine.configuration.orm_default');
 
         $this->assertInstanceOf(Configuration::class, $configuration);
@@ -52,7 +52,7 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
             'sql'  => 'SHOW DATABASES;'
         ];
 
-        $factory = new ConfigurationFactory();
+        $factory = new ConfigurationFactory('orm_default');
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.configuration.orm_default');
     }

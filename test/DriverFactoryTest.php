@@ -31,7 +31,7 @@ class DriverFactoryTest extends AbstractFactoryTest
      */
     public function testEntityResolverFactoryCreation(): void
     {
-        $factory = new DriverFactory();
+        $factory = new DriverFactory('orm_default');
         $driver  = $factory($this->getContainer(), 'doctrine.driver.orm_default');
 
         $this->assertInstanceOf(MappingDriver::class, $driver);
@@ -47,7 +47,7 @@ class DriverFactoryTest extends AbstractFactoryTest
     {
         $this->config['doctrine']['driver']['orm_default']['drivers']['NotFoundA'] = 'NotFoundA';
 
-        $factory = new DriverFactory();
+        $factory = new DriverFactory('orm_default');
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.driver.orm_default');
     }
@@ -63,7 +63,7 @@ class DriverFactoryTest extends AbstractFactoryTest
         $this->config['doctrine']['driver']['orm_default']['drivers']['NotFoundA'] = 'NotFoundA';
         $this->config['doctrine']['driver']['NotFoundA']                           = ['class_name' => 'NotFoundA'];
 
-        $factory = new DriverFactory();
+        $factory = new DriverFactory('orm_default');
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.driver.orm_default');
     }
@@ -79,7 +79,7 @@ class DriverFactoryTest extends AbstractFactoryTest
         $this->config['doctrine']['driver']['orm_default']['drivers']['NotFoundA'] = 'NotFoundA';
         $this->config['doctrine']['driver']['NotFoundA']                           = ['class_name' => null];
 
-        $factory = new DriverFactory();
+        $factory = new DriverFactory('orm_default');
         $this->expectException(RuntimeException::class);
         $factory($this->getContainer(), 'doctrine.driver.orm_default');
     }

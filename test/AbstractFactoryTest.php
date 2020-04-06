@@ -29,6 +29,7 @@ use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Repository\DefaultRepositoryFactory;
 use JSoumelidis\SymfonyDI\Config\{Config as SymfonyConfig, ContainerFactory as SymfonyContainerFactory};
 use Predis\{ClientInterface, Client};
+use Prophecy\PhpUnit\ProphecyTrait;
 use Redis;
 use Memcached;
 use PHPUnit\Framework\TestCase;
@@ -48,9 +49,15 @@ use Streamcommon\Doctrine\Manager\ORM\Factory\{
 use Streamcommon\Doctrine\Manager\ConfigProvider;
 use Streamcommon\Test\Doctrine\Manager\TestAssets\TestEventSubscriber;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SymfonyContainer;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Pimple\Config\{Config as PimpleConfig, ContainerFactory as PimpleContainerFactory};
-use Zend\AuraDi\Config\{Config as AuraConfig, ContainerFactory as AuraContainerFactory};
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Pimple\Config\{
+    Config as PimpleConfig,
+    ContainerFactory as PimpleContainerFactory,
+};
+use Laminas\AuraDi\Config\{
+    Config as AuraConfig,
+    ContainerFactory as AuraContainerFactory,
+};
 
 use function call_user_func_array;
 
@@ -61,6 +68,8 @@ use function call_user_func_array;
  */
 abstract class AbstractFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var array */
     protected $config = [
         'doctrine' => [
@@ -269,42 +278,42 @@ abstract class AbstractFactoryTest extends TestCase
             ]
         ));
         $container->get('doctrine.driver.orm_default')->willReturn(call_user_func_array(
-            new DriverFactory(),
+            new DriverFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.driver.orm_default'
             ]
         ));
         $container->get('doctrine.entity_resolver.orm_default')->willReturn(call_user_func_array(
-            new EntityResolverFactory(),
+            new EntityResolverFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.entity_resolver.orm_default'
             ]
         ));
         $container->get('doctrine.event_manager.orm_default')->willReturn(call_user_func_array(
-            new EventManagerFactory(),
+            new EventManagerFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.doctrine.event_manager.orm_default'
             ]
         ));
         $container->get('doctrine.configuration.orm_default')->willReturn(call_user_func_array(
-            new ConfigurationFactory(),
+            new ConfigurationFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.configuration.orm_default'
             ]
         ));
         $container->get('doctrine.connection.orm_default')->willReturn(call_user_func_array(
-            new ConnectionFactory(),
+            new ConnectionFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.connection.orm_default'
             ]
         ));
         $container->get('doctrine.entity_manager.orm_default')->willReturn(call_user_func_array(
-            new EntityManagerFactory(),
+            new EntityManagerFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.entity_manager.orm_default'
@@ -314,11 +323,11 @@ abstract class AbstractFactoryTest extends TestCase
     }
 
     /**
-     * Return Zend ServiceManager
+     * Return Laminas ServiceManager
      *
      * @return ServiceManager
      */
-    protected function getZendServiceManager(): ServiceManager
+    protected function getLaminasServiceManager(): ServiceManager
     {
         $config                                                                = new ConfigProvider();
         $config                                                                = $config();

@@ -35,7 +35,7 @@ class EventManagerFactoryTest extends AbstractFactoryTest
      */
     public function testEventManagerFactoryCreation(): void
     {
-        $factory     = new EventManagerFactory();
+        $factory     = new EventManagerFactory('orm_default');
         $eventManger = $factory($this->getContainer(), 'doctrine.event_manager.orm_default');
 
         $this->assertInstanceOf(EventManager::class, $eventManger);
@@ -53,7 +53,7 @@ class EventManagerFactoryTest extends AbstractFactoryTest
         $container->get('config')->willReturn($this->config);
         $container->get(TestEventSubscriber::class)->willReturn(new ArrayObject());
         $container->get('doctrine.entity_resolver.orm_default')->willReturn(call_user_func_array(
-            new EntityResolverFactory(),
+            new EntityResolverFactory('orm_default'),
             [
                 $container->reveal(),
                 'doctrine.entity_resolver.orm_default'
@@ -61,7 +61,7 @@ class EventManagerFactoryTest extends AbstractFactoryTest
         ));
 
         $this->expectException(RuntimeException::class);
-        $factory = new EventManagerFactory();
+        $factory = new EventManagerFactory('orm_default');
         $factory($container->reveal(), 'doctrine.event_manager.orm_default');
     }
 }

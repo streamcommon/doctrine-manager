@@ -34,7 +34,7 @@ abstract class AbstractFactory
      *
      * @param string $name
      */
-    public function __construct(string $name = 'orm_default')
+    final public function __construct(string $name)
     {
         $this->name = $name;
     }
@@ -44,7 +44,7 @@ abstract class AbstractFactory
      *
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param null|array         $options
+     * @param null|array<mixed>  $options
      * @return object
      */
     abstract public function __invoke(
@@ -56,8 +56,8 @@ abstract class AbstractFactory
     /**
      * Call create an object
      *
-     * @param string $name
-     * @param array  $arguments
+     * @param string        $name
+     * @param array<string> $arguments
      * @return object
      */
     public static function __callStatic(string $name, array $arguments): object
@@ -71,7 +71,7 @@ abstract class AbstractFactory
      * @param ContainerInterface $container
      * @param string             $key
      * @param string|null        $ormName
-     * @return array
+     * @return array<mixed>
      * @throws RuntimeException
      */
     public function getOptions(ContainerInterface $container, string $key, string $ormName = null): array

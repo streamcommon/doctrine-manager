@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Class EntityResolver
@@ -22,13 +22,13 @@ use Zend\Stdlib\AbstractOptions;
  */
 class EntityResolver extends AbstractOptions
 {
-    /** @var array */
+    /** @var array<mixed> */
     protected $resolvers = [];
 
     /**
      * Get resolvers
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getResolvers(): array
     {
@@ -38,7 +38,7 @@ class EntityResolver extends AbstractOptions
     /**
      * Set resolvers
      *
-     * @param array $resolvers
+     * @param array<mixed> $resolvers
      * @return EntityResolver
      */
     public function setResolvers(array $resolvers): EntityResolver

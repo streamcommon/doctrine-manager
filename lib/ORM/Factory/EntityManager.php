@@ -30,7 +30,7 @@ class EntityManager extends AbstractFactory
      *
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param null|array         $options
+     * @param null|array<mixed>  $options
      * @return \Doctrine\ORM\EntityManager
      * @throws \Doctrine\ORM\ORMException
      */

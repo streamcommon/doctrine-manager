@@ -9,6 +9,7 @@
     "doctrine container",
     "doctrine cli",
     "doctrine zend servicemanager",
+    "doctrine laminas servicemanager",
     "doctrine auradi",
     "doctrine pimple",
     "doctrine symfony container",
@@ -31,17 +32,22 @@
     "streamcommon/coding-standard": "dev-master",
     "roave/security-advisories": "dev-master",
     "malukenho/docheader": "^0.1.7",
-    "phpstan/phpstan": "^0.11.1",
-    "phpunit/phpunit": "^8.0",
+    "phpstan/phpstan": "^0.12.18",
+    "phpunit/phpunit": "^9.1.1",
+    "phpspec/prophecy-phpunit": "dev-master",
     "php-coveralls/php-coveralls": "^2.1.0",
     "predis/predis":   "^1.1.0",
-    "zendframework/zend-servicemanager": "^3.4.0",
-    "zendframework/zend-auradi-config": "^1.0.1",
-    "zendframework/zend-pimple-config": "^1.1.0",
+    "laminas/laminas-servicemanager": "^3.4.0",
+    "laminas/laminas-auradi-config": "^1.0.1",
+    "laminas/laminas-pimple-config": "^1.1.0",
     "jsoumelidis/zend-sf-di-config": "^0.4.0"
   },
   "extra": {
-    "zf" : {
+    "zf": {
+      "component": "Streamcommon\\Doctrine\\Manager",
+      "config-provider" : "Streamcommon\\Doctrine\\Manager\\ConfigProvider"
+    },
+    "laminas": {
       "component": "Streamcommon\\Doctrine\\Manager",
       "config-provider" : "Streamcommon\\Doctrine\\Manager\\ConfigProvider"
     }

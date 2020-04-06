@@ -34,7 +34,7 @@ class Connection extends AbstractFactory
      *
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param null|array         $options
+     * @param null|array<mixed>  $options
      * @return DBALConnection
      * @throws \Doctrine\DBAL\DBALException
      */

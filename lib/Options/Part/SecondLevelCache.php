@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Doctrine\Manager\Options\Part;
 
 use Streamcommon\Doctrine\Manager\Options\Part\Cache\Region;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 use function array_map;
 

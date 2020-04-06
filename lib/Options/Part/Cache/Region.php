@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager\Options\Part\Cache;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Class Region

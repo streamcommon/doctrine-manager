@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Class EventManager
@@ -22,7 +22,7 @@ use Zend\Stdlib\AbstractOptions;
  */
 class EventManager extends AbstractOptions
 {
-    /** @var array */
+    /** @var array<string> */
     protected $subscribers = [];
     /** @var string */
     protected $entityResolver = 'orm_default';
@@ -30,7 +30,7 @@ class EventManager extends AbstractOptions
     /**
      * Get subscribers
      *
-     * @return array
+     * @return array<string>
      */
     public function getSubscribers(): array
     {
@@ -40,7 +40,7 @@ class EventManager extends AbstractOptions
     /**
      * Set subscribers
      *
-     * @param array $subscribers
+     * @param array<string> $subscribers
      * @return EventManager
      */
     public function setSubscribers(array $subscribers): EventManager

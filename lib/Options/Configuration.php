@@ -15,7 +15,7 @@ namespace Streamcommon\Doctrine\Manager\Options;
 
 use Streamcommon\Doctrine\Manager\Options\Part\{NamedQuery, NamedNativeQueries, SecondLevelCache};
 use Streamcommon\Doctrine\Manager\Exception\{InvalidArgumentException};
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 use function array_map;
 use function is_array;
@@ -49,21 +49,21 @@ class Configuration extends AbstractOptions
     protected $proxyDir = 'data/doctrine/orm/proxy';
     /** @var string */
     protected $proxyNamespace = 'Streamcommon\Doctrine\Manager\Proxy';
-    /** @var array */
+    /** @var array<mixed> */
     protected $entityNamespaces = [];
-    /** @var array */
+    /** @var array<mixed> */
     protected $datetimeFunctions = [];
-    /** @var array */
+    /** @var array<mixed> */
     protected $customStringFunctions = [];
-    /** @var array */
+    /** @var array<mixed> */
     protected $customNumericFunctions = [];
-    /** @var array */
+    /** @var array<mixed> */
     protected $filters = [];
     /** @var NamedQuery[] */
     protected $namedQueries = [];
     /** @var NamedNativeQueries[] */
     protected $namedNativeQueries = [];
-    /** @var array */
+    /** @var array<mixed> */
     protected $customHydrationModes = [];
     /** @var string|null */
     protected $namingStrategy = null;
@@ -85,7 +85,7 @@ class Configuration extends AbstractOptions
     /**
      * Configuration constructor.
      *
-     * @param null|array $options
+     * @param null|array<mixed> $options
      */
     public function __construct(?array $options = null)
     {
@@ -272,7 +272,7 @@ class Configuration extends AbstractOptions
     /**
      * Get entityNamespaces
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getEntityNamespaces(): array
     {
@@ -282,7 +282,7 @@ class Configuration extends AbstractOptions
     /**
      * Set entityNamespaces
      *
-     * @param array $entityNamespaces
+     * @param array<mixed> $entityNamespaces
      * @return Configuration
      */
     public function setEntityNamespaces(array $entityNamespaces): Configuration
@@ -294,7 +294,7 @@ class Configuration extends AbstractOptions
     /**
      * Get datetimeFunctions
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getDatetimeFunctions(): array
     {
@@ -304,7 +304,7 @@ class Configuration extends AbstractOptions
     /**
      * Set datetimeFunctions
      *
-     * @param array $datetimeFunctions
+     * @param array<mixed> $datetimeFunctions
      * @return Configuration
      */
     public function setDatetimeFunctions(array $datetimeFunctions): Configuration
@@ -316,7 +316,7 @@ class Configuration extends AbstractOptions
     /**
      * Get customStringFunctions
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getCustomStringFunctions(): array
     {
@@ -326,7 +326,7 @@ class Configuration extends AbstractOptions
     /**
      * Set customStringFunctions
      *
-     * @param array $customStringFunctions
+     * @param array<mixed> $customStringFunctions
      * @return Configuration
      */
     public function setCustomStringFunctions(array $customStringFunctions): Configuration
@@ -338,7 +338,7 @@ class Configuration extends AbstractOptions
     /**
      * Get customNumericFunctions
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getCustomNumericFunctions(): array
     {
@@ -348,7 +348,7 @@ class Configuration extends AbstractOptions
     /**
      * Set customNumericFunctions
      *
-     * @param array $customNumericFunctions
+     * @param array<mixed> $customNumericFunctions
      * @return Configuration
      */
     public function setCustomNumericFunctions(array $customNumericFunctions): Configuration
@@ -360,7 +360,7 @@ class Configuration extends AbstractOptions
     /**
      * Get filters
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getFilters(): array
     {
@@ -370,7 +370,7 @@ class Configuration extends AbstractOptions
     /**
      * Set filters
      *
-     * @param array $filters
+     * @param array<mixed> $filters
      * @return Configuration
      */
     public function setFilters(array $filters): Configuration
@@ -392,7 +392,7 @@ class Configuration extends AbstractOptions
     /**
      * Set namedQueries
      *
-     * @param array $namedQueries
+     * @param array<mixed> $namedQueries
      * @return Configuration
      */
     public function setNamedQueries(array $namedQueries): Configuration
@@ -416,7 +416,7 @@ class Configuration extends AbstractOptions
     /**
      * Set namedNativeQueries
      *
-     * @param array $namedNativeQueries
+     * @param array<mixed> $namedNativeQueries
      * @return Configuration
      */
     public function setNamedNativeQueries(array $namedNativeQueries): Configuration
@@ -430,7 +430,7 @@ class Configuration extends AbstractOptions
     /**
      * Get customHydrationModes
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getCustomHydrationModes(): array
     {
@@ -440,7 +440,7 @@ class Configuration extends AbstractOptions
     /**
      * Set customHydrationModes
      *
-     * @param array $customHydrationModes
+     * @param array<mixed> $customHydrationModes
      * @return Configuration
      */
     public function setCustomHydrationModes(array $customHydrationModes): Configuration
@@ -594,7 +594,7 @@ class Configuration extends AbstractOptions
     /**
      * Set secondLevelCache
      *
-     * @param SecondLevelCache|array|mixed $secondLevelCache
+     * @param SecondLevelCache|array<mixed>|mixed $secondLevelCache
      * @return Configuration
      */
     public function setSecondLevelCache($secondLevelCache): Configuration

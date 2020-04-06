@@ -16,7 +16,7 @@ namespace Streamcommon\Doctrine\Manager\Options;
 use Doctrine\DBAL\Driver\PDOMySql\Driver;
 use Streamcommon\Doctrine\Manager\Exception\{InvalidArgumentException};
 use Streamcommon\Doctrine\Manager\Options\Part\{ConnectionParams};
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 use function is_array;
 use function sprintf;
@@ -43,15 +43,15 @@ class Connection extends AbstractOptions
     protected $configuration = 'orm_default';
     /** @var string */
     protected $eventManager = 'orm_default';
-    /** @var array */
+    /** @var array<mixed> */
     protected $typeMapping = [];
-    /** @var array */
+    /** @var array<mixed> */
     protected $commentedTypes = [];
 
     /**
      * Connection constructor.
      *
-     * @param null|array $options
+     * @param null|array<mixed> $options
      */
     public function __construct(?array $options = null)
     {
@@ -138,7 +138,7 @@ class Connection extends AbstractOptions
     /**
      * Set params
      *
-     * @param ConnectionParams|array|mixed $params
+     * @param ConnectionParams|array<mixed>|mixed $params
      * @return Connection
      */
     public function setParams($params): Connection
@@ -203,7 +203,7 @@ class Connection extends AbstractOptions
     /**
      * Get typeMapping
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getTypeMapping(): array
     {
@@ -213,7 +213,7 @@ class Connection extends AbstractOptions
     /**
      * Set typeMapping
      *
-     * @param array $typeMapping
+     * @param array<mixed> $typeMapping
      * @return Connection
      */
     public function setTypeMapping(array $typeMapping): Connection
@@ -225,7 +225,7 @@ class Connection extends AbstractOptions
     /**
      * Get commentedTypes
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getCommentedTypes(): array
     {
@@ -235,7 +235,7 @@ class Connection extends AbstractOptions
     /**
      * Set commentedTypes
      *
-     * @param array $commentedTypes
+     * @param array<mixed> $commentedTypes
      * @return Connection
      */
     public function setCommentedTypes(array $commentedTypes): Connection

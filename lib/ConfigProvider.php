@@ -16,7 +16,7 @@ namespace Streamcommon\Doctrine\Manager;
 use Streamcommon\Doctrine\Manager\Common\Factory\{
     Cache as CacheFactory,
     Driver as DriverFactory,
-    EventManager as EventManagerFactory
+    EventManager as EventManagerFactory,
 };
 use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
 use Streamcommon\Doctrine\Manager\ORM\Factory\{
@@ -26,12 +26,8 @@ use Streamcommon\Doctrine\Manager\ORM\Factory\{
 };
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\Common\Cache\{
-    ArrayCache,
-    FilesystemCache,
-    MemcachedCache,
-    RedisCache,
-    PredisCache,
-    ZendDataCache};
+    ArrayCache, FilesystemCache, MemcachedCache, RedisCache, PredisCache, ZendDataCache,
+};
 
 /**
  * Class ConfigProvider
@@ -43,7 +39,7 @@ class ConfigProvider
     /**
      * Returns the configuration array
      *
-     * @return array
+     * @return array<array>
      */
     public function __invoke(): array
     {
@@ -56,19 +52,19 @@ class ConfigProvider
     /**
      * Return dependencies configuration
      *
-     * @return array
+     * @return array<array>
      */
     public function getDependencies(): array
     {
         return [
             'factories' => [
                 // default orm
-                'doctrine.driver.orm_default'          => DriverFactory::class,
-                'doctrine.event_manager.orm_default'   => EventManagerFactory::class,
-                'doctrine.configuration.orm_default'   => ConfigurationFactory::class,
-                'doctrine.connection.orm_default'      => ConnectionFactory::class,
-                'doctrine.entity_resolver.orm_default' => EntityResolverFactory::class,
-                'doctrine.entity_manager.orm_default'  => EntityManagerFactory::class,
+                'doctrine.driver.orm_default'          => [DriverFactory::class, 'orm_default'],
+                'doctrine.event_manager.orm_default'   => [EventManagerFactory::class, 'orm_default'],
+                'doctrine.configuration.orm_default'   => [ConfigurationFactory::class, 'orm_default'],
+                'doctrine.connection.orm_default'      => [ConnectionFactory::class, 'orm_default'],
+                'doctrine.entity_resolver.orm_default' => [EntityResolverFactory::class, 'orm_default'],
+                'doctrine.entity_manager.orm_default'  => [EntityManagerFactory::class, 'orm_default'],
                 // orm cached
                 'doctrine.cache.array'                 => [CacheFactory::class, 'array'],
                 'doctrine.cache.filesystem'            => [CacheFactory::class, 'filesystem'],
@@ -83,7 +79,7 @@ class ConfigProvider
     /**
      * Return doctrine configuration
      *
-     * @return array
+     * @return array<array>
      */
     public function getDoctrine(): array
     {

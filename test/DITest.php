@@ -14,17 +14,15 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
-use Doctrine\ORM\{Configuration, EntityManager};
+use Doctrine\ORM\{
+    Configuration, EntityManager,
+};
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Tools\ResolveTargetEntityListener as EntityResolver;
 use Doctrine\Common\Cache\{
-    ArrayCache,
-    FilesystemCache,
-    MemcachedCache,
-    RedisCache,
-    PredisCache,
-    ZendDataCache};
+    ArrayCache, FilesystemCache, MemcachedCache, RedisCache, PredisCache, ZendDataCache,
+};
 
 /**
  * Class DITest
@@ -34,13 +32,13 @@ use Doctrine\Common\Cache\{
 class DITest extends AbstractFactoryTest
 {
     /**
-     * Test zend factories
+     * Test Laminas factories
      *
      * @return void
      */
-    public function testZendServiceManagerFactories(): void
+    public function testLaminasServiceManagerFactories(): void
     {
-        $serviceManger = $this->getZendServiceManager();
+        $serviceManger = $this->getLaminasServiceManager();
 
         // orm test
         $this->assertInstanceOf(MappingDriver::class, $serviceManger->get('doctrine.driver.orm_default'));

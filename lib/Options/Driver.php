@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Class Driver
@@ -24,13 +24,13 @@ class Driver extends AbstractOptions
 {
     /** @var string|null */
     protected $className;
-    /** @var array */
+    /** @var array<mixed> */
     protected $paths = [];
     /** @var string|null */
     protected $extension;
     /** @var string */
     protected $cache = 'array';
-    /** @var array */
+    /** @var array<mixed> */
     protected $drivers = [];
     /** @var string|null */
     protected $globalBasename;
@@ -60,7 +60,7 @@ class Driver extends AbstractOptions
     /**
      * Get paths
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getPaths(): array
     {
@@ -70,7 +70,7 @@ class Driver extends AbstractOptions
     /**
      * Set paths
      *
-     * @param array $paths
+     * @param array<mixed> $paths
      * @return Driver
      */
     public function setPaths(array $paths): Driver
@@ -126,7 +126,7 @@ class Driver extends AbstractOptions
     /**
      * Get drivers
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getDrivers(): array
     {
@@ -136,7 +136,7 @@ class Driver extends AbstractOptions
     /**
      * Set drivers
      *
-     * @param array $drivers
+     * @param array<mixed> $drivers
      * @return Driver
      */
     public function setDrivers(array $drivers): Driver

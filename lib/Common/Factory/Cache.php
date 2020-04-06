@@ -31,21 +31,11 @@ use function class_exists;
 class Cache extends AbstractFactory
 {
     /**
-     * CacheFactory constructor.
-     *
-     * @param string $name
-     */
-    public function __construct(string $name = 'array')
-    {
-        parent::__construct($name);
-    }
-
-    /**
      * Create an object
      *
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param null|array         $options
+     * @param null|array<mixed>  $options
      * @return CacheProvider
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object

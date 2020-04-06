@@ -41,7 +41,7 @@ class Configuration extends AbstractFactory
      *
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param null|array         $options
+     * @param null|array<mixed>  $options
      * @return \Doctrine\ORM\Configuration
      * @throws ORMException
      * @throws RuntimeException

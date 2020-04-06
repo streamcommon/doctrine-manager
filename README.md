@@ -36,6 +36,9 @@ Or add into your `composer.json`:
 * [ZendFramework/zend-auradi-config](https://github.com/zendframework/zend-auradi-config)
 * [ZendFramework/zend-pimple-config](https://github.com/zendframework/zend-pimple-config)
 * [Jsoumelidis/zend-sf-di-config](https://github.com/jsoumelidis/zend-sf-di-config)
+* [Laminas/laminas-servicemanager](https://github.com/laminas/laminas-servicemanager)
+* [Laminas/laminas-auradi-config](https://github.com/laminas/laminas-auradi-config)
+* [Laminas/laminas-pimple-config](https://github.com/laminas/laminas-pimple-config)
 
 
 ## Example configure project file
@@ -191,13 +194,13 @@ Configure your project config file:
     'dependencies' => [
        'factories' => [
        // If you use single connection
-            'doctrine.driver.orm_default'          => DriverFactory::class,
-            'doctrine.event_manager.orm_default'   => EventManagerFactory::class,
-            'doctrine.configuration.orm_default'   => ConfigurationFactory::class,
-            'doctrine.connection.orm_default'      => ConnectionFactory::class,
-            'doctrine.entity_resolver.orm_default' => EntityResolverFactory::class,
-            'doctrine.entity_manager.orm_default'  => EntityManagerFactory::class,
-            'doctrine.cache.array'                 => CacheFactory::class,
+            'doctrine.driver.orm_default'          => [DriverFactory::class, 'orm_default'],
+            'doctrine.event_manager.orm_default'   => [EventManagerFactory::class, 'orm_default'],
+            'doctrine.configuration.orm_default'   => [ConfigurationFactory::class, 'orm_default'],
+            'doctrine.connection.orm_default'      => [ConnectionFactory::class, 'orm_default'],
+            'doctrine.entity_resolver.orm_default' => [EntityResolverFactory::class, 'orm_default'],
+            'doctrine.entity_manager.orm_default'  => [EntityManagerFactory::class, 'orm_default'],
+            'doctrine.cache.array'                 => [CacheFactory::class, 'orm_default'],
         
        // If you want to add a second connection
             'doctrine.driver.orm_custom'          => [DriverFactory::class, 'orm_custom'],
@@ -217,10 +220,10 @@ Configure your project config file:
 
 ## Example configure container
 
->Zend ServiceManager
+>Laminas ServiceManager
 ```php
 use Streamcommon\Doctrine\Manager\ConfigProvider;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\ServiceManager\ServiceManager;
 
 $config = new ConfigProvider();
 $config = $config();
