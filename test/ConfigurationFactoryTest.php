@@ -49,7 +49,7 @@ class ConfigurationFactoryTest extends AbstractFactoryTest
         $this->config['doctrine']['configuration']['orm_default']['named_native_queries'][] = [
             'name' => 'test',
             'rsm'  => 'TestAssets\ResultSetMapping',
-            'sql'  => 'SHOW DATABASES;'
+            'sql'  => 'SHOW DATABASES;',
         ];
 
         $factory = new ConfigurationFactory('orm_default');

@@ -87,6 +87,7 @@ class Configuration extends AbstractFactory
         $configuration->setMetadataDriverImpl($container->get('doctrine.driver.' . $options->getDriver()));
 
         if ($options->getClassMetadataFactoryName() !== null) {
+            /** @phpstan-ignore-next-line */
             $configuration->setClassMetadataFactoryName($options->getClassMetadataFactoryName());
         }
         if ($options->getNamingStrategy() !== null) {

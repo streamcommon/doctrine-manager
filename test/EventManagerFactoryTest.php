@@ -56,7 +56,7 @@ class EventManagerFactoryTest extends AbstractFactoryTest
             new EntityResolverFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.entity_resolver.orm_default'
+                'doctrine.entity_resolver.orm_default',
             ]
         ));
 

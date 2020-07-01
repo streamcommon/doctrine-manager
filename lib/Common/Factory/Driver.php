@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Doctrine\Manager\Common\Factory;
 
 use Doctrine\Common\Annotations\{AnnotationReader, CachedReader, IndexedReader};
-use Doctrine\Common\Persistence\Mapping\Driver\{AnnotationDriver, FileDriver, MappingDriverChain, MappingDriver};
+use Doctrine\Persistence\Mapping\Driver\{AnnotationDriver, FileDriver, MappingDriverChain, MappingDriver};
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\Driver as DriverOptions;

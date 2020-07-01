@@ -20,7 +20,7 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 
-if (PHP_SAPI !== 'cli' || PHP_OS !== 'Linux') {
+if (PHP_SAPI !== 'cli') {
     return false;
 }
 

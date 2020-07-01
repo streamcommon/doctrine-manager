@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping\{
     Driver\AnnotationDriver};
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Common\Cache\{ArrayCache, FilesystemCache, RedisCache, PredisCache, MemcachedCache};
-use Doctrine\Common\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver, StaticPHPDriver};
+use Doctrine\Persistence\Mapping\Driver\{MappingDriverChain, PHPDriver, StaticPHPDriver};
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Repository\DefaultRepositoryFactory;
@@ -88,32 +88,32 @@ abstract class AbstractFactoryTest extends TestCase
                     'named_queries'                 => [
                         [
                             'name' => 'test',
-                            'sql'  => 'SHOW DATABASES;'
+                            'sql'  => 'SHOW DATABASES;',
                         ],
                     ],
                     'named_native_queries'          => [
                         [
                             'name' => 'test',
                             'rsm'  => ResultSetMapping::class,
-                            'sql'  => 'SHOW DATABASES;'
+                            'sql'  => 'SHOW DATABASES;',
                         ],
                     ],
                     'filters'                       => [
-                        'test' => 'TestAssets\Filter'
+                        'test' => 'TestAssets\Filter',
                     ],
                     'sql_logger'                    => EchoSQLLogger::class,
                     'second_level_cache'            => [
                         'enabled'                    => true,
                         'regions'                    => [
                             [
-                                'name' => 'test'
+                                'name' => 'test',
                             ],
                             [
-                                'name' => null
-                            ]
+                                'name' => null,
+                            ],
                         ],
                         'file_lock_region_directory' => __DIR__ . '/cache',
-                    ]
+                    ],
                 ],
             ],
             'connection'      => [
@@ -158,18 +158,18 @@ abstract class AbstractFactoryTest extends TestCase
                         'TestAssets\AnnotationEntity' => 'TestAssets\AnnotationEntity',
                         'TestAssets\FileEntity'       => 'TestAssets\FileEntity',
                         'TestAssets\Static'           => 'TestAssets\Static',
-                    ]
+                    ],
                 ],
                 'TestAssets\AnnotationEntity' => [
                     'class_name' => AnnotationDriver::class,
-                    'paths'      => [__DIR__ . '/TestAssets/AnnotationEntity']
+                    'paths'      => [__DIR__ . '/TestAssets/AnnotationEntity'],
                 ],
                 'TestAssets\FileEntity'       => [
                     'class_name' => PHPDriver::class,
-                    'paths'      => [__DIR__ . '/TestAssets/FileEntity']
+                    'paths'      => [__DIR__ . '/TestAssets/FileEntity'],
                 ],
                 'TestAssets\Static'           => [
-                    'class_name' => StaticPHPDriver::class
+                    'class_name' => StaticPHPDriver::class,
                 ],
             ],
             'cache'           => [
@@ -180,7 +180,7 @@ abstract class AbstractFactoryTest extends TestCase
                 'filesystem' => [
                     'class_name' => FilesystemCache::class,
                     'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
-                    'path'       => __DIR__
+                    'path'       => __DIR__,
                 ],
                 'redis'      => [
                     'class_name' => RedisCache::class,
@@ -198,7 +198,7 @@ abstract class AbstractFactoryTest extends TestCase
                     'namespace'  => 'Streamcommon\Doctrine\Manager\Interop',
                 ],
             ],
-        ]
+        ],
     ];
 
     /**
@@ -246,77 +246,77 @@ abstract class AbstractFactoryTest extends TestCase
             new CacheFactory('array'),
             [
                 $container->reveal(),
-                'doctrine.cache.array'
+                'doctrine.cache.array',
             ]
         ));
         $container->get('doctrine.cache.filesystem')->willReturn(call_user_func_array(
             new CacheFactory('filesystem'),
             [
                 $container->reveal(),
-                'doctrine.cache.filesystem'
+                'doctrine.cache.filesystem',
             ]
         ));
         $container->get('doctrine.cache.predis')->willReturn(call_user_func_array(
             new CacheFactory('predis'),
             [
                 $container->reveal(),
-                'doctrine.cache.predis'
+                'doctrine.cache.predis',
             ]
         ));
         $container->get('doctrine.cache.redis')->willReturn(call_user_func_array(
             new CacheFactory('redis'),
             [
                 $container->reveal(),
-                'doctrine.cache.redis'
+                'doctrine.cache.redis',
             ]
         ));
         $container->get('doctrine.cache.memcached')->willReturn(call_user_func_array(
             new CacheFactory('memcached'),
             [
                 $container->reveal(),
-                'doctrine.cache.memcached'
+                'doctrine.cache.memcached',
             ]
         ));
         $container->get('doctrine.driver.orm_default')->willReturn(call_user_func_array(
             new DriverFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.driver.orm_default'
+                'doctrine.driver.orm_default',
             ]
         ));
         $container->get('doctrine.entity_resolver.orm_default')->willReturn(call_user_func_array(
             new EntityResolverFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.entity_resolver.orm_default'
+                'doctrine.entity_resolver.orm_default',
             ]
         ));
         $container->get('doctrine.event_manager.orm_default')->willReturn(call_user_func_array(
             new EventManagerFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.doctrine.event_manager.orm_default'
+                'doctrine.doctrine.event_manager.orm_default',
             ]
         ));
         $container->get('doctrine.configuration.orm_default')->willReturn(call_user_func_array(
             new ConfigurationFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.configuration.orm_default'
+                'doctrine.configuration.orm_default',
             ]
         ));
         $container->get('doctrine.connection.orm_default')->willReturn(call_user_func_array(
             new ConnectionFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.connection.orm_default'
+                'doctrine.connection.orm_default',
             ]
         ));
         $container->get('doctrine.entity_manager.orm_default')->willReturn(call_user_func_array(
             new EntityManagerFactory('orm_default'),
             [
                 $container->reveal(),
-                'doctrine.entity_manager.orm_default'
+                'doctrine.entity_manager.orm_default',
             ]
         ));
         return $container->reveal();
@@ -336,6 +336,30 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
+        ];
+        $dependencies['factories']['doctrine.driver.orm_default']              = [
+            DriverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['factories']['doctrine.event_manager.orm_default']       = [
+            EventManagerFactory::class,
+            'orm_default',
+        ];
+        $dependencies['factories']['doctrine.configuration.orm_default']       = [
+            ConfigurationFactory::class,
+            'orm_default',
+        ];
+        $dependencies['factories']['doctrine.connection.orm_default']          = [
+            ConnectionFactory::class,
+            'orm_default',
+        ];
+        $dependencies['factories']['doctrine.entity_resolver.orm_default']     = [
+            EntityResolverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['factories']['doctrine.entity_manager.orm_default']      = [
+            EntityManagerFactory::class,
+            'orm_default',
         ];
         $dependencies['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();
@@ -358,6 +382,30 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['dependencies']['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
+        ];
+        $dependencies['dependencies']['factories']['doctrine.driver.orm_default']              = [
+            DriverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.event_manager.orm_default']       = [
+            EventManagerFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.configuration.orm_default']       = [
+            ConfigurationFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.connection.orm_default']          = [
+            ConnectionFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.entity_resolver.orm_default']     = [
+            EntityResolverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.entity_manager.orm_default']      = [
+            EntityManagerFactory::class,
+            'orm_default',
         ];
         $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();
@@ -383,6 +431,30 @@ abstract class AbstractFactoryTest extends TestCase
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
         ];
+        $dependencies['dependencies']['factories']['doctrine.driver.orm_default']              = [
+            DriverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.event_manager.orm_default']       = [
+            EventManagerFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.configuration.orm_default']       = [
+            ConfigurationFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.connection.orm_default']          = [
+            ConnectionFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.entity_resolver.orm_default']     = [
+            EntityResolverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.entity_manager.orm_default']      = [
+            EntityManagerFactory::class,
+            'orm_default',
+        ];
         $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();
             $redis->connect('127.0.0.1');
@@ -406,6 +478,30 @@ abstract class AbstractFactoryTest extends TestCase
         $dependencies['dependencies']['invokables']                                            = [
             'Streamcommon\Container\Alias\Cache\Memcached' => Memcached::class,
             'Streamcommon\Container\Alias\Cache\Predis'    => Client::class,
+        ];
+        $dependencies['dependencies']['factories']['doctrine.driver.orm_default']              = [
+            DriverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.event_manager.orm_default']       = [
+            EventManagerFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.configuration.orm_default']       = [
+            ConfigurationFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.connection.orm_default']          = [
+            ConnectionFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.entity_resolver.orm_default']     = [
+            EntityResolverFactory::class,
+            'orm_default',
+        ];
+        $dependencies['dependencies']['factories']['doctrine.entity_manager.orm_default']      = [
+            EntityManagerFactory::class,
+            'orm_default',
         ];
         $dependencies['dependencies']['factories']['Streamcommon\Container\Alias\Cache\Redis'] = function () {
             $redis = new Redis();

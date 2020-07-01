@@ -13,18 +13,8 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager;
 
-use Streamcommon\Doctrine\Manager\Common\Factory\{
-    Cache as CacheFactory,
-    Driver as DriverFactory,
-    EventManager as EventManagerFactory,
-};
-use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
-use Streamcommon\Doctrine\Manager\ORM\Factory\{
-    Configuration as ConfigurationFactory,
-    EntityManager as EntityManagerFactory,
-    EntityResolver as EntityResolverFactory,
-};
-use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
+use Streamcommon\Doctrine\Manager\Common\Factory\Cache as CacheFactory;
+use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\Common\Cache\{
     ArrayCache, FilesystemCache, MemcachedCache, RedisCache, PredisCache, ZendDataCache,
 };
@@ -58,20 +48,13 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                // default orm
-                'doctrine.driver.orm_default'          => [DriverFactory::class, 'orm_default'],
-                'doctrine.event_manager.orm_default'   => [EventManagerFactory::class, 'orm_default'],
-                'doctrine.configuration.orm_default'   => [ConfigurationFactory::class, 'orm_default'],
-                'doctrine.connection.orm_default'      => [ConnectionFactory::class, 'orm_default'],
-                'doctrine.entity_resolver.orm_default' => [EntityResolverFactory::class, 'orm_default'],
-                'doctrine.entity_manager.orm_default'  => [EntityManagerFactory::class, 'orm_default'],
                 // orm cached
-                'doctrine.cache.array'                 => [CacheFactory::class, 'array'],
-                'doctrine.cache.filesystem'            => [CacheFactory::class, 'filesystem'],
-                'doctrine.cache.memcached'             => [CacheFactory::class, 'memcached'],
-                'doctrine.cache.redis'                 => [CacheFactory::class, 'redis'],
-                'doctrine.cache.predis'                => [CacheFactory::class, 'predis'],
-                'doctrine.cache.zend_data'             => [CacheFactory::class, 'zend_data'],
+                'doctrine.cache.array'      => [CacheFactory::class, 'array'],
+                'doctrine.cache.filesystem' => [CacheFactory::class, 'filesystem'],
+                'doctrine.cache.memcached'  => [CacheFactory::class, 'memcached'],
+                'doctrine.cache.redis'      => [CacheFactory::class, 'redis'],
+                'doctrine.cache.predis'     => [CacheFactory::class, 'predis'],
+                'doctrine.cache.zend_data'  => [CacheFactory::class, 'zend_data'],
             ],
         ];
     }

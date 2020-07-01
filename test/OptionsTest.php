@@ -49,7 +49,7 @@ class OptionsTest extends TestCase
             'class_name' => 'class_name_a',
             'namespace'  => 'class_name_b',
             'instance'   => 'class_name_c',
-            'path'       => '/tmp'
+            'path'       => '/tmp',
         ];
         $options = new Cache($config);
         foreach ($config as $item => $value) {
@@ -78,28 +78,28 @@ class OptionsTest extends TestCase
                 'Test\\Entity'
             ],
             'datetime_functions'            => [
-                'name' => 'class_name'
+                'name' => 'class_name',
             ],
             'custom_string_functions'       => [
-                'name' => 'class_name'
+                'name' => 'class_name',
             ],
             'custom_numeric_functions'      => [
-                'name' => 'class_name'
+                'name' => 'class_name',
             ],
             'filters'                       => [
-                'name' => 'class_name'
+                'name' => 'class_name',
             ],
             'named_queries'                 => [
                 new NamedQuery([
                     'name' => 'query',
-                    'sql'  => 'select'
+                    'sql'  => 'select',
                 ])
             ],
             'named_native_queries'          => [
                 new NamedNativeQueries([
                     'name' => 'query',
                     'sql'  => 'select',
-                    'rsm'  => new ResultSetMapping()
+                    'rsm'  => new ResultSetMapping(),
                 ])
             ],
             'custom_hydration_modes'        => [
@@ -112,7 +112,7 @@ class OptionsTest extends TestCase
             'class_metadata_factory_name'   => 'some_factory_name',
             'entity_listener_resolver'      => 'resolver_class',
             'second_level_cache'            => new SecondLevelCache(),
-            'sql_logger'                    => 'logger'
+            'sql_logger'                    => 'logger',
         ];
         $options = new Configuration($config);
         foreach ($config as $item => $value) {
@@ -149,14 +149,14 @@ class OptionsTest extends TestCase
             'configuration'      => 'orm_default',
             'event_manager'      => 'orm_default',
             'params'             => new ConnectionParams([
-                'platform' => 'test'
+                'platform' => 'test',
             ]),
             'type_mapping'       => [
                 'test_string' => 'string',
             ],
             'commented_types'    => [
                 'test_string'
-            ]
+            ],
         ];
         $options = new Connection($config);
         foreach ($config as $item => $value) {
@@ -183,7 +183,7 @@ class OptionsTest extends TestCase
                 '/tmp'
             ],
             'drivers'         => [
-                'orm_test' => 'driver_name'
+                'orm_test' => 'driver_name',
             ],
         ];
         $options = new Driver($config);
@@ -218,7 +218,7 @@ class OptionsTest extends TestCase
     {
         $config  = [
             'resolvers' => [
-                'alias' => 'name'
+                'alias' => 'name',
             ],
         ];
         $options = new EntityResolver($config);
@@ -237,7 +237,7 @@ class OptionsTest extends TestCase
         $config  = [
             'entity_resolver' => 'orm_test',
             'subscribers'     => [
-                'alias' => 'name'
+                'alias' => 'name',
             ],
         ];
         $options = new EventManager($config);
@@ -296,7 +296,7 @@ class OptionsTest extends TestCase
         $config  = [
             'name' => 'query',
             'sql'  => 'select',
-            'rsm'  => new ResultSetMapping()
+            'rsm'  => new ResultSetMapping(),
         ];
         $options = new NamedNativeQueries($config);
         foreach ($config as $item => $value) {
@@ -339,7 +339,7 @@ class OptionsTest extends TestCase
                     'life_time'      => 13,
                     'lock_life_time' => 42,
                 ])
-            ]
+            ],
         ];
         $options = new SecondLevelCache($config);
         foreach ($config as $item => $value) {

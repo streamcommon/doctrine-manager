@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Streamcommon\Test\Doctrine\Manager;
 
-use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
+use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\ORM\{
     Configuration, EntityManager,
 };
