@@ -10,11 +10,41 @@
  */
 
 use Streamcommon\Doctrine\Manager\ConfigProvider;
-use Zend\ServiceManager\ServiceManager;
+use Streamcommon\Doctrine\Manager\Common\Factory\{
+    Driver as DriverFactory,
+    EventManager as EventManagerFactory,
+};
+use Streamcommon\Doctrine\Manager\DBAL\Factory\Connection as ConnectionFactory;
+use Streamcommon\Doctrine\Manager\ORM\Factory\{
+    Configuration as ConfigurationFactory,
+    EntityManager as EntityManagerFactory,
+    EntityResolver as EntityResolverFactory,
+};
+use Laminas\ServiceManager\ServiceManager;
 
 $configProvider = new ConfigProvider();
 $config = $configProvider();
+$config['doctrine']['migrations']['orm_default'] = [
+    'table_storage' => [
+        'table_name' => 'doctrine_migration_versions',
+        'version_column_name' => 'version',
+        'version_column_length' => 1024,
+        'executed_at_column_name' => 'executed_at',
+        'execution_time_column_name' => 'execution_time',
+    ],
+    'migrations_paths' => [
+        'MyProject\Migrations' => '/data/doctrine/migrations',
+    ],
+    'all_or_nothing' => true,
+    'check_database_platform' => true,
+];
 $dependencies = $config['dependencies'];
+$dependencies['factories']['doctrine.driver.orm_default' ] = [DriverFactory::class, 'orm_default'];
+$dependencies['factories']['doctrine.event_manager.orm_default'] = [EventManagerFactory::class, 'orm_default'];
+$dependencies['factories']['doctrine.configuration.orm_default'] = [ConfigurationFactory::class, 'orm_default'];
+$dependencies['factories']['doctrine.connection.orm_default'] = [ConnectionFactory::class, 'orm_default'];
+$dependencies['factories']['doctrine.entity_resolver.orm_default'] = [EntityResolverFactory::class, 'orm_default'];
+$dependencies['factories']['doctrine.entity_manager.orm_default'] = [EntityManagerFactory::class, 'orm_default'];
 $dependencies['services']['config'] = $config;
 
 return new ServiceManager($dependencies);
