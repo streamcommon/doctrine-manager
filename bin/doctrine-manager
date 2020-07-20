@@ -85,7 +85,8 @@ $helper->set(new QuestionHelper(), 'question');
 $migrationsConfig = $container->get('config')['doctrine'] ?? null;
 if ($migrationsConfig === null || !isset($migrationsConfig['migrations'][$ormName])) {
     echo <<<'HELP'
-Invalid migrations configuration.
+Invalid migrations configuration
+See cli-container.php.dist example configuration
 HELP;
     exit(1);
 }

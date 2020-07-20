@@ -15,8 +15,9 @@ namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\ORM\{
-    Configuration, EntityManager,
-};
+    Configuration,
+    EntityManager,
+    EntityManagerInterface};
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Tools\ResolveTargetEntityListener as EntityResolver;
@@ -46,7 +47,7 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(Configuration::class, $serviceManger->get('doctrine.configuration.orm_default'));
         $this->assertInstanceOf(Connection::class, $serviceManger->get('doctrine.connection.orm_default'));
         $this->assertInstanceOf(EntityResolver::class, $serviceManger->get('doctrine.entity_resolver.orm_default'));
-        $this->assertInstanceOf(EntityManager::class, $serviceManger->get('doctrine.entity_manager.orm_default'));
+        $this->assertInstanceOf(EntityManagerInterface::class, $serviceManger->get('doctrine.entity_manager.orm_default'));
 
         // cache test
         $this->assertInstanceOf(ArrayCache::class, $serviceManger->get('doctrine.cache.array'));
@@ -73,7 +74,7 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(Configuration::class, $container->get('doctrine.configuration.orm_default'));
         $this->assertInstanceOf(Connection::class, $container->get('doctrine.connection.orm_default'));
         $this->assertInstanceOf(EntityResolver::class, $container->get('doctrine.entity_resolver.orm_default'));
-        $this->assertInstanceOf(EntityManager::class, $container->get('doctrine.entity_manager.orm_default'));
+        $this->assertInstanceOf(EntityManagerInterface::class, $container->get('doctrine.entity_manager.orm_default'));
 
         // cache test
         $this->assertInstanceOf(ArrayCache::class, $container->get('doctrine.cache.array'));
@@ -99,7 +100,7 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(Configuration::class, $container->get('doctrine.configuration.orm_default'));
         $this->assertInstanceOf(Connection::class, $container->get('doctrine.connection.orm_default'));
         $this->assertInstanceOf(EntityResolver::class, $container->get('doctrine.entity_resolver.orm_default'));
-        $this->assertInstanceOf(EntityManager::class, $container->get('doctrine.entity_manager.orm_default'));
+        $this->assertInstanceOf(EntityManagerInterface::class, $container->get('doctrine.entity_manager.orm_default'));
 
         // cache test
         $this->assertInstanceOf(ArrayCache::class, $container->get('doctrine.cache.array'));
@@ -126,7 +127,7 @@ class DITest extends AbstractFactoryTest
         $this->assertInstanceOf(Configuration::class, $container->get('doctrine.configuration.orm_default'));
         $this->assertInstanceOf(Connection::class, $container->get('doctrine.connection.orm_default'));
         $this->assertInstanceOf(EntityResolver::class, $container->get('doctrine.entity_resolver.orm_default'));
-        $this->assertInstanceOf(EntityManager::class, $container->get('doctrine.entity_manager.orm_default'));
+        $this->assertInstanceOf(EntityManagerInterface::class, $container->get('doctrine.entity_manager.orm_default'));
 
         // cache test
         $this->assertInstanceOf(ArrayCache::class, $container->get('doctrine.cache.array'));

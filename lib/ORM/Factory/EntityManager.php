@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Streamcommon\Doctrine\Manager\ORM\Factory;
 
+use Doctrine\DBAL\Connection;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\EntityManager as EntityManagerOptions;
+use Streamcommon\Doctrine\Manager\ORM\EntityMangerDecorator;
 
 /**
  * Class EntityManager
@@ -31,16 +33,17 @@ class EntityManager extends AbstractFactory
      * @param ContainerInterface $container
      * @param string             $requestedName
      * @param null|array<mixed>  $options
-     * @return \Doctrine\ORM\EntityManager
+     * @return \Doctrine\ORM\EntityManagerInterface
      * @throws \Doctrine\ORM\ORMException
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object
     {
         $options = new EntityManagerOptions($this->getOptions($container, 'entity_manager'));
-
+        /** @var Connection $connection */
         $connection    = $container->get('doctrine.connection.' . $options->getConnection());
         $configuration = $container->get('doctrine.configuration.' . $options->getConfiguration());
 
-        return \Doctrine\ORM\EntityManager::create($connection, $configuration);
+        $em = \Doctrine\ORM\EntityManager::create($connection, $configuration, $connection->getEventManager());
+        return new EntityMangerDecorator($em);
     }
 }

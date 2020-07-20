@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Streamcommon\Test\Doctrine\Manager;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Streamcommon\Doctrine\Manager\ORM\Factory\EntityManager as EntityManagerFactory;
 
 /**
@@ -34,6 +35,6 @@ class EntityManagerFactoryTest extends AbstractFactoryTest
         $factory       = new EntityManagerFactory('orm_default');
         $entityManager = $factory($this->getContainer(), 'doctrine.entity_manager.orm_default');
 
-        $this->assertInstanceOf(EntityManager::class, $entityManager);
+        $this->assertInstanceOf(EntityManagerInterface::class, $entityManager);
     }
 }
