@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the streamcommon/doctrine-manager package, a StreamCommon open software project.
+ * This file is part of the doctrine-manager package, a StreamCommon open software project.
  *
- * @copyright (c) 2020 StreamCommon
+ * @copyright (c) 2019 StreamCommon Team
  * @see https://github.com/streamcommon/doctrine-manager
  *
  * For the full copyright and license information, please view the LICENSE
