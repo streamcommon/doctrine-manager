@@ -17,7 +17,7 @@ use Doctrine\DBAL\Connection;
 use Psr\Container\ContainerInterface;
 use Streamcommon\Doctrine\Manager\AbstractFactory;
 use Streamcommon\Doctrine\Manager\Options\EntityManager as EntityManagerOptions;
-use Streamcommon\Doctrine\Manager\ORM\EntityMangerDecorator;
+use Streamcommon\Doctrine\Manager\ORM\EntityManagerDecorator;
 
 /**
  * Class EntityManager
@@ -44,6 +44,6 @@ class EntityManager extends AbstractFactory
         $configuration = $container->get('doctrine.configuration.' . $options->getConfiguration());
 
         $em = \Doctrine\ORM\EntityManager::create($connection, $configuration, $connection->getEventManager());
-        return new EntityMangerDecorator($em);
+        return new EntityManagerDecorator($em);
     }
 }

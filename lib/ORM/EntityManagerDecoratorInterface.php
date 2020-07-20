@@ -15,11 +15,11 @@ namespace Streamcommon\Doctrine\Manager\ORM;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Interface EntityMangerDecoratorInterface
+ * Interface EntityManagerDecoratorInterface
  *
  * @package Streamcommon\Doctrine\Manager\ORM
  */
-interface EntityMangerDecoratorInterface extends EntityManagerInterface
+interface EntityManagerDecoratorInterface extends EntityManagerInterface
 {
     /**
      * Reset EM
