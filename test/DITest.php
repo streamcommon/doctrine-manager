@@ -39,23 +39,23 @@ class DITest extends AbstractFactoryTest
      */
     public function testLaminasServiceManagerFactories(): void
     {
-        $serviceManger = $this->getLaminasServiceManager();
+        $container = $this->getLaminasServiceManager();
 
         // orm test
-        $this->assertInstanceOf(MappingDriver::class, $serviceManger->get('doctrine.driver.orm_default'));
-        $this->assertInstanceOf(EventManager::class, $serviceManger->get('doctrine.event_manager.orm_default'));
-        $this->assertInstanceOf(Configuration::class, $serviceManger->get('doctrine.configuration.orm_default'));
-        $this->assertInstanceOf(Connection::class, $serviceManger->get('doctrine.connection.orm_default'));
-        $this->assertInstanceOf(EntityResolver::class, $serviceManger->get('doctrine.entity_resolver.orm_default'));
-        $this->assertInstanceOf(EntityManagerInterface::class, $serviceManger->get('doctrine.entity_manager.orm_default'));
+        $this->assertInstanceOf(MappingDriver::class, $container->get('doctrine.driver.orm_default'));
+        $this->assertInstanceOf(EventManager::class, $container->get('doctrine.event_manager.orm_default'));
+        $this->assertInstanceOf(Configuration::class, $container->get('doctrine.configuration.orm_default'));
+        $this->assertInstanceOf(Connection::class, $container->get('doctrine.connection.orm_default'));
+        $this->assertInstanceOf(EntityResolver::class, $container->get('doctrine.entity_resolver.orm_default'));
+        $this->assertInstanceOf(EntityManagerInterface::class, $container->get('doctrine.entity_manager.orm_default'));
 
         // cache test
-        $this->assertInstanceOf(ArrayCache::class, $serviceManger->get('doctrine.cache.array'));
-        $this->assertInstanceOf(FilesystemCache::class, $serviceManger->get('doctrine.cache.filesystem'));
-        $this->assertInstanceOf(MemcachedCache::class, $serviceManger->get('doctrine.cache.memcached'));
-        $this->assertInstanceOf(RedisCache::class, $serviceManger->get('doctrine.cache.redis'));
-        $this->assertInstanceOf(PredisCache::class, $serviceManger->get('doctrine.cache.predis'));
-        $this->assertInstanceOf(ZendDataCache::class, $serviceManger->get('doctrine.cache.zend_data'));
+        $this->assertInstanceOf(ArrayCache::class, $container->get('doctrine.cache.array'));
+        $this->assertInstanceOf(FilesystemCache::class, $container->get('doctrine.cache.filesystem'));
+        $this->assertInstanceOf(MemcachedCache::class, $container->get('doctrine.cache.memcached'));
+        $this->assertInstanceOf(RedisCache::class, $container->get('doctrine.cache.redis'));
+        $this->assertInstanceOf(PredisCache::class, $container->get('doctrine.cache.predis'));
+        $this->assertInstanceOf(ZendDataCache::class, $container->get('doctrine.cache.zend_data'));
     }
 
     /**
