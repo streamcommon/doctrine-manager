@@ -86,7 +86,7 @@ $cli = ConsoleRunner::createApplication($helper);
 
 // Migrations CLI
 $migrationsConfig = $container->get('config')['doctrine'] ?? null;
-if ($migrationsConfig === null || !isset($migrationsConfig['migrations'][$ormName])) {
+if (isset($migrationsConfig['migrations'][$ormName])) {
     $dependencyFactory = MigrationsDependencyFactory::fromEntityManager(
             new MigrationsConfigurationArray($migrationsConfig['migrations'][$ormName]),
             new MigrationsExistingEntityManager($entityManager)
