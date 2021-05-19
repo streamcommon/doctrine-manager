@@ -101,11 +101,11 @@ $commandHash = [];
 array_walk($commands, function (Command $command) use (&$commandHash) {
     $hash = spl_object_hash($command);
     if (!in_array($hash, $commandHash)) {
-        $command->addArgument(
+        $command->addOption(
             '--object-manager',
-            InputArgument::OPTIONAL,
-            'Doctrine object manager name',
-            'orm_default'
+            null,
+            InputOption::VALUE_OPTIONAL,
+            'Doctrine object manager name, default value "orm_default"'
         );
         $commandHash[] = $hash;
     }
