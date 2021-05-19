@@ -18,7 +18,7 @@ use Doctrine\Migrations\Tools\Console\ConsoleRunner as MigrationsConsole;
 use Doctrine\Migrations\DependencyFactory as MigrationsDependencyFactory;
 use Doctrine\Migrations\Configuration\Migration\ConfigurationArray as MigrationsConfigurationArray;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager as MigrationsExistingEntityManager;
-use Symfony\Component\Console\Input\{ArgvInput, InputArgument};
+use Symfony\Component\Console\Input\{ArgvInput, InputArgument, InputOption};
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
