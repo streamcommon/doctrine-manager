@@ -14,6 +14,7 @@ namespace Streamcommon\Doctrine\Manager\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class RepositoryFactory
@@ -22,19 +23,27 @@ use Doctrine\Persistence\ObjectRepository;
  */
 final class RepositoryDecoratorFactory implements \Doctrine\ORM\Repository\RepositoryFactory
 {
-    /** @var EntityManagerDecoratorInterface  */
-    private $emDecorator;
-    /** @var array<string, ObjectRepository>|ObjectRepository[] */
+    /** @var ContainerInterface  */
+    private $container;
+    /** @var string */
+    private $entityManagerName;
+    /**
+     * @var array<string, ObjectRepository>|ObjectRepository[]
+     * @phpstan-ignore-next-line
+     */
     private $repositoryList = [];
 
     /**
      * RepositoryFactory constructor.
      *
-     * @param EntityManagerDecoratorInterface $emDecorator
+     * RepositoryDecoratorFactory constructor.
+     * @param ContainerInterface $container
+     * @param string             $entityManagerName
      */
-    public function __construct(EntityManagerDecoratorInterface $emDecorator)
+    public function __construct(ContainerInterface $container, string $entityManagerName)
     {
-        $this->emDecorator = $emDecorator;
+        $this->container         = $container;
+        $this->entityManagerName = $entityManagerName;
     }
 
     /**
@@ -42,11 +51,12 @@ final class RepositoryDecoratorFactory implements \Doctrine\ORM\Repository\Repos
      *
      * @param EntityManagerInterface $entityManager
      * @param string                 $entityName
-     * @return ObjectRepository|mixed
+     * @return ObjectRepository
+     * @phpstan-ignore-next-line
      */
-    public function getRepository(EntityManagerInterface $entityManager, $entityName)
+    public function getRepository(EntityManagerInterface $entityManager, $entityName): ObjectRepository
     {
-        $entityManager  = $this->emDecorator;
+        $entityManager  = $this->container->get($this->entityManagerName);
         $repositoryHash = $entityManager->getClassMetadata($entityName)->getName() . spl_object_hash($entityManager);
 
         if (isset($this->repositoryList[$repositoryHash])) {
@@ -63,8 +73,9 @@ final class RepositoryDecoratorFactory implements \Doctrine\ORM\Repository\Repos
      * @param string                               $entityName    The name of the entity.
      *
      * @return ObjectRepository
+     * @phpstan-ignore-next-line
      */
-    private function createRepository(EntityManagerInterface $entityManager, $entityName)
+    private function createRepository(EntityManagerInterface $entityManager, $entityName): ObjectRepository
     {
         /* @var $metadata \Doctrine\ORM\Mapping\ClassMetadata */
         $metadata            = $entityManager->getClassMetadata($entityName);

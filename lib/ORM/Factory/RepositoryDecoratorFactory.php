@@ -33,7 +33,8 @@ class RepositoryDecoratorFactory extends AbstractFactory
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): object
     {
         return new \Streamcommon\Doctrine\Manager\ORM\RepositoryDecoratorFactory(
-            $container->get('doctrine.entity_manager.' . $this->name)
+            $container,
+            sprintf('doctrine.entity_manager.%s', $this->name)
         );
     }
 }
