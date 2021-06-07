@@ -16,6 +16,7 @@ before_install:
   - phpenv config-add ./test/travis/php.ini
 
 install:
+  - composer self-update 1.10.22
   - composer install --no-interaction
 
 script:
