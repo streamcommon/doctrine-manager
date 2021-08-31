@@ -31,10 +31,14 @@ class EntityManagerDecorator extends \Doctrine\ORM\Decorator\EntityManagerDecora
      */
     public function reset()
     {
+        $enabledFilters = $this->getFilters()->getEnabledFilters();
         $this->wrapped = EntityManager::create(
             $this->wrapped->getConnection(),
             $this->wrapped->getConfiguration(),
             $this->wrapped->getEventManager()
         );
+        foreach ($enabledFilters as $name => $filter) {
+            $this->wrapped->getFilters()->enable($name);
+        }
     }
 }
