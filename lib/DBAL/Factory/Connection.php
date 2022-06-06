@@ -52,6 +52,7 @@ class Connection extends AbstractFactory
             'user'         => $options->getParams()->getUser(),
             'password'     => $options->getParams()->getPassword(),
             'host'         => $options->getParams()->getHost(),
+            'port'         => $options->getParams()->getPort(),
         ];
         if ($options->getPdoClassName() !== null) {
             $connectionParams['pdo'] = $container->get($options->getPdoClassName());
